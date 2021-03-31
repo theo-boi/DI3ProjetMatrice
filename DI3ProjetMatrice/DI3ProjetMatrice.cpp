@@ -1,5 +1,11 @@
 // DI3ProjetMatrice.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
+#include "x64/headers/CException.h"
+#include "x64/headers/CFichier.h"
+#include "x64/headers/CMatrice.h"
+#include "x64/headers/CMatriceCaractere.h"
+#include "x64/headers/CMatriceDouble.h"
+#include "x64/headers/CMatriceEntier.h"
 
 #include <iostream>
 
