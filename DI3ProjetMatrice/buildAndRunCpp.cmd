@@ -1,4 +1,4 @@
-cd C:\Users\DELL\source\repos\DI3ProjetMatrice\DI3ProjetMatrice\Debug
+cd %userprofile%\source\repos\DI3ProjetMatrice\DI3ProjetMatrice\Debug
 cls
 REM ***************** COMPILATION *****************
 cl /W4 /EHsc "../source/DI3ProjetMatrice.cpp" /link
