@@ -1,3 +1,5 @@
+#define CMATRICEH 0
+
 class CMatrice {
 	//attributs
 	protected:
@@ -12,11 +14,11 @@ class CMatrice {
 	//accesseurs
 	public:
 		/*type void à adapter dans les classes filles*/
-		virtual void MATGet(unsigned int x, unsigned int y)=0;
+		//virtual void MATGet(unsigned int x, unsigned int y)=0; //doit etre declaree dans la classe fille car void inextensible
 	//methodes
 	public:
 		/*type void à adapter dans les classes filles*/
-		virtual void MATPrint(CMatrice* pMATarg)=0; //ou MATAfficher
+		virtual void MATPrint()=0; //ou MATAfficher
 		virtual CMatrice& MATt(CMatrice* pMATarg)=0; //ou MATTransposee
 		virtual CMatrice& MATAdd(CMatrice* pMATarg)=0; //ou MATTransposee
 		virtual CMatrice& MATSub(CMatrice* pMATarg)=0; //ou MATSoustraction

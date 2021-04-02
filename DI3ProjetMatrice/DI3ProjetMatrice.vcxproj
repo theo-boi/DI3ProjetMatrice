@@ -168,6 +168,7 @@
     <ClInclude Include="headers\CMatriceCaractere.h" />
     <ClInclude Include="headers\CMatriceDouble.h" />
     <ClInclude Include="headers\CMatriceEntier.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="buildAndRunCpp.cmd" />

@@ -12,6 +12,12 @@
 int main()
 {
     std::cout << "Hello World! It is working!\n";
+
+	CMatriceDouble* pMAD1 = new CMatriceDouble();
+	CMatriceDouble* pMAD2 = new CMatriceDouble(2, 2);
+
+	pMAD1->MATPrint(); //postcondition : vide
+	pMAD2->MATPrint(); //postcondition : {0 0}^2
 	return 0;
 }
 
