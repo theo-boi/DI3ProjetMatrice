@@ -6,7 +6,7 @@
 class CMatriceDouble : public CMatrice {
 	//atributs
 	private:
-		double** ppeMAIElem;
+		double** ppdMAIElem;
 	//constructeurs et destructeurs
 	public:
 		CMatriceDouble() {};
