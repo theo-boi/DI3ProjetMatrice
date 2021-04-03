@@ -7,34 +7,34 @@
 /*** Constructeurs et destructeurs ***/
 
 CMatriceDouble::CMatriceDouble() {
-	ppdMAIElem = nullptr;
+	ppdMADElem = nullptr;
 	uiMATdimLigne = uiMATdimColonne = 0;
 }
 
-CMatriceDouble::CMatriceDouble(unsigned int uiX, unsigned int uiY) {
-	uiMATdimLigne = uiX;
-	uiMATdimColonne = uiY;
+CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) {
+	uiMATdimLigne = MADArg.uiMATdimLigne;
+	uiMATdimColonne = MADArg.uiMATdimColonne;
 	//allocation dynamique de chaque vecteur d'elements
-	ppdMAIElem = new double*[uiMATdimLigne];
+	ppdMADElem = new double*[uiMATdimLigne];
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
-		ppdMAIElem[uiBoucleForX] = new double[uiMATdimColonne];
-		//initialisation de chaque element a 0
+		ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne];
+		//recopie de chaque element de MADArg par vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMAIElem[uiBoucleForX][uiBoucleForY] = 0;
+			ppdMADElem[uiBoucleForX][uiBoucleForY] = MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
 		}
 	}
 }
 
-CMatriceDouble::CMatriceDouble(CMatriceDouble& MADArg) {
-	uiMATdimLigne = MADArg.uiMATdimLigne;
-	uiMATdimColonne = MADArg.uiMATdimColonne;
+CMatriceDouble::CMatriceDouble(const unsigned int uiX, const unsigned int uiY) {
+	uiMATdimLigne = uiX;
+	uiMATdimColonne = uiY;
 	//allocation dynamique de chaque vecteur d'elements
-	ppdMAIElem = new double*[uiMATdimLigne];
+	ppdMADElem = new double*[uiMATdimLigne];
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
-		ppdMAIElem[uiBoucleForX] = new double[uiMATdimColonne];
-		//recopie de chaque element de MADArg
+		ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne];
+		//initialisation de chaque element a 0 par vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMAIElem[uiBoucleForX][uiBoucleForY] = MADArg.ppdMAIElem[uiBoucleForX][uiBoucleForY];
+			ppdMADElem[uiBoucleForX][uiBoucleForY] = 0;
 		}
 	}
 }
@@ -42,26 +42,40 @@ CMatriceDouble::CMatriceDouble(CMatriceDouble& MADArg) {
 CMatriceDouble::~CMatriceDouble() {
 	//liberation des vecteurs de la memoire
 	for (unsigned int uiBoucleFor = 0; uiBoucleFor < uiMATdimLigne; uiBoucleFor++)
-		delete[] ppdMAIElem[uiBoucleFor];
-	delete[] ppdMAIElem;
+		delete[] ppdMADElem[uiBoucleFor];
+	delete[] ppdMADElem;
 }
 
 
 /*** Operateurs ***/
 
+CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) {
+	//init
+	const double cfConst = (const double) clfArg;
+	CMatriceDouble* pMADMult = new CMatriceDouble(*this);
 
+	//calcul
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * cfConst;
+		}
+	}
+	return *pMADMult;
+}
 
 
 /*** Autres methodes ***/
 
-void CMatriceDouble::MATPrint() {
+void CMatriceDouble::MATPrint(bool bEndl) {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimLigne; uiBoucleForY++) { //affiche les uiMATdimLigne elements de la uiBoucleForX-ieme ligne
-			std::cout << ppdMAIElem[uiBoucleForX][uiBoucleForY];
+			std::cout << ppdMADElem[uiBoucleForX][uiBoucleForY];
 			if (uiBoucleForY != uiMATdimColonne - 1) //met un espace seulement entre des elements
-				std::cout << ' ';
+				std::cout << '\t';
 		}
 		if (uiBoucleForX != uiMATdimLigne - 1)
-			std::cout << std::endl; //saute une ligne seulement entre des elements
+			std::cout << std::endl << std::endl; //saute une ligne seulement entre des elements
 	}
+	std::cout << std::endl;
+	if (bEndl) std::cout << std::endl; //revient une 2e fois a la ligne seulement si bEndl est vrai
 }

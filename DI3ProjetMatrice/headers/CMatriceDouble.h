@@ -9,7 +9,7 @@
 class CMatriceDouble : public CMatrice {
 	//attributs
 	private:
-		double** ppdMAIElem;
+		double** ppdMADElem;
 
 	//constructeurs et destructeurs
 	public:
@@ -19,35 +19,39 @@ class CMatriceDouble : public CMatrice {
 
 			Entree : rien
 			Precondition : neant
-			Sortie : CMatriceDouble
+			Sortie : MADNew : CMatriceDouble
 			Postcondition : Objet CMatriceDouble alloue
 		*/
 		CMatriceDouble();
 
 		/*
 			Constructeur de recopie
+			Remarques :
+				MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 
 			Entree : MADArg : CMatriceDouble
 			Precondition : neant
-			Sortie : CMatriceDouble
+			Sortie : MADNew : CMatriceDouble
 			Postcondition : Objet CMatriceDouble alloue
 		*/
-		CMatriceDouble(CMatriceDouble& MADArg);
+		CMatriceDouble(const CMatriceDouble& MADArg);
 
 		/*
 			Constructeur a deux arguments permettant d'initialiser une matrice nulle de uiX x uiY elements
+			Remarques :
+				uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 
 			Entree : uiX : entier non signe, uiY : entier non signe
 			Precondition : neant
-			Sortie : CMatriceDouble
+			Sortie : MADNew : CMatriceDouble
 			Postcondition : Objet CMatriceDouble alloue et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 0)
 		*/
-		CMatriceDouble(unsigned int uiX, unsigned int uiY);
+		CMatriceDouble(const unsigned int uiX, const unsigned int uiY);
 
 		/*
 			Destructeur
 
-			Entree : CMatriceDouble
+			Entree : MADInutile : CMatriceDouble
 			Precondition : neant
 			Sortie : rien
 			Postcondition : Objet CMatriceDouble libere
@@ -57,9 +61,19 @@ class CMatriceDouble : public CMatrice {
 
 	//operateurs
 	public:
-		virtual CMatriceDouble& operator=(float fConst) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& operator*(float fConst) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& operator/(float fConst) { return *new CMatriceDouble(); };
+		/*
+			Methode de type operateur a un argument renvoyant le produit d'un objet CMatriceDouble par un nombre constant clfArg
+			Remarques :
+				clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+				clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
+
+			Entree : MADActuelle : CMatriceDouble, clfArg : long double
+			Precondition : neant
+			Sortie : MADMult : CMatriceDouble
+			Postcondition : (MADMult = MADActuelle * clfArg)
+		*/
+		virtual CMatriceDouble& operator*(const long double clfArg);
+		virtual CMatriceDouble& operator/(const long double clfArg) { return *new CMatriceDouble(); };
 
 
 	//accesseurs et mutateurs
@@ -67,40 +81,47 @@ class CMatriceDouble : public CMatrice {
 
 		/*
 			Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+			Remarques :
+				uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 			
 			Entree : uiX : entier non signe, uiY : entier non signe
 			Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
-			Sortie : dMAIElem : double
-			Postcondition : (dMAIElem = ppdMAIElem[uiX][uiY])
+			Sortie : dElem : double
+			Postcondition : (dElem = ppdMAIElem[uiX][uiY])
 		*/
-		double MADGet(unsigned int uiX, unsigned int uiY) { return ppdMAIElem[uiX][uiY]; };
-
+		double MADGetElem(const unsigned int uiX, const unsigned int uiY) { return ppdMADElem[uiX][uiY]; };
+		
 		/*
 			Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+			Remarques :
+				uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 
 			Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
 			Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
 			Sortie : rien
 			Postcondition : (ppdMAIElem[uiX][uiY] = dElem)
 		*/
-		void MADSet(unsigned int uiX, unsigned int uiY, double dElem) { ppdMAIElem[uiX][uiY] = dElem; };
+		void MADSetElem(const unsigned int uiX, const unsigned int uiY, const double dElem) { ppdMADElem[uiX][uiY] = dElem; };
 
 
 	//autres methodes
 	public:
 
 		/*
-			Methode sans argument affichant la matrice
+			Methode sans argument affichant la matrice (puis un saut de ligne si bEndl est vrai)
 
 			Entree : rien
 			Precondition : neant
 			Sortie : rien
 			Postcondition : Affiche les elements de CMatriceDouble
 		*/
-		virtual void MATPrint(); //ou MATAfficher
-		virtual CMatriceDouble& MATt(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee
-		virtual CMatriceDouble& MATAdd(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee
-		virtual CMatriceDouble& MATSub(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATSoustraction
-		virtual CMatriceDouble& MATMult(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATMultiplication
-		virtual CMatriceDouble& MATDiv(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATDivision
+		virtual void MATPrint(bool bEndl = 0); //ou MATAfficher
+		virtual CMatriceDouble& MATt(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
+		virtual CMatriceDouble& MATAdd(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
+		virtual CMatriceDouble& MATSous(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
+		virtual CMatriceDouble& MATMult(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
+		virtual CMatriceDouble& MATDiv(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
 };
+
+
+/* Methodes INLINE */

@@ -7,39 +7,50 @@ class CMatrice {
 		unsigned int uiMATdimLigne;
 		unsigned int uiMATdimColonne;
 
+	//accesseurs et mutateurs
+	public:
 
-	//constructeurs et destructeurs
+		/*
+			Methode INLINE de type accesseur sans arguments renvoyant le nombre de ligne
+
+			Entree : rien
+			Precondition : neant
+			Sortie : uiDimLigne : entier non signe
+			Postcondition : (uiDimLigne = uiMATDimLigne)
+		*/
+		virtual unsigned int MATGetDimLigne() { return uiMATdimLigne; };
+
+		/*
+			Methode INLINE de type accesseur sans arguments renvoyant le nombre de colonne
+
+			Entree : rien
+			Precondition : neant
+			Sortie : uiDimColonne : entier non signe
+			Postcondition : (uiDimColonne = uiMATdimColonne)
+		*/
+		virtual unsigned int MATGetDimColonne() { return uiMATdimColonne; };
 
 
 	//operateurs
 	public:
-		virtual CMatrice& operator=(float fConst)=0;
-		virtual CMatrice& operator*(float fConst)=0;
-		virtual CMatrice& operator/(float fConst)=0;
+		//Type long double pour ne pas perdre d'information dans le cas de la conversion d'un nombre
+		virtual CMatrice& operator*(const long double clfConst)=0;
+		virtual CMatrice& operator/(const long double clfConst)=0;
 
 
-	//accesseurs
+	//accesseurs et mutateurs
 	public:
 		/*type void a adapter dans les classes filles*/
-		//virtual void MATGet(unsigned int x, unsigned int y)=0; //doit etre declaree dans la classe fille car void inextensible
+		//doivent etre declares dans la classe fille car le type de retour void ne peut pas etre adapte
 
 
 	//methodes
 	public:
-		/*type void a adapter dans les classes filles*/
-
-		/*
-			Methode virtuelle pure sans argument affichant la matrice
-
-			Entree : rien
-			Precondition : neant
-			Sortie : rien
-			Postcondition : Affiche les elements de CMatrice
-		*/
-		virtual void MATPrint()=0; //ou MATAfficher
-		virtual CMatrice& MATt(CMatrice* pMATarg)=0; //ou MATTransposee
-		virtual CMatrice& MATAdd(CMatrice* pMATarg)=0; //ou MATTransposee
-		virtual CMatrice& MATSub(CMatrice* pMATarg)=0; //ou MATSoustraction
-		virtual CMatrice& MATMult(CMatrice* pMATarg)=0; //ou MATMultiplication
-		virtual CMatrice& MATDiv(CMatrice* pMATarg)=0; //ou MATDivision
+		/*type CMatrice& a adapter dans les classes filles*/
+		virtual void MATPrint(bool bEndl)=0; //ou MATAfficher
+		virtual CMatrice& MATt(const CMatrice* pMATarg)=0; //ou MATTransposee
+		virtual CMatrice& MATAdd(const CMatrice* pMATarg)=0; //ou MATTransposee
+		virtual CMatrice& MATSous(const CMatrice* pMATarg)=0; //ou MATSoustraction
+		virtual CMatrice& MATMult(const CMatrice* pMATarg)=0; //ou MATMultiplication
+		virtual CMatrice& MATDiv(const CMatrice* pMATarg)=0; //ou MATDivision
 };
