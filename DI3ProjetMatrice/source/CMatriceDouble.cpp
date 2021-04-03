@@ -11,9 +11,9 @@ CMatriceDouble::CMatriceDouble() {
 	uiMATdimLigne = uiMATdimColonne = 0;
 }
 
-CMatriceDouble::CMatriceDouble(unsigned int uiArgX, unsigned int uiArgY) {
-	uiMATdimLigne = uiArgX;
-	uiMATdimColonne = uiArgY;
+CMatriceDouble::CMatriceDouble(unsigned int uiX, unsigned int uiY) {
+	uiMATdimLigne = uiX;
+	uiMATdimColonne = uiY;
 	//allocation dynamique de chaque vecteur d'elements
 	ppdMAIElem = new double*[uiMATdimLigne];
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
@@ -49,9 +49,6 @@ CMatriceDouble::~CMatriceDouble() {
 
 /*** Operateurs ***/
 
-
-
-/*** Accesseurs ***/
 
 
 
