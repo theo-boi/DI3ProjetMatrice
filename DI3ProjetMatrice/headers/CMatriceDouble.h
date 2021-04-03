@@ -1,7 +1,7 @@
 #ifndef CMATRICEH
-#define CMATRICEH 0
 #include "CMatrice.h"
 #endif 
+#define CMATRICEDOUBLEH 0
 
 /* Attention developpeurs : definitions inline predefinies a enlever. Presentes uniquement pour eviter les erreurs de compilation. */
 class CMatriceDouble : public CMatrice {
@@ -19,13 +19,11 @@ class CMatriceDouble : public CMatrice {
 		virtual CMatriceDouble& operator=(float fConst) { return *new CMatriceDouble(); };
 		virtual CMatriceDouble& operator*(float fConst) { return *new CMatriceDouble(); };
 		virtual CMatriceDouble& operator/(float fConst) { return *new CMatriceDouble(); };
-		//accesseurs
+	//accesseurs
 	public:
-		/*type void à adapter dans les classes filles*/
 		virtual double MATGet(unsigned int x, unsigned int y);
-		//methodes
+	//autres methodes
 	public:
-		/*type void à adapter dans les classes filles*/
 		virtual void MATPrint(); //ou MATAfficher
 		virtual CMatriceDouble& MATt(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee
 		virtual CMatriceDouble& MATAdd(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee

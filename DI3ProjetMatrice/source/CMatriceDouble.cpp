@@ -1,8 +1,10 @@
 #ifndef CMATRICEDOUBLEH
-#define CMATRICEDOUBLEH 0
 #include "../headers/CMatriceDouble.h"
 #endif
 #include <iostream>
+
+
+/*** Constructeurs et destructeurs ***/
 
 CMatriceDouble::CMatriceDouble() {
 	ppdMAIElem = nullptr;
@@ -27,12 +29,32 @@ CMatriceDouble::~CMatriceDouble() {
 	delete[] ppdMAIElem;
 }
 
+
+/*** Operateurs ***/
+
+
+
+/*** Methodes ***/
+
+/*
+	Entree : x : entier non signe, y : entier non signe
+	Precondition : neant
+	Sortie : dMAIElem : double
+	Postcondition : (dMAIElem = ppdMAIElem[x][y])^(x < eMATdimLigne)^(y < eMATdimLigne)
+*/
 double CMatriceDouble::MATGet(unsigned int x, unsigned int y) {
-	if (x >= eMATdimLigne && y >= eMATdimLigne)
+	if (x >= eMATdimLigne && y >= eMATdimLigne) {
 		/* exception */;
-	else return ppdMAIElem[x][y];
+	}
+	return ppdMAIElem[x][y];
 }
 
+/*
+	Entree : rien
+	Precondition : neant
+	Sortie : rien
+	Postcondition : Affiche les elements de CMatriceDouble
+*/
 void CMatriceDouble::MATPrint() {
 	for (unsigned int eBoucleForX = 0; eBoucleForX < eMATdimLigne; eBoucleForX++) {
 		for (unsigned int eBoucleForY = 0; eBoucleForY < eMATdimLigne; eBoucleForY++) {
