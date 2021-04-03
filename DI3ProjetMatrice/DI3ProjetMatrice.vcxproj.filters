@@ -56,12 +56,10 @@
     <ClInclude Include="headers\CMatriceEntier.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="buildAndRunCpp.cmd" />
     <None Include="Terminal développeur Visual Studio 2017.cmd" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

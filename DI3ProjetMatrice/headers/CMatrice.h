@@ -3,8 +3,8 @@
 class CMatrice {
 	//attributs
 	protected:
-		unsigned int eMATdimLigne;
-		unsigned int eMATdimColonne;
+		unsigned int uiMATdimLigne;
+		unsigned int uiMATdimColonne;
 	//constructeurs et destructeurs
 	//operateurs
 	public:

@@ -168,9 +168,9 @@
     <ClInclude Include="headers\CMatriceCaractere.h" />
     <ClInclude Include="headers\CMatriceDouble.h" />
     <ClInclude Include="headers\CMatriceEntier.h" />
-    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
     <None Include="buildAndRunCpp.cmd" />
     <None Include="Terminal développeur Visual Studio 2017.cmd" />
   </ItemGroup>
