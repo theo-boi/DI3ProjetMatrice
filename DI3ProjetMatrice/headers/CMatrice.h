@@ -13,11 +13,11 @@ class CMatrice {
 		virtual CMatrice& operator/(float fConst)=0;
 	//accesseurs
 	public:
-		/*type void à adapter dans les classes filles*/
+		/*type void a adapter dans les classes filles*/
 		//virtual void MATGet(unsigned int x, unsigned int y)=0; //doit etre declaree dans la classe fille car void inextensible
 	//methodes
 	public:
-		/*type void à adapter dans les classes filles*/
+		/*type void a adapter dans les classes filles*/
 		virtual void MATPrint()=0; //ou MATAfficher
 		virtual CMatrice& MATt(CMatrice* pMATarg)=0; //ou MATTransposee
 		virtual CMatrice& MATAdd(CMatrice* pMATarg)=0; //ou MATTransposee

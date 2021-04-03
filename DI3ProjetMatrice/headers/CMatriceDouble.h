@@ -21,11 +21,11 @@ class CMatriceDouble : public CMatrice {
 		virtual CMatriceDouble& operator/(float fConst) { return *new CMatriceDouble(); };
 		//accesseurs
 	public:
-		/*type void à adapter dans les classes filles*/
+		/*type void Ã  adapter dans les classes filles*/
 		virtual double MATGet(unsigned int x, unsigned int y);
 		//methodes
 	public:
-		/*type void à adapter dans les classes filles*/
+		/*type void Ã  adapter dans les classes filles*/
 		virtual void MATPrint(); //ou MATAfficher
 		virtual CMatriceDouble& MATt(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee
 		virtual CMatriceDouble& MATAdd(CMatrice* pMATarg) { return *new CMatriceDouble(); }; //ou MATTransposee
