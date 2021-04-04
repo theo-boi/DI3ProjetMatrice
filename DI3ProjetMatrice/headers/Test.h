@@ -1,4 +1,4 @@
-#ifndef CEXCEPTIONH
+#ifndef DI3PROJETMATRICEH
 #include "../headers/DI3ProjetMatrice.h"
 #endif
 
