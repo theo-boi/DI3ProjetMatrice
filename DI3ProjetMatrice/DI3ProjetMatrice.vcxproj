@@ -23,7 +23,7 @@
     <ProjectGuid>{15F86BD7-B238-42FA-BAF9-6DB233D5B60C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>DI3ProjetMatrice</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -176,6 +176,9 @@
     <None Include="buildAndRunCpp.cmd" />
     <None Include="buildAndRunCpp.sh" />
     <None Include="Terminal développeur Visual Studio 2017.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fichierMatrice.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

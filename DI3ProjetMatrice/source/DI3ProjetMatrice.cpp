@@ -1,6 +1,7 @@
 #include "../headers/DI3ProjetMatrice.h"
 using namespace std;
 
+
 /*
  *	Attention developpeurs : creer une classe capable de regrouper ce type d'operateur de type de base
  *	Pour l'instant defini dans Test.cpp
@@ -64,4 +65,7 @@ int main()
 	delete pMAD2;
 	delete pMAD3;
 	return 0;
+
+	//tests fichiers
+	//CMatriceDouble MAD FICprincipale("../fichierMatrice.txt");
 }
