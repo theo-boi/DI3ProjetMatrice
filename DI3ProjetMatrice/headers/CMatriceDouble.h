@@ -61,6 +61,7 @@ class CMatriceDouble : public CMatrice {
 
 	//operateurs
 	public:
+
 		/*
 		 *	Methode de type operateur a un argument renvoyant le produit d'un objet CMatriceDouble par un nombre constant clfArg
 		 *	Remarques :
@@ -70,10 +71,22 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
 		 *	Precondition : neant
 		 *	Sortie : MADMult : CMatriceDouble
-		 *	Postcondition : (MADMult = MADActuelle * clfArg)
+		 *	Postcondition : {MADMult = MADActuelle * clfArg}
 		 */
-		virtual CMatriceDouble& operator*(const long double clfArg);
-		virtual CMatriceDouble& operator/(const long double clfArg) { return *new CMatriceDouble(); };
+		virtual CMatriceDouble& operator*(const long double clfArg) const;
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant le resultat de la division d'un objet CMatriceDouble par un nombre constant clfArg
+		 *	Remarques :
+		 *		clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
+		 *
+		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
+		 *	Precondition : neant
+		 *	Sortie : MADDiv : CMatriceDouble
+		 *	Postcondition : {MADDiv = MADActuelle / clfArg}
+		 */
+		virtual CMatriceDouble& operator/(const long double clfArg) const;
 
 
 	//accesseurs et mutateurs
@@ -87,9 +100,9 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
 		 *	Sortie : dElem : double
-		 *	Postcondition : (dElem = ppdMAIElem[uiX][uiY])
+		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
 		 */
-		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) { return ppdMADElem[uiX][uiY]; };
+		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
 		
 		/*
 		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
@@ -99,7 +112,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
 		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
 		 *	Sortie : rien
-		 *	Postcondition : (ppdMAIElem[uiX][uiY] = dElem)
+		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
 		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem);
 
@@ -115,12 +128,29 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : rien
 		 *	Postcondition : Affiche les elements de CMatriceDouble
 		 */
-		virtual void MATPrint(bool bEndl = 0); //ou MATAfficher
-		virtual CMatriceDouble& MATt(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& MATAdd(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& MATSous(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& MATMult(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
-		virtual CMatriceDouble& MATDiv(const CMatrice* pMATarg) { return *new CMatriceDouble(); };
+		virtual void MATPrint(bool bEndl = 0) const;
+
+		/*
+		 *	Methode sans argument renvoyant la transposee de la matrice
+		 *
+		 *	Entree : MADActuelle : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MADt : CMatriceDouble
+		 *	Postcondition : MADt est la transposee de MADActuelle
+		 */
+		CMatriceDouble& MADt() const;
+
+		/*
+		 *	Methode a un argument renvoyant la matrice additionnee par MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : Les dimensions de MADArg et MADActuelle sont egales
+		 *	Sortie : MATAdd : CMatriceDouble
+		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
+		 */
+		CMatriceDouble& MADAdd(const CMatriceDouble& MADArg) const;
+		CMatriceDouble& MADSous(const CMatriceDouble& MADArg) const { return *new CMatriceDouble(); };
+		CMatriceDouble& MADMult(const CMatriceDouble& MADArg) const { return *new CMatriceDouble(); };
 };
 
 
