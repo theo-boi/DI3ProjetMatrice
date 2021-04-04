@@ -51,7 +51,7 @@ CMatriceDouble::~CMatriceDouble() {
 
 CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) {
 	//init	
-	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(Arg) est trop different
+	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different
 	const double cfConst = (const double) clfArg;
 
 	CMatriceDouble* pMADMult = new CMatriceDouble(*this);

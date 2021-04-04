@@ -89,7 +89,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : dElem : double
 		 *	Postcondition : (dElem = ppdMAIElem[uiX][uiY])
 		 */
-		double MADGetElem(const unsigned int uiX, const unsigned int uiY) { return ppdMADElem[uiX][uiY]; };
+		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) { return ppdMADElem[uiX][uiY]; };
 		
 		/*
 		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
@@ -101,7 +101,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : rien
 		 *	Postcondition : (ppdMAIElem[uiX][uiY] = dElem)
 		 */
-		void MADSetElem(const unsigned int uiX, const unsigned int uiY, const double dElem) { ppdMADElem[uiX][uiY] = dElem; };
+		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem);
 
 
 	//autres methodes
@@ -125,3 +125,10 @@ class CMatriceDouble : public CMatrice {
 
 
 /* Methodes INLINE */
+void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem) {
+	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	const double dElem = (const double) cldElem;
+	
+	//set
+	ppdMADElem[uiX][uiY] = dElem;
+}
