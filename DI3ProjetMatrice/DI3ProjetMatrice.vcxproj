@@ -160,6 +160,7 @@
     <ClCompile Include="source\CMatriceDouble.cpp" />
     <ClCompile Include="source\CMatriceEntier.cpp" />
     <ClCompile Include="source\DI3ProjetMatrice.cpp" />
+    <ClCompile Include="source\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\CException.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="headers\CMatriceCaractere.h" />
     <ClInclude Include="headers\CMatriceDouble.h" />
     <ClInclude Include="headers\CMatriceEntier.h" />
+    <ClInclude Include="headers\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

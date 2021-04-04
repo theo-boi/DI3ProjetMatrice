@@ -28,11 +28,18 @@ int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
 
 int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg*21 et 21*MADArg\n\n\n";
-	//Calcul puis affichage de l'objet CMatriceDouble temporaire
+	/*
+	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
+	 *	Le compilateur comprend MADArg.operator*(21)
+	 */
 	( MADArg * 21 ).MATPrint(1); //MADArg*21
 
 	cout << endl;
-	//Calcul puis affichage de l'objet CMatriceDouble temporaire
+	/*
+	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
+	 *	Le compilateur utilise operator*(21, MADArg)
+	 *	car 21.operator*(MADArg) n'est pas surchargeable
+	 */
 	( 21 * MADArg ).MATPrint(1); //21*MADArg
 	return 0;
 }

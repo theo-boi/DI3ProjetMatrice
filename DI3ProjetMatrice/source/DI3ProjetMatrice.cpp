@@ -38,7 +38,6 @@ int main()
 
 	//tests
 	CMatriceDoubleTestPrint(*pMAD1);
-	cout << endl;
 	CMatriceDoubleTestPrint(*pMAD2);
 	cout << "---------\n\n\n";
 
