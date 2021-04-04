@@ -61,5 +61,6 @@
     <None Include="buildAndRunCpp.cmd" />
     <None Include="Terminal développeur Visual Studio 2017.cmd" />
     <None Include="..\README.md" />
+    <None Include="buildAndRunCpp.sh" />
   </ItemGroup>
 </Project>
