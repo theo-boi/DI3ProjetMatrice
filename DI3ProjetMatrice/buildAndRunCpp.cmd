@@ -1,4 +1,4 @@
-cd %userprofile%\source\repos\DI3ProjetMatrice\DI3ProjetMatrice\Debug
+cd Debug
 del "DI3ProjetMatrice.exe"
 del "DI3ProjetMatrice.tlog/log.txt"
 cl /W4 /EHsc ../source/DI3ProjetMatrice.cpp ../source/C* ../source/Test.cpp /link > DI3ProjetMatrice.tlog/log.txt
