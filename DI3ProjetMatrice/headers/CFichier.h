@@ -9,9 +9,9 @@ class CFichier {
 
     //attributs
     private :
-        char pcFICnom;
+        char* pcFICnom;
         FILE* pFICfichier;
-        CMatriceDouble pMADmatrice;
+        CMatriceDouble* pMADmatrice;
 
     //constructeur et destructeur
     public :
@@ -27,5 +27,5 @@ class CFichier {
 		 *	Sortie : MatriceDouble
 		 *	Postcondition : les données de la matrice correspondent à celles du fichier
 		 */
-        CMatriceDouble FICprincipale();
+        //CMatriceDouble FICprincipale(char* pcFICnomFichier);
 };

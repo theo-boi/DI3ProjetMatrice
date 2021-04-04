@@ -69,4 +69,7 @@
     <None Include="..\README.md" />
     <None Include="buildAndRunCpp.sh" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="fichierMatrice.txt" />
+  </ItemGroup>
 </Project>
