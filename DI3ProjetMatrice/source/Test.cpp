@@ -1,11 +1,10 @@
-#include "../headers/DI3ProjetMatrice.h"
+#include "../headers/Test.h"
 using namespace std;
 
 /*
  *	Attention developpeurs : creer une classe capable de regrouper ce type d'operateur de type de base
  *	Pour l'instant defini dans Test.cpp
  */
-/*
 CMatriceDouble& operator*(const long double cldArg, const CMatriceDouble MADArg) {
 	//init
 	CMatriceDouble* pMADMult = new CMatriceDouble(MADArg);
@@ -16,38 +15,24 @@ CMatriceDouble& operator*(const long double cldArg, const CMatriceDouble MADArg)
 			pMADMult->MADSetElem(uiBoucleForX, uiBoucleForY, pMADMult->MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
 		}
 	}
-
 	return *pMADMult;
 }
-*/
 
-int main()
-{
-	//init
-	CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
-	pMAD1->MADSetElem(0, 0, 1);
-	pMAD1->MADSetElem(0, 1, 1);
-	pMAD1->MADSetElem(1, 0, 1);
-	pMAD1->MADSetElem(1, 1, 1);
-	
-	CMatriceDouble* pMAD2 = new CMatriceDouble(2, 2); //MAD2 = I_2
-	pMAD2->MADSetElem(0, 0, 1);
-	pMAD2->MADSetElem(0, 1, 0);
-	pMAD2->MADSetElem(1, 0, 0);
-	pMAD2->MADSetElem(1, 1, 1);
+/* Tests */
 
-	//tests
-	CMatriceDoubleTestPrint(*pMAD1);
+int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
+	cout << "Afficher MADArg\n\n";
+	MADArg.MATPrint(1);
+	return 0;
+}
+
+int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
+	cout << "Afficher MADArg*21 et 21*MADArg\n\n\n";
+	//Calcul puis affichage de l'objet CMatriceDouble temporaire
+	( MADArg * 21 ).MATPrint(1); //MADArg*21
+
 	cout << endl;
-	CMatriceDoubleTestPrint(*pMAD2);
-	cout << "---------\n\n\n";
-
-	CMatriceDoubleTestMultConst(*pMAD1);
-	CMatriceDoubleTestMultConst(*pMAD2);
-	cout << "---------\n\n\n";
-
-	//delete
-	delete pMAD1;
-	delete pMAD2;
+	//Calcul puis affichage de l'objet CMatriceDouble temporaire
+	( 21 * MADArg ).MATPrint(1); //21*MADArg
 	return 0;
 }

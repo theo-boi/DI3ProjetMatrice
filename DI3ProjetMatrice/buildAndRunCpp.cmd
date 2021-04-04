@@ -7,5 +7,5 @@ REM ***************** COMPILATION *****************
 type log.txt
 REM *** Le contenu des logs de compilation est a : Debug/DI3ProjetMatrice.tlog/DI3ProjetMatrice.tlog ***
 cd ../
-REM **************** CONSOLE **********************
+REM ******************* CONSOLE *******************
 DI3ProjetMatrice.exe

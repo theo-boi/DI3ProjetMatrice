@@ -1,3 +1,5 @@
+#define DI3PROJETMATRICEH
+
 #ifndef CEXCEPTIONH
 #include "../headers/CException.h"
 #endif
@@ -23,3 +25,4 @@
 #endif
 
 #include <iostream>
+#include "Test.h"

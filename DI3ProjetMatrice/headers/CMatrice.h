@@ -11,23 +11,23 @@ class CMatrice {
 	public:
 
 		/*
-			Methode INLINE de type accesseur sans arguments renvoyant le nombre de ligne
-
-			Entree : rien
-			Precondition : neant
-			Sortie : uiDimLigne : entier non signe
-			Postcondition : (uiDimLigne = uiMATDimLigne)
-		*/
+		 *	Methode INLINE de type accesseur sans arguments renvoyant le nombre de ligne
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : uiDimLigne : entier non signe
+		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
+		 */
 		virtual unsigned int MATGetDimLigne() { return uiMATdimLigne; };
 
 		/*
-			Methode INLINE de type accesseur sans arguments renvoyant le nombre de colonne
-
-			Entree : rien
-			Precondition : neant
-			Sortie : uiDimColonne : entier non signe
-			Postcondition : (uiDimColonne = uiMATdimColonne)
-		*/
+		 *	Methode INLINE de type accesseur sans arguments renvoyant le nombre de colonne
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : uiDimColonne : entier non signe
+		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
+		 */
 		virtual unsigned int MATGetDimColonne() { return uiMATdimColonne; };
 
 
