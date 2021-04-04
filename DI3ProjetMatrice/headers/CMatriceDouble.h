@@ -37,14 +37,14 @@ class CMatriceDouble : public CMatrice {
 		CMatriceDouble(const CMatriceDouble& MADArg);
 
 		/*
-		 *	Constructeur a deux arguments permettant d'initialiser une matrice nulle de uiX x uiY elements
+		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
 		 *	Remarques :
 		 *		uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloue et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 0)
+		 *	Postcondition : Objet CMatriceDouble alloue et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
 		 */
 		CMatriceDouble(const unsigned int uiX, const unsigned int uiY);
 
@@ -125,6 +125,7 @@ class CMatriceDouble : public CMatrice {
 
 
 /* Methodes INLINE */
+
 void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem) {
 	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
 	const double dElem = (const double) cldElem;

@@ -34,7 +34,7 @@ CMatriceDouble::CMatriceDouble(const unsigned int uiX, const unsigned int uiY) {
 		ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne];
 		//initialisation de chaque element a 0 par vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMADElem[uiBoucleForX][uiBoucleForY] = 0;
+			ppdMADElem[uiBoucleForX][uiBoucleForY] = 1;
 		}
 	}
 }

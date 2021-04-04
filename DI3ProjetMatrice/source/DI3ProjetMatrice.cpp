@@ -25,16 +25,10 @@ int main()
 {
 	//init
 	CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
-	pMAD1->MADSetElem(0, 0, 1);
-	pMAD1->MADSetElem(0, 1, 1);
-	pMAD1->MADSetElem(1, 0, 1);
-	pMAD1->MADSetElem(1, 1, 1);
 	
 	CMatriceDouble* pMAD2 = new CMatriceDouble(2, 2); //MAD2 = I_2
-	pMAD2->MADSetElem(0, 0, 1);
 	pMAD2->MADSetElem(0, 1, 0);
 	pMAD2->MADSetElem(1, 0, 0);
-	pMAD2->MADSetElem(1, 1, 1);
 
 	//tests
 	CMatriceDoubleTestPrint(*pMAD1);
