@@ -50,8 +50,10 @@ CMatriceDouble::~CMatriceDouble() {
 /*** Operateurs ***/
 
 CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) {
-	//init
+	//init	
+	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(Arg) est trop different
 	const double cfConst = (const double) clfArg;
+
 	CMatriceDouble* pMADMult = new CMatriceDouble(*this);
 
 	//calcul
