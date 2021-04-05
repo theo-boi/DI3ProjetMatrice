@@ -31,7 +31,7 @@ int main()
 	pMAD2->MADSetElem(0, 1, 0);
 	pMAD2->MADSetElem(1, 0, 0);
 
-	CMatriceDouble* pMAD3 = new CMatriceDouble(2, 3); //MAD2 = I_2
+	CMatriceDouble* pMAD3 = new CMatriceDouble(3, 4); //MAD3 = ((1,4,1), (2,5,1), (3,6,1), (1,1,1))
 	pMAD3->MADSetElem(0, 1, 2);
 	pMAD3->MADSetElem(0, 2, 3);
 	pMAD3->MADSetElem(1, 0, 4);
@@ -39,25 +39,23 @@ int main()
 	pMAD3->MADSetElem(1, 2, 6);
 
 	//tests
-	
-	CMatriceDoubleTestPrint(*pMAD1);
-	CMatriceDoubleTestPrint(*pMAD2);
+	CMatriceDoubleTestPrint(*pMAD3);
+	CMatriceDoubleTestMultConst(*pMAD3);
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestMultConst(*pMAD1);
-	CMatriceDoubleTestMultConst(*pMAD2);
+	CMatriceDoubleTestDivConst(*pMAD3);
 	cout << "---------\n\n\n";
 	
-	CMatriceDoubleTestDivConst(*pMAD1);
-	CMatriceDoubleTestDivConst(*pMAD2);
-	cout << "---------\n\n\n";
-	
-	CMatriceDoubleTestPrint(*pMAD3);
 	CMatriceDoubleTestT(*pMAD3);
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestPrint(*pMAD1);
-	CMatriceDoubleTestAdd(*pMAD1); //*pMAD1 + (*pMAD1*10)
+	CMatriceDoubleTestAdd(*pMAD3); //*pMAD1 + (*pMAD1*10)
+	cout << "---------\n\n\n";
+
+	CMatriceDoubleTestSous(*pMAD3);
+	cout << "---------\n\n\n";
+
+	CMatriceDoubleTestMult(*pMAD3);
 	cout << "---------\n\n\n";
 
 	//delete

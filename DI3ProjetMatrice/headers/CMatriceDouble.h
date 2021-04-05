@@ -3,7 +3,8 @@
 #endif 
 #define CMATRICEDOUBLEH 0
 
-/* Attention developpeurs : definitions inline predefinies (non-indiquees dans la specification) a enlever.
+/*
+ *	Attention developpeurs : definitions inline predefinies (non-indiquees dans la specification) a enlever.
  *	Presentes uniquement pour eviter les erreurs de compilation.
  */
 class CMatriceDouble : public CMatrice {
@@ -27,7 +28,7 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Constructeur de recopie
 		 *	Remarques :
-		 *		MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
 		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
@@ -39,7 +40,7 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
 		 *	Remarques :
-		 *		uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : neant
@@ -65,8 +66,8 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Methode de type operateur a un argument renvoyant le produit d'un objet CMatriceDouble par un nombre constant clfArg
 		 *	Remarques :
-		 *		clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
-		 *		clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
+		 *		- clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		- clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
 		 *
 		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
 		 *	Precondition : neant
@@ -78,8 +79,8 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Methode de type operateur a un argument renvoyant le resultat de la division d'un objet CMatriceDouble par un nombre constant clfArg
 		 *	Remarques :
-		 *		clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
-		 *		clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
+		 *		- clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		- clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
 		 *
 		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
 		 *	Precondition : neant
@@ -95,7 +96,7 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
 		 *	Remarques :
-		 *		uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *	
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
@@ -107,7 +108,7 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
 		 *	Remarques :
-		 *		uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
 		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
@@ -144,13 +145,31 @@ class CMatriceDouble : public CMatrice {
 		 *	Methode a un argument renvoyant la matrice additionnee par MATArg
 		 *
 		 *	Entree : MATArg : CMatriceDouble
-		 *	Precondition : Les dimensions de MADArg et MADActuelle sont egales
+		 *	Precondition : neant
 		 *	Sortie : MATAdd : CMatriceDouble
 		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
 		 */
 		CMatriceDouble& MADAdd(const CMatriceDouble& MADArg) const;
-		CMatriceDouble& MADSous(const CMatriceDouble& MADArg) const { return *new CMatriceDouble(); };
-		CMatriceDouble& MADMult(const CMatriceDouble& MADArg) const { return *new CMatriceDouble(); };
+
+		/*
+		 *	Methode a un argument renvoyant la matrice soustraite par MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MATSous : CMatriceDouble
+		 *	Postcondition : {MATSous = MATActuelle - MATArg}
+		 */
+		CMatriceDouble& MADSous(const CMatriceDouble& MADArg) const;
+
+		/*
+		 *	Methode a un argument renvoyant la matrice multipliee par MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MADMult : CMatriceDouble
+		 *	Postcondition : {MADMult = MATActuelle * MATArg}
+		 */
+		CMatriceDouble& MADMult(const CMatriceDouble& MADArg) const;
 };
 
 

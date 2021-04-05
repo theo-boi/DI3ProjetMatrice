@@ -32,7 +32,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
 	 *	Le compilateur utilise MADArg.operator*(21)
 	 */
-	( MADArg * 21 ).MATPrint(1); //MADArg*21
+	( MADArg * 10 ).MATPrint(1); //MADArg*21
 
 	cout << endl;
 	/*
@@ -40,7 +40,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	 *	Le compilateur utilise operator*(21, MADArg)
 	 *	car 21.operator*(MADArg) n'est pas surchargeable
 	 */
-	( 21 * MADArg ).MATPrint(1); //21*MADArg
+	( 10 * MADArg ).MATPrint(1); //21*MADArg
 	return 0;
 }
 
@@ -50,7 +50,7 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
 	 *	Le compilateur utilise MADArg.operator/(21)
 	 */
-	(MADArg / 20).MATPrint(1); //MADArg/21
+	(MADArg / 10).MATPrint(1); //MADArg/21
 
 	/*
 	 *	21/MADArg = 21*MADArg^(-1), donc il faudrait coder une methode pour inverser MADArg
@@ -72,3 +72,18 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 	return 0;
 }
 
+int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
+	cout << "Afficher MADArg - 10*MADArg\n\n\n";
+	CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
+	MADArg.MADSous(MADDix).MATPrint();
+	return 0;
+}
+
+int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
+	cout << "Afficher la transposee de MADArg\n\n\n";
+	CMatriceDouble MADArgT = MADArg.MADt();
+	MADArgT.MATPrint();
+	cout << "Afficher MADArg x MADArg\n\n\n";
+	MADArg.MADMult(MADArgT).MATPrint();
+	return 0;
+}

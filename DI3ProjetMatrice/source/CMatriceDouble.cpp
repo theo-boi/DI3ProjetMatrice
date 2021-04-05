@@ -133,6 +133,8 @@ CMatriceDouble& CMatriceDouble::MADt() const {
 }
 
 CMatriceDouble& CMatriceDouble::MADAdd(const CMatriceDouble& MADArg) const {
+	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+
 	//init
 	CMatriceDouble* pMADAdd = new CMatriceDouble();
 	pMADAdd->uiMATdimLigne = uiMATdimLigne;
@@ -148,5 +150,58 @@ CMatriceDouble& CMatriceDouble::MADAdd(const CMatriceDouble& MADArg) const {
 		}
 	}
 	return *pMADAdd;
+}
+
+CMatriceDouble& CMatriceDouble::MADSous(const CMatriceDouble& MADArg) const {
+	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+
+	//init
+	CMatriceDouble* pMADSous = new CMatriceDouble();
+	pMADSous->uiMATdimLigne = uiMATdimLigne;
+	pMADSous->uiMATdimColonne = uiMATdimColonne;
+
+	//calcul
+	pMADSous->ppdMADElem = new double*[uiMATdimLigne]; //allocation dynamique de chaque vecteur d'elements
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		pMADSous->ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
+		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MADArg, pour chaque vecteur
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			pMADSous->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] - MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
+		}
+	}
+	return *pMADSous;
+}
+
+CMatriceDouble& CMatriceDouble::MADMult(const CMatriceDouble& MADArg) const {
+	//Effectuer un try pour lever l'erreur en cas de dimensions incompatibles entre MADActuelle et MADArg :
+	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
+
+	//init
+	CMatriceDouble* pMADMult = new CMatriceDouble();
+	pMADMult->uiMATdimLigne = uiMATdimLigne;
+	pMADMult->uiMATdimColonne = MADArg.uiMATdimColonne;
+
+	//calcul
+	pMADMult->ppdMADElem = new double*[pMADMult->uiMATdimLigne]; //allocation dynamique de chaque vecteur d'elements
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < pMADMult->uiMATdimLigne; uiBoucleForX++) {
+		pMADMult->ppdMADElem[uiBoucleForX] = new double[pMADMult->uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
+		/*
+		 *	Chaque element de coordonnees (x,y) de la matrice de resultat MADMult est egal
+		 *	au produit scalaire de la uiBoucleForX-ieme ligne de MADActuelle par la uiBoucleForY-ieme colonne de MADArg
+		 */
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < pMADMult->uiMATdimColonne; uiBoucleForY++) {
+
+			//pour chaque ligne de MADActuelle
+			double dSommeProdScalaireVects = 0;
+			//on parcourt la ligne de MADActuelle (soit aussi la colonne de MADArg)
+			for (unsigned int uiBoucleForYCalcul = 0; uiBoucleForYCalcul < uiMATdimColonne; uiBoucleForYCalcul++) {
+				//on somme le produit de chaque uiBoucleForYCalcul-ieme element
+				dSommeProdScalaireVects += ppdMADElem[uiBoucleForX][uiBoucleForYCalcul] * MADArg.ppdMADElem[uiBoucleForYCalcul][uiBoucleForY];
+			}
+			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = dSommeProdScalaireVects;
+
+		}
+	}
+	return *pMADMult;
 }
 
