@@ -25,7 +25,7 @@ CMatriceDouble& operator*(const long double cldArg, const CMatriceDouble MADArg)
 int main()
 {
 	//init
-	CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
+	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
 	
 	CMatriceDouble* pMAD2 = new CMatriceDouble(2, 2); //MAD2 = I_2
 	pMAD2->MADSetElem(0, 1, 0);
@@ -38,26 +38,42 @@ int main()
 	pMAD3->MADSetElem(1, 1, 5);
 	pMAD3->MADSetElem(1, 2, 6);
 
+	CMatriceDouble* pMADArg = pMAD3;
+
 	//tests
-	CMatriceDoubleTestPrint(*pMAD3); //MAD
+	/* Test la compatibilite avec les objects constants */
+	cout << "Afficher MADConstante\n\n";
+	pMAD1->MATPrint(1);
+	*pMAD1 * 10; //MADArg*10
+	10 * *pMAD1; //10*MADArg
+	*pMAD1 / 10; //MADArg/10
+	pMAD1->MADt();
+	*pMAD1 + 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
+	*pMAD1 - 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
+	pMAD1->MADGetElem((double)0, (double)0);
+	*pMAD1 * pMAD1->MADt();
+	//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
+	cout << "---------\n\n\n---------\n\n\n";
+
+	CMatriceDoubleTestPrint(*pMADArg); //MAD
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestMultConst(*pMAD3); //MAD*10 et 10*MAD
+	CMatriceDoubleTestMultConst(*pMADArg); //MAD*10 et 10*MAD
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestDivConst(*pMAD3); //MAD/10 et 10/MAD
+	CMatriceDoubleTestDivConst(*pMADArg); //MAD/10 et 10/MAD
 	cout << "---------\n\n\n";
 	
-	CMatriceDoubleTestT(*pMAD3); //MAD^T
+	CMatriceDoubleTestT(*pMADArg); //MAD^T
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestAdd(*pMAD3); //MAD + (MAD*10)
+	CMatriceDoubleTestAdd(*pMADArg); //MAD + (MAD*10)
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestSous(*pMAD3); //MAD1 - (MAD*10)
+	CMatriceDoubleTestSous(*pMADArg); //MAD1 - (MAD*10)
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestMult(*pMAD3); //MAD * MAD
+	CMatriceDoubleTestMult(*pMADArg); //MAD * MAD
 	cout << "---------\n\n\n";
 
 	//delete

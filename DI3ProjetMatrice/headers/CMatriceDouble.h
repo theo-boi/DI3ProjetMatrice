@@ -91,6 +91,7 @@ class CMatriceDouble : public CMatrice {
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
 		 *	Entree : MATArg : CMatriceDouble
 		 *	Precondition : neant
@@ -101,6 +102,7 @@ class CMatriceDouble : public CMatrice {
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MATArg
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
 		 *	Entree : MATArg : CMatriceDouble
 		 *	Precondition : neant
@@ -111,6 +113,7 @@ class CMatriceDouble : public CMatrice {
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MATArg
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
 		 *	Entree : MATArg : CMatriceDouble
 		 *	Precondition : neant
@@ -118,6 +121,18 @@ class CMatriceDouble : public CMatrice {
 		 *	Postcondition : {MADMult = MATActuelle * MATArg}
 		 */
 		CMatriceDouble& operator*(const CMatriceDouble& MADArg) const;
+
+		/*
+		 *	Methode INLINE de type operateur a un argument appelant le constructeur de recopie a un argument prenant l'objet MADArg de type const CMatriceDouble&
+		 *	Remarques :
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
+		 *	Precondition : neant
+		 *	Sortie : MADCopie : CMatriceDouble
+		 *	Postcondition : {MADCopie = MADActuelle = clfArg}
+		 */
+		inline CMatriceDouble& operator=(const CMatrice& MADArg) const;
 
 
 	//accesseurs et mutateurs
@@ -175,10 +190,27 @@ class CMatriceDouble : public CMatrice {
 
 /* Methodes INLINE */
 
+CMatriceDouble& CMatriceDouble::operator=(const CMatrice& MADArg) const {
+	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	CMatriceDouble& rMADArgConvertie = (CMatriceDouble&) MADArg;
+	if (rMADArgConvertie.ppdMADElem && rMADArgConvertie.ppdMADElem[0][0]) {
+		/*try { (double) rMADArgConvertie.ppdMADElem[0][0]; }
+		catch (const std::exception&) {
+
+		}*/
+	}
+
+	return *new CMatriceDouble(rMADArgConvertie);
+}
+
 void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem) {
-	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	/*try { (double) cldElem; }
+	catch (const std::exception&) {
+		;
+	}*/
 	const double dElem = (const double) cldElem;
-	
+
 	//set
 	ppdMADElem[uiX][uiY] = dElem;
 }
