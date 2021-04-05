@@ -160,7 +160,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : rien
 		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
-		virtual inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem);
+		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem);
 
 
 	//autres methodes
