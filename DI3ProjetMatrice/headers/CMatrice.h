@@ -40,8 +40,18 @@ class CMatrice {
 
 	//accesseurs et mutateurs
 	public:
-		/*type void a adapter dans les classes filles*/
-		//doivent etre declares dans la classe fille car le type de retour void ne peut pas etre adapte
+
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
+		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Sortie : rien
+		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
+		 */
+		virtual void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem)=0;
 
 
 	//methodes

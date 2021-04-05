@@ -11,7 +11,19 @@ CMatriceDouble::CMatriceDouble() {
 	uiMATdimLigne = uiMATdimColonne = 0;
 }
 
-CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) {
+CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) /*throw(CException)*/ {
+	/* Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
+	if (MADArg.ppdMADElem != nullptr) {
+		try { (double) MADArg.ppdMADElem[0][0]; }
+		catch (...) {
+			//CException EXCConversion;
+		//EXCConversion.id = 1; //erreur de type 1
+		//EXCConversion.comment = "types incompatibles";
+			//throw(CException);
+		}
+	}
+	*/
+	//init
 	uiMATdimLigne = MADArg.uiMATdimLigne;
 	uiMATdimColonne = MADArg.uiMATdimColonne;
 
@@ -51,11 +63,17 @@ CMatriceDouble::~CMatriceDouble() {
 
 /*** Operateurs ***/
 
-CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) const {
-	//init	
-	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
-	const double cfConst = (const double) clfArg;
+CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) /*throw(CException)*/ const {
+	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
+	try { (const double) clfArg; }
+	catch (...) {
+		//CException EXCConversion;
+		//EXCConversion.id = 1; //erreur de type 1
+		//EXCConversion.comment = "types incompatibles";
+		//throw(CException);
+	}
 
+	//init
 	CMatriceDouble* pMADMult = new CMatriceDouble();
 	pMADMult->uiMATdimLigne = uiMATdimLigne;
 	pMADMult->uiMATdimColonne = uiMATdimColonne;
@@ -66,17 +84,23 @@ CMatriceDouble& CMatriceDouble::operator*(const long double clfArg) const {
 		pMADMult->ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
 		//recopie le resultat de la multiplication de chaque element par cfConst pour chaque vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * cfConst;
+			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * clfArg;
 		}
 	}
 	return *pMADMult;
 }
 
-CMatriceDouble& CMatriceDouble::operator/(const long double clfArg) const {
-	//init	
-	//SI MISE EN PLACE D'UN TEMPLATE : Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
-	const double cfConst = (const double) clfArg;
+CMatriceDouble& CMatriceDouble::operator/(const long double clfArg) /*throw(CException)*/ const {
+	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
+	try { (const double) clfArg; }
+	catch (...) {
+		//CException EXCConversion;
+		//EXCConversion.id = 1; //erreur de type 1
+		//EXCConversion.comment = "types incompatibles";
+		//throw(CException);
+	}
 
+	//init
 	CMatriceDouble* pMADMult = new CMatriceDouble();
 	pMADMult->uiMATdimLigne = uiMATdimLigne;
 	pMADMult->uiMATdimColonne = uiMATdimColonne;
@@ -87,14 +111,26 @@ CMatriceDouble& CMatriceDouble::operator/(const long double clfArg) const {
 		pMADMult->ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
 		//recopie le resultat de la division de chaque element par cfConst pour chaque vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / cfConst;
+			pMADMult->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / clfArg;
 		}
 	}
 	return *pMADMult;
 }
 
-CMatriceDouble& CMatriceDouble::operator+(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
+		//CException EXCConversion;
+		//EXCConversion.id = 2; //erreur de type 1
+		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
+		//throw(CException);
+	}
+	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
+		//CException EXCConversion;
+		//EXCConversion.id = 2; //erreur de type 1
+		//EXCConversion.comment = "mauvais nombre de COLONNES de l'argument";
+		//throw(CException);
+	}
 
 	//init
 	CMatriceDouble* pMADAdd = new CMatriceDouble();
@@ -113,8 +149,20 @@ CMatriceDouble& CMatriceDouble::operator+(const CMatriceDouble& MADArg) const {
 	return *pMADAdd;
 }
 
-CMatriceDouble& CMatriceDouble::operator-(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator-(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
+		//CException EXCConversion;
+		//EXCConversion.id = 2; //erreur de type 2
+		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
+		//throw(CException);
+	}
+	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
+		//CException EXCConversion;
+		//EXCConversion.id = 2; //erreur de type 2
+		//EXCConversion.comment = "mauvais nombre de COLONNES de l'argument";
+		//throw(CException);
+	}
 
 	//init
 	CMatriceDouble* pMADSous = new CMatriceDouble();
@@ -133,8 +181,14 @@ CMatriceDouble& CMatriceDouble::operator-(const CMatriceDouble& MADArg) const {
 	return *pMADSous;
 }
 
-CMatriceDouble& CMatriceDouble::operator*(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator*(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions incompatibles entre MADActuelle et MADArg :
+	if (uiMATdimColonne != MADArg.uiMATdimLigne) {
+		//CException EXCConversion;
+		//EXCConversion.id = 2; //erreur de type 2
+		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
+		//throw(CException);
+	}
 	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
 
 	//init
