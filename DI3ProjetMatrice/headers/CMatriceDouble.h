@@ -52,7 +52,7 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Destructeur
 		 *
-		 *	Entree : MADInutile : CMatriceDouble
+		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
 		 *	Postcondition : Objet CMatriceDouble libere
@@ -64,7 +64,7 @@ class CMatriceDouble : public CMatrice {
 	public:
 
 		/*
-		 *	Methode de type operateur a un argument renvoyant le produit d'un objet CMatriceDouble par un nombre constant clfArg
+		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par un nombre constant clfArg
 		 *	Remarques :
 		 *		- clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *		- clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
@@ -77,7 +77,7 @@ class CMatriceDouble : public CMatrice {
 		virtual CMatriceDouble& operator*(const long double clfArg) const;
 
 		/*
-		 *	Methode de type operateur a un argument renvoyant le resultat de la division d'un objet CMatriceDouble par un nombre constant clfArg
+		 *	Methode de type operateur a un argument renvoyant la matrice divisee par un nombre constant clfArg
 		 *	Remarques :
 		 *		- clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *		- clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion
@@ -88,6 +88,36 @@ class CMatriceDouble : public CMatrice {
 		 *	Postcondition : {MADDiv = MADActuelle / clfArg}
 		 */
 		virtual CMatriceDouble& operator/(const long double clfArg) const;
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MATAdd : CMatriceDouble
+		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
+		 */
+		CMatriceDouble& operator+(const CMatriceDouble& MADArg) const;
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MATSous : CMatriceDouble
+		 *	Postcondition : {MATSous = MATActuelle - MATArg}
+		 */
+		CMatriceDouble& operator-(const CMatriceDouble& MADArg) const;
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MATArg
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MADMult : CMatriceDouble
+		 *	Postcondition : {MADMult = MATActuelle * MATArg}
+		 */
+		CMatriceDouble& operator*(const CMatriceDouble& MADArg) const;
 
 
 	//accesseurs et mutateurs
@@ -140,36 +170,6 @@ class CMatriceDouble : public CMatrice {
 		 *	Postcondition : MADt est la transposee de MADActuelle
 		 */
 		CMatriceDouble& MADt() const;
-
-		/*
-		 *	Methode a un argument renvoyant la matrice additionnee par MATArg
-		 *
-		 *	Entree : MATArg : CMatriceDouble
-		 *	Precondition : neant
-		 *	Sortie : MATAdd : CMatriceDouble
-		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
-		 */
-		CMatriceDouble& MADAdd(const CMatriceDouble& MADArg) const;
-
-		/*
-		 *	Methode a un argument renvoyant la matrice soustraite par MATArg
-		 *
-		 *	Entree : MATArg : CMatriceDouble
-		 *	Precondition : neant
-		 *	Sortie : MATSous : CMatriceDouble
-		 *	Postcondition : {MATSous = MATActuelle - MATArg}
-		 */
-		CMatriceDouble& MADSous(const CMatriceDouble& MADArg) const;
-
-		/*
-		 *	Methode a un argument renvoyant la matrice multipliee par MATArg
-		 *
-		 *	Entree : MATArg : CMatriceDouble
-		 *	Precondition : neant
-		 *	Sortie : MADMult : CMatriceDouble
-		 *	Postcondition : {MADMult = MATActuelle * MATArg}
-		 */
-		CMatriceDouble& MADMult(const CMatriceDouble& MADArg) const;
 };
 
 

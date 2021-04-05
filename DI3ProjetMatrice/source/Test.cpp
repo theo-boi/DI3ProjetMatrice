@@ -61,29 +61,27 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 
 int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 	cout << "Afficher la transposee de MADArg\n\n\n";
-	MADArg.MADt().MATPrint();
+	MADArg.MADt().MATPrint(1);
 	return 0;
 }
 
 int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg + 10*MADArg\n\n\n";
-	CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
-	MADArg.MADAdd(MADDix).MATPrint();
+	CMatriceDouble MADDix = CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
+	(MADArg + (10 * MADDix)).MATPrint();
 	return 0;
 }
 
 int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg - 10*MADArg\n\n\n";
 	CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
-	MADArg.MADSous(MADDix).MATPrint();
+	(MADArg - MADDix).MATPrint();
 	return 0;
 }
 
 int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
-	cout << "Afficher la transposee de MADArg\n\n\n";
+	cout << "Afficher MADArg x MADArg^t\n\n\n";
 	CMatriceDouble MADArgT = MADArg.MADt();
-	MADArgT.MATPrint();
-	cout << "Afficher MADArg x MADArg\n\n\n";
-	MADArg.MADMult(MADArgT).MATPrint();
+	(MADArg * MADArgT).MATPrint();
 	return 0;
 }

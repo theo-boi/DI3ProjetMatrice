@@ -39,23 +39,25 @@ int main()
 	pMAD3->MADSetElem(1, 2, 6);
 
 	//tests
-	CMatriceDoubleTestPrint(*pMAD3);
-	CMatriceDoubleTestMultConst(*pMAD3);
+	CMatriceDoubleTestPrint(*pMAD3); //MAD
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestDivConst(*pMAD3);
+	CMatriceDoubleTestMultConst(*pMAD3); //MAD*10 et 10*MAD
+	cout << "---------\n\n\n";
+
+	CMatriceDoubleTestDivConst(*pMAD3); //MAD/10 et 10/MAD
 	cout << "---------\n\n\n";
 	
-	CMatriceDoubleTestT(*pMAD3);
+	CMatriceDoubleTestT(*pMAD3); //MAD^T
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestAdd(*pMAD3); //*pMAD1 + (*pMAD1*10)
+	CMatriceDoubleTestAdd(*pMAD3); //MAD + (MAD*10)
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestSous(*pMAD3);
+	CMatriceDoubleTestSous(*pMAD3); //MAD1 - (MAD*10)
 	cout << "---------\n\n\n";
 
-	CMatriceDoubleTestMult(*pMAD3);
+	CMatriceDoubleTestMult(*pMAD3); //MAD * MAD
 	cout << "---------\n\n\n";
 
 	//delete

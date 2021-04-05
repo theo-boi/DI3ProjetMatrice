@@ -93,46 +93,7 @@ CMatriceDouble& CMatriceDouble::operator/(const long double clfArg) const {
 	return *pMADMult;
 }
 
-
-/*** Autres methodes ***/
-
-void CMatriceDouble::MATPrint(bool bEndl) const {
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) { //affiche les uiMATdimLigne elements de la uiBoucleForX-ieme ligne
-			std::cout << ppdMADElem[uiBoucleForX][uiBoucleForY];
-			if (uiBoucleForY < uiMATdimColonne) //met un espace seulement entre des elements
-				std::cout << "\t";
-		}
-		if (uiBoucleForX != uiMATdimLigne - 1)
-			std::cout << std::endl << std::endl; //saute une ligne seulement entre des elements
-	}
-	std::cout << std::endl;
-	if (bEndl) std::cout << std::endl; //revient une 2e fois a la ligne seulement si bEndl est vrai
-}
-
-CMatriceDouble& CMatriceDouble::MADt() const {
-	//init
-	CMatriceDouble* pMADt = new CMatriceDouble();
-	/*
-	 *	Chaque element de coordonnees (x,y) prend la valeur de celui dans MADt de coordonnees (y,x).
-	 *	Les dimensions de la matrice sont donc logiquement inversees.
-	 */
-	pMADt->uiMATdimLigne = uiMATdimColonne;
-	pMADt->uiMATdimColonne = uiMATdimLigne;
-
-	//calcul
-	pMADt->ppdMADElem = new double*[pMADt->uiMATdimLigne]; //allocation dynamique de chaque vecteur d'elements
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < pMADt->uiMATdimLigne; uiBoucleForX++) {
-		pMADt->ppdMADElem[uiBoucleForX] = new double[pMADt->uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
-		//recopie chaque element de coordonnees (uiBoucleForY,uiBoucleForX) a (uiBoucleForX,uiBoucleForY) pour chaque vecteur
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < pMADt->uiMATdimColonne; uiBoucleForY++) {
-			pMADt->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForY][uiBoucleForX];
-		}
-	}
-	return *pMADt;
-}
-
-CMatriceDouble& CMatriceDouble::MADAdd(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator+(const CMatriceDouble& MADArg) const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
 
 	//init
@@ -152,7 +113,7 @@ CMatriceDouble& CMatriceDouble::MADAdd(const CMatriceDouble& MADArg) const {
 	return *pMADAdd;
 }
 
-CMatriceDouble& CMatriceDouble::MADSous(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator-(const CMatriceDouble& MADArg) const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
 
 	//init
@@ -164,7 +125,7 @@ CMatriceDouble& CMatriceDouble::MADSous(const CMatriceDouble& MADArg) const {
 	pMADSous->ppdMADElem = new double*[uiMATdimLigne]; //allocation dynamique de chaque vecteur d'elements
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		pMADSous->ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
-		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MADArg, pour chaque vecteur
+		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MADArg, pour chaque vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
 			pMADSous->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] - MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
 		}
@@ -172,7 +133,7 @@ CMatriceDouble& CMatriceDouble::MADSous(const CMatriceDouble& MADArg) const {
 	return *pMADSous;
 }
 
-CMatriceDouble& CMatriceDouble::MADMult(const CMatriceDouble& MADArg) const {
+CMatriceDouble& CMatriceDouble::operator*(const CMatriceDouble& MADArg) const {
 	//Effectuer un try pour lever l'erreur en cas de dimensions incompatibles entre MADActuelle et MADArg :
 	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
 
@@ -205,3 +166,41 @@ CMatriceDouble& CMatriceDouble::MADMult(const CMatriceDouble& MADArg) const {
 	return *pMADMult;
 }
 
+
+/*** Autres methodes ***/
+
+void CMatriceDouble::MATPrint(bool bEndl) const {
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) { //affiche les uiMATdimLigne elements de la uiBoucleForX-ieme ligne
+			std::cout << ppdMADElem[uiBoucleForX][uiBoucleForY];
+			if (uiBoucleForY < uiMATdimColonne) //met un espace seulement entre des elements
+				std::cout << "\t";
+		}
+		if (uiBoucleForX != uiMATdimLigne - 1)
+			std::cout << std::endl << std::endl; //saute une ligne seulement entre des elements
+	}
+	std::cout << std::endl;
+	if (bEndl) std::cout << std::endl << std::endl; //revient une 2e fois a la ligne seulement si bEndl est vrai
+}
+
+CMatriceDouble& CMatriceDouble::MADt() const {
+	//init
+	CMatriceDouble* pMADt = new CMatriceDouble();
+	/*
+	 *	Chaque element de coordonnees (x,y) prend la valeur de celui dans MADt de coordonnees (y,x).
+	 *	Les dimensions de la matrice sont donc logiquement inversees.
+	 */
+	pMADt->uiMATdimLigne = uiMATdimColonne;
+	pMADt->uiMATdimColonne = uiMATdimLigne;
+
+	//calcul
+	pMADt->ppdMADElem = new double*[pMADt->uiMATdimLigne]; //allocation dynamique de chaque vecteur d'elements
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < pMADt->uiMATdimLigne; uiBoucleForX++) {
+		pMADt->ppdMADElem[uiBoucleForX] = new double[pMADt->uiMATdimColonne]; //allocation dynamique du contenu de chaque vecteur
+		//recopie chaque element de coordonnees (uiBoucleForY,uiBoucleForX) a (uiBoucleForX,uiBoucleForY) pour chaque vecteur
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < pMADt->uiMATdimColonne; uiBoucleForY++) {
+			pMADt->ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForY][uiBoucleForX];
+		}
+	}
+	return *pMADt;
+}
