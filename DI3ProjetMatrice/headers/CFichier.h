@@ -16,17 +16,16 @@ class CFichier {
     //constructeur et destructeur
     public :
         CFichier();
-		CFichier(const char* pcFICnomFichier);
         ~CFichier();
 
         //fonction principale
         /*
-		 *	Methode sans arguments permettant de lire le contenu d'une matrice double dans un fichier formaté et de créer une matrice en mémoire à partie des données lues
+		 *	Methode prenant en argument le nom d'un fichier texte (formaté) permettant d'en lire le contenu d'une matrice double et de créer une matrice en mémoire à partie des données lues
 		 *
 		 *	Entree : rien
 		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
 		 *	Sortie : rien
 		 *	Postcondition : les données de la matrice pMADmatrice correspondent à celles du fichier pFICfichier
 		 */
-        void FICprincipale();
+        void FICprincipale(const char* pcNomFichier);
 };
