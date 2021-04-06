@@ -1,23 +1,6 @@
 #include "../headers/Test.h"
 using namespace std;
 
-/*
- *	Attention developpeurs : creer une classe capable de regrouper ce type d'operateur de type de base
- *	Pour l'instant defini dans Test.cpp
- */
-CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) {
-	//init
-	CMatriceDouble MADMult = CMatriceDouble(MADArg);
-
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MADMult.MATGetDimLigne(); uiBoucleForX++) {
-		//calcul de chaque element par vecteur
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MADMult.MATGetDimColonne(); uiBoucleForY++) {
-			MADMult.MADSetElem(uiBoucleForX, uiBoucleForY, MADMult.MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
-		}
-	}
-	return MADMult;
-}
-
 /* Tests */
 
 int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {

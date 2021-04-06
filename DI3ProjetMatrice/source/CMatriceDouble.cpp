@@ -3,7 +3,6 @@
 #endif
 #include <iostream>
 
-
 /*** Constructeurs et destructeurs ***/
 
 CMatriceDouble::CMatriceDouble() {
@@ -90,6 +89,19 @@ CMatriceDouble CMatriceDouble::operator*(const long double clfArg) /*throw(CExce
 	return MADMult;
 }
 
+CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) {
+	//init
+	CMatriceDouble MADMult = CMatriceDouble(MADArg);
+
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MADMult.MATGetDimLigne(); uiBoucleForX++) {
+		//calcul de chaque element par vecteur
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MADMult.MATGetDimColonne(); uiBoucleForY++) {
+			MADMult.MADSetElem(uiBoucleForX, uiBoucleForY, MADMult.MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
+		}
+	}
+	return MADMult;
+}
+
 CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CException)*/ const {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) clfArg; }
@@ -101,20 +113,20 @@ CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CExce
 	}
 
 	//init
-	CMatriceDouble MADMult = CMatriceDouble();
-	MADMult.uiMATdimLigne = uiMATdimLigne;
-	MADMult.uiMATdimColonne = uiMATdimColonne;
+	CMatriceDouble MADDiv = CMatriceDouble();
+	MADDiv.uiMATdimLigne = uiMATdimLigne;
+	MADDiv.uiMATdimColonne = uiMATdimColonne;
 
 	//calcul
-	MADMult.ppdMADElem = new double*[uiMATdimLigne]; //allocation dynamique de chaque ligne
+	MADDiv.ppdMADElem = new double*[uiMATdimLigne]; //allocation dynamique de chaque ligne
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
-		MADMult.ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		MADDiv.ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat de la division de chaque element par cfConst pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			MADMult.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / clfArg;
+			MADDiv.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / clfArg;
 		}
 	}
-	return MADMult;
+	return MADDiv;
 }
 
 CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
