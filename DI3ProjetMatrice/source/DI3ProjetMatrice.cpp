@@ -1,29 +1,5 @@
 #include "../headers/DI3ProjetMatrice.h"
-#ifndef CFICHIERH
-#include "../headers/CFichier.h"
-#endif
 using namespace std;
-
-
-/*
- *	Attention developpeurs : creer une classe capable de regrouper ce type d'operateur de type de base
- *	Pour l'instant defini dans Test.cpp
- */
-/*
-CMatriceDouble& operator*(const long double cldArg, const CMatriceDouble MADArg) {
-	//init
-	CMatriceDouble* pMADMult = new CMatriceDouble(MADArg);
-
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < pMADMult->MATGetDimLigne(); uiBoucleForX++) {
-		//calcul de chaque element par vecteur
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < pMADMult->MATGetDimColonne(); uiBoucleForY++) {
-			pMADMult->MADSetElem(uiBoucleForX, uiBoucleForY, pMADMult->MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
-		}
-	}
-
-	return *pMADMult;
-}
-*/
 
 int main()
 {
@@ -45,7 +21,9 @@ int main()
 	CMatriceDouble* pMADArg = pMAD3;
 	
 	//tests
-	//Test la compatibilite avec les objets constants
+	/*
+	 *	Teste la compatibilite avec les objets constants
+	 */
 	cout << "Afficher MADConstante\n\n";
 	pMAD1->MATPrint(1);
 	*pMAD1 * 10; //MADArg*10
@@ -79,7 +57,9 @@ int main()
 
 	CMatriceDoubleTestMult(*pMADArg); //MAD * MAD
 	cout << "---------\n\n\n";
-	
+
+	CExceptionTest();
+
 	//delete
 	delete pMAD1;
 	delete pMAD2;
@@ -90,8 +70,5 @@ int main()
 	printf("TESTS FICHIER\n");
 	//fichier.FICprincipale();
 
-
 	return 0;
-
-
 }

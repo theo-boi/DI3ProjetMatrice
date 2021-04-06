@@ -1,7 +1,7 @@
 #ifndef CMATRICEH
 #include "CMatrice.h"
 #endif 
-#define CMATRICEDOUBLEH 0
+#define CMATRICEDOUBLEH
 
 /*
  *	Attention developpeurs : definitions inline predefinies (non-indiquees dans la specification) a enlever.
@@ -188,7 +188,7 @@ class CMatriceDouble : public CMatrice {
 };
 
 /*
- *	Methode de type operateur a un argument renvoyant un nombre constant clfArg multiplie par la matrice CMatriceDouble MADArg
+ *	Methode de type operateur a deux argument renvoyant un nombre constant clfArg multiplie par la matrice CMatriceDouble MADArg
  *	Remarques :
  *		- clfArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
  *		- clfArg est de type long double pour ne pas perdre d'information dans le cas d'une conversion

@@ -1,7 +1,13 @@
-#define CMATRICEH 0
+#define CMATRICEH
+#ifndef CEXCEPTIONH
+#include "../headers/CException.h"
+#endif
+#ifndef CMATRICECPP
+#include "CMatrice.cpp"
+#endif
+#include <iostream>
 
 class CMatrice {
-
 	//attributs
 	protected:
 		unsigned int uiMATdimLigne;
@@ -31,15 +37,7 @@ class CMatrice {
 		virtual unsigned int MATGetDimColonne() const { return uiMATdimColonne; };
 
 
-	//operateurs
-	public:
-
-
-	//accesseurs et mutateurs
-	public:
-
-
 	//methodes
 	public:
-		virtual void MATPrint(bool bEndl) const =0; //ou MATAfficher
+		virtual void MATPrint(bool bEndl) const =0;
 };

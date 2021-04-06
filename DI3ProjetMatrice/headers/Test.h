@@ -15,3 +15,5 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg);
 int CMatriceDoubleTestSous(CMatriceDouble& MADArg);
 
 int CMatriceDoubleTestMult(CMatriceDouble& MADArg);
+
+int CExceptionTest();

@@ -1,7 +1,6 @@
 #ifndef CMATRICEDOUBLEH
 #include "../headers/CMatriceDouble.h"
 #endif
-#include <iostream>
 
 /*** Constructeurs et destructeurs ***/
 
@@ -10,18 +9,17 @@ CMatriceDouble::CMatriceDouble() {
 	uiMATdimLigne = uiMATdimColonne = 0;
 }
 
-CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) /*throw(CException)*/ {
-	/* Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
+CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) throw(CException) {
+	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
 	if (MADArg.ppdMADElem != nullptr) {
 		try { (double) MADArg.ppdMADElem[0][0]; }
 		catch (...) {
-			//CException EXCConversion;
-		//EXCConversion.id = 1; //erreur de type 1
-		//EXCConversion.comment = "types incompatibles";
-			//throw(CException);
+			CException EXCConversion;
+			EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+			throw(EXCConversion);
 		}
 	}
-	*/
+	
 	//init
 	uiMATdimLigne = MADArg.uiMATdimLigne;
 	uiMATdimColonne = MADArg.uiMATdimColonne;
@@ -66,10 +64,9 @@ CMatriceDouble CMatriceDouble::operator*(const long double clfArg) /*throw(CExce
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) clfArg; }
 	catch (...) {
-		//CException EXCConversion;
-		//EXCConversion.id = 1; //erreur de type 1
-		//EXCConversion.comment = "types incompatibles";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		throw(EXCConversion);
 	}
 
 	//init
@@ -106,10 +103,9 @@ CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CExce
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) clfArg; }
 	catch (...) {
-		//CException EXCConversion;
-		//EXCConversion.id = 1; //erreur de type 1
-		//EXCConversion.comment = "types incompatibles";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		throw(EXCConversion);
 	}
 
 	//init
@@ -130,18 +126,18 @@ CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CExce
 }
 
 CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
-	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+	//Lever une exception en cas de dimensions differentes entre MADActuelle et MADArg.
 	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
-		//CException EXCConversion;
-		//EXCConversion.id = 2; //erreur de type 1
-		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		throw(EXCConversion);
 	}
 	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
-		//CException EXCConversion;
-		//EXCConversion.id = 2; //erreur de type 1
-		//EXCConversion.comment = "mauvais nombre de COLONNES de l'argument";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("nombre de COLONNES de l'argument incoherent");
+		throw(EXCConversion);
 	}
 
 	//init
@@ -162,18 +158,18 @@ CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(C
 }
 
 CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
-	//Effectuer un try pour lever l'erreur en cas de dimensions differentes entre MADActuelle et MADArg.
+	//Lever une exception en cas de dimensions differentes entre MADActuelle et MADArg.
 	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
-		//CException EXCConversion;
-		//EXCConversion.id = 2; //erreur de type 2
-		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		throw(EXCConversion);
 	}
 	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
-		//CException EXCConversion;
-		//EXCConversion.id = 2; //erreur de type 2
-		//EXCConversion.comment = "mauvais nombre de COLONNES de l'argument";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("nombre de COLONNES de l'argument incoherent");
+		throw(EXCConversion);
 	}
 
 	//init
@@ -194,12 +190,12 @@ CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) /*throw(C
 }
 
 CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
-	//Effectuer un try pour lever l'erreur en cas de dimensions incompatibles entre MADActuelle et MADArg :
+	//Lever une exception en cas de dimensions incompatibles entre MADActuelle et MADArg :
 	if (uiMATdimColonne != MADArg.uiMATdimLigne) {
-		//CException EXCConversion;
-		//EXCConversion.id = 2; //erreur de type 2
-		//EXCConversion.comment = "mauvais nombre de LIGNES de l'argument";
-		//throw(CException);
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		throw(EXCConversion);
 	}
 	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
 

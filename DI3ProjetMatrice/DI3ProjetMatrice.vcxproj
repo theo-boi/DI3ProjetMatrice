@@ -169,6 +169,7 @@
     <ClInclude Include="headers\CMatriceCaractere.h" />
     <ClInclude Include="headers\CMatriceDouble.h" />
     <ClInclude Include="headers\CMatriceEntier.h" />
+    <ClInclude Include="headers\DI3ProjetMatrice.h" />
     <ClInclude Include="headers\Test.h" />
   </ItemGroup>
   <ItemGroup>

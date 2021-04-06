@@ -68,3 +68,24 @@ int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
 	(MADArg * MADArgT).MATPrint();
 	return 0;
 }
+
+int CExceptionTest() {
+	CMatriceDouble MAD1 = CMatriceDouble(2, 2);
+	CMatriceDouble MAD2 = CMatriceDouble(2, 3);
+
+	try {
+		/*
+		CException A;
+		A.EXCSetId(types_incompatibles); //type d'exception 1
+		A.EXCSetCommentaire("blablabla");
+		throw(A); //arrete l'execution du bloc
+		*/
+		MAD2*MAD1; //type d'exception 2
+	}
+	catch (CException EXCLevee) {
+		if (CException::EXCGestionaireException(EXCLevee))
+			throw(EXCLevee); //on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
+	}
+	cout << "L'execution de la fonction continue !\n\n\n";
+	return 0;
+}

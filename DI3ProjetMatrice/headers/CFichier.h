@@ -1,8 +1,7 @@
-#define CFICHIERH 0
+#define CFICHIERH
 #ifndef CMATRICEDOUBLEH
 #include "../headers/CMatriceDouble.h"
 #endif
-
 #include <iostream>
 
 class CFichier {
