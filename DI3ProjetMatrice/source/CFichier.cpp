@@ -41,6 +41,19 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 	if (*pligneCourante == *(char*)pcTypeAttendu)
 	{
 		printf("CFichier : type attendu correct\n");
+		
+		unsigned int uiNbLignes;
+		unsigned int uiNbColonnes;
+
+		//on déplace le curseur afin de scanner le nombre de lignes
+		fseek(pFICfichier, 9, SEEK_CUR);
+		fscanf_s(pFICfichier, "%u", &uiNbLignes);
+		printf("nb lignes : %u\n", uiNbLignes);
+
+		//on déplace le curseur afin de scanner le nombre de colonnes
+		fseek(pFICfichier, 13, SEEK_CUR);
+		fscanf_s(pFICfichier, "%u", &uiNbColonnes);
+		printf("nb colonnes : %u\n", uiNbColonnes);
 	}
 	else
 	{
