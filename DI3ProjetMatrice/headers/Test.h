@@ -3,7 +3,7 @@
 #endif
 
 
-CMatriceDouble& operator*(const long double cldArg, const CMatriceDouble MADArg);
+CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg);
 
 int CMatriceDoubleTestPrint(CMatriceDouble& MADArg);
 

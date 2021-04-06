@@ -38,6 +38,18 @@ class CMatriceDouble : public CMatrice {
 		CMatriceDouble(const CMatriceDouble& MADArg);
 
 		/*
+		 *	Constructeur de recopie
+		 *	Remarques :
+		 *		- MATArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MATArg : CMatrice
+		 *	Precondition : neant
+		 *	Sortie : MADNew : CMatriceDouble
+		 *	Postcondition : Objet CMatriceDouble alloue
+		 */
+		CMatriceDouble(const CMatrice& MADArg) { CMatriceDouble((CMatriceDouble&) MADArg); };
+
+		/*
 		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
 		 *	Remarques :
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
@@ -74,7 +86,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADMult : CMatriceDouble
 		 *	Postcondition : {MADMult = MADActuelle * clfArg}
 		 */
-		virtual CMatriceDouble& operator*(const long double clfArg) const;
+		CMatriceDouble operator*(const long double clfArg) const;
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice divisee par un nombre constant clfArg
@@ -87,7 +99,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADDiv : CMatriceDouble
 		 *	Postcondition : {MADDiv = MADActuelle / clfArg}
 		 */
-		virtual CMatriceDouble& operator/(const long double clfArg) const;
+		CMatriceDouble operator/(const long double clfArg) const;
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
@@ -98,7 +110,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MATAdd : CMatriceDouble
 		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
 		 */
-		CMatriceDouble& operator+(const CMatriceDouble& MADArg) const;
+		CMatriceDouble operator+(const CMatriceDouble& MADArg) const;
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MATArg
@@ -109,7 +121,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MATSous : CMatriceDouble
 		 *	Postcondition : {MATSous = MATActuelle - MATArg}
 		 */
-		CMatriceDouble& operator-(const CMatriceDouble& MADArg) const;
+		CMatriceDouble operator-(const CMatriceDouble& MADArg) const;
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MATArg
@@ -120,19 +132,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADMult : CMatriceDouble
 		 *	Postcondition : {MADMult = MATActuelle * MATArg}
 		 */
-		CMatriceDouble& operator*(const CMatriceDouble& MADArg) const;
-
-		/*
-		 *	Methode INLINE de type operateur a un argument appelant le constructeur de recopie a un argument prenant l'objet MADArg de type const CMatriceDouble&
-		 *	Remarques :
-		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
-		 *
-		 *	Entree : MADActuelle : CMatriceDouble, clfArg : long double
-		 *	Precondition : neant
-		 *	Sortie : MADCopie : CMatriceDouble
-		 *	Postcondition : {MADCopie = MADActuelle = clfArg}
-		 */
-		inline CMatriceDouble& operator=(const CMatrice& MADArg) const { return *new CMatriceDouble( (const CMatriceDouble&) MADArg ); };
+		CMatriceDouble operator*(const CMatriceDouble& MADArg) const;
 
 
 	//accesseurs et mutateurs
@@ -184,7 +184,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADt : CMatriceDouble
 		 *	Postcondition : MADt est la transposee de MADActuelle
 		 */
-		CMatriceDouble& MADt() const;
+		CMatriceDouble MADt() const;
 };
 
 

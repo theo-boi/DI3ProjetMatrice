@@ -33,9 +33,6 @@ class CMatrice {
 
 	//operateurs
 	public:
-		//Type long double pour ne pas perdre d'information dans le cas de la conversion d'un nombre
-		virtual CMatrice& operator*(const long double clfConst) const =0;
-		virtual CMatrice& operator/(const long double clfConst) const =0;
 
 
 	//accesseurs et mutateurs
