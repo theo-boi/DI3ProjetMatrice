@@ -9,7 +9,7 @@ class CFichier {
 
     //attributs
     private :
-        const char* pcFICnom;
+        char* pcFICnom;
         FILE* pFICfichier;
         CMatriceDouble* pMADmatrice;
 

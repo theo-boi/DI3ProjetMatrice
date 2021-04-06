@@ -2,6 +2,9 @@
 #include "../headers/CFichier.h"
 #endif
 
+#include <iostream>
+#include <fstream>
+
 
 // Constructeurs et destructeur
 
@@ -14,9 +17,12 @@ CFichier::CFichier()
 
 CFichier::CFichier(const char* pcFICnomFichier)
 {
-	pcFICnom = pcFICnomFichier;
+	//pcFICnom = (char*)&pcFICnomFichier;
+	pcFICnom = nullptr;
 	fopen_s(&pFICfichier, pcFICnomFichier, "r");
 	pMADmatrice = nullptr;
+	//FILE* file;
+	//fopen_s(&file, filename, "r");
 
 }
 
@@ -31,8 +37,9 @@ CFichier::~CFichier()
 void CFichier::FICprincipale()
 {
 	CMatriceDouble MAD;
-	char* pligneCourante = nullptr;
-	fgets(pligneCourante, 200, pFICfichier);
+	char *pligneCourante;
+	fscanf_s(pFICfichier, "%s", &pligneCourante, 256);
+	//fread(&pligneCourante, sizeof(char), 25, pFICfichier);
 	if (pligneCourante == "TypeMatrice=double")
 	{
 		printf("CFichier : type attendu correct\n");

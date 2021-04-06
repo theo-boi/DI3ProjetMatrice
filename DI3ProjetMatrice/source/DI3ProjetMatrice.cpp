@@ -84,9 +84,14 @@ int main()
 	delete pMAD1;
 	delete pMAD2;
 	delete pMAD3;
-	return 0;
 
 	//tests fichiers
-	CFichier fichier("../fichierMatrice.txt");
-	fichier.FICprincipale();
+	CFichier fichier("fichierMatrice.txt");
+	printf("TESTS FICHIER\n");
+	//fichier.FICprincipale();
+
+
+	return 0;
+
+
 }
