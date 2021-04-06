@@ -45,7 +45,7 @@ int main()
 	CMatriceDouble* pMADArg = pMAD3;
 	
 	//tests
-	//Test la compatibilite avec les objects constants
+	//Test la compatibilite avec les objets constants
 	cout << "Afficher MADConstante\n\n";
 	pMAD1->MATPrint(1);
 	*pMAD1 * 10; //MADArg*10
