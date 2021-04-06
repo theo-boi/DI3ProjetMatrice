@@ -3,13 +3,21 @@
 #endif
 
 
-// Constructeur et destructeur
+// Constructeurs et destructeur
 
 CFichier::CFichier()
 {
 	pcFICnom = nullptr;
 	pFICfichier = nullptr;
 	pMADmatrice = nullptr;
+}
+
+CFichier::CFichier(const char* pcFICnomFichier)
+{
+	pcFICnom = pcFICnomFichier;
+	fopen_s(&pFICfichier, pcFICnomFichier, "r");
+	pMADmatrice = nullptr;
+
 }
 
 CFichier::~CFichier()
@@ -20,16 +28,17 @@ CFichier::~CFichier()
 }
 
 //Fonction principale
-/*CMatriceDouble CFichier::FICprincipale(char* pcFICnomFichier)
+void CFichier::FICprincipale()
 {
-	pcFICnom = pcFICnomFichier;
-	fopen_s(&pFICfichier, pcFICnomFichier, "r");
 	CMatriceDouble MAD;
-	char* pligneCourante;
+	char* pligneCourante = nullptr;
 	fgets(pligneCourante, 200, pFICfichier);
 	if (pligneCourante == "TypeMatrice=double")
 	{
-		printf("CFichier : type attendu correct");
+		printf("CFichier : type attendu correct\n");
 	}
-	return MAD;
-}*/
+	else
+	{
+		printf("CFichier : type attendu incorrect\n");
+	}
+}
