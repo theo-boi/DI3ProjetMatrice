@@ -1,4 +1,7 @@
 #include "../headers/DI3ProjetMatrice.h"
+#ifndef CFICHIERH
+#include "../headers/CFichier.h"
+#endif
 using namespace std;
 
 
@@ -83,5 +86,6 @@ int main()
 	return 0;
 
 	//tests fichiers
-	//CMatriceDouble MAD FICprincipale("../fichierMatrice.txt");
+	CFichier fichier("../fichierMatrice.txt");
+	fichier.FICprincipale();
 }
