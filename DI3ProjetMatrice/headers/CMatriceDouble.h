@@ -210,7 +210,7 @@ class CMatriceDouble : public CMatrice {
  *	Sortie : MADMult : CMatriceDouble
  *	Postcondition : {MADMult = clfArg * MADArg}
  */
-CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg);
+CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) throw(CException);
 
 
 /* Methodes INLINE */
