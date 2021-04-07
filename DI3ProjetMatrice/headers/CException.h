@@ -18,5 +18,5 @@ class CException {
 		void EXCSetCommentaire(const char* pccArg);
 	//methodes
 	public:
-		static bool EXCGestionaireException(CException EXCLevee);
+		bool EXCGestionaireException() const;
 };

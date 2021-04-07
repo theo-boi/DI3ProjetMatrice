@@ -2,9 +2,7 @@
 #ifndef CEXCEPTIONH
 #include "../headers/CException.h"
 #endif
-#ifndef CMATRICECPP
 #include "CMatrice.cpp"
-#endif
 #include <iostream>
 
 class CMatrice {
@@ -35,6 +33,26 @@ class CMatrice {
 		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
 		 */
 		virtual unsigned int MATGetDimColonne() const { return uiMATdimColonne; };
+
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimLigne
+		 *
+		 *	Entree : uiDimLigne : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : neant
+		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
+		 */
+		virtual void MATSetDimLigne(const unsigned int uiDimLigne) { uiMATdimLigne = uiDimLigne; };
+
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimColonne
+		 *
+		 *	Entree : uiDimColonne : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : neant
+		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
+		 */
+		virtual void MATSetDimColonne(const unsigned int uiDimColonne) { uiMATdimColonne = uiDimColonne; };
 
 
 	//methodes

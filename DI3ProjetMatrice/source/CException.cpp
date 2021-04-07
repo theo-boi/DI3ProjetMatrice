@@ -10,27 +10,26 @@ void CException::EXCSetCommentaire(const char* pccArg) {
 	pcEXCCommentaire[uiBoucleWhile] = '\0';
 }
 
-bool CException::EXCGestionaireException(CException EXCLevee) {
+bool CException::EXCGestionaireException() const {
 	bool bInconnue = false;
 	bool bDanger = false;
 	cout << "Erreur";
 
-	switch (EXCLevee.EXCGetId()) {
+	switch (EXCGetId()) {
 		case 1:
 			cout << " \"types incompatibles\"";
-			bDanger = true;
 			break;
 		case 2:
 			cout << " \"dimensions incompatibles\"";
-			bDanger = true;
 			break;
 		default:
 			bInconnue = true;
 			cout << " inconnue";
+			break;
 	}
 
-	if (EXCLevee.EXCGetCommentaire()) cout << " : " << EXCLevee.EXCGetCommentaire();
+	if (EXCGetCommentaire()) cout << " : " << EXCGetCommentaire();
 	cout << "\n";
 
-	return bInconnue || bDanger;
+	return (bInconnue || bDanger);
 }

@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
 	//init
-	/*
+	
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
 	CMatriceDouble MAD1Copie = *pMAD1;
 
@@ -20,12 +20,12 @@ int main()
 	pMAD3->MADSetElem(1, 2, 6);
 
 	CMatriceDouble* pMADArg = pMAD3;
-	*/
+	
 	//tests
 	/*
 	 *	Teste la compatibilite avec les objets constants
 	 */
-	/*
+	
 	cout << "Afficher MADConstante\n\n";
 	pMAD1->MATPrint(1);
 	*pMAD1 * 10; //MADArg*10
@@ -66,12 +66,11 @@ int main()
 	delete pMAD1;
 	delete pMAD2;
 	delete pMAD3;
-	*/
+	
 	//tests fichiers
 	printf("TESTS FICHIER\n");
 	CFichier fichier;
 	fichier.FICprincipale("fichierMatrice.txt");
-	//fichier.FICprincipale();
 
 	return 0;
 }

@@ -16,6 +16,7 @@ CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) throw(CException) {
 		catch (...) {
 			CException EXCConversion;
 			EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+			EXCConversion.EXCSetCommentaire("Constructeur de recopie (type de l'argument incompatible)");
 			throw(EXCConversion);
 		}
 	}
@@ -60,17 +61,18 @@ CMatriceDouble::~CMatriceDouble() {
 
 /*** Operateurs ***/
 
-CMatriceDouble CMatriceDouble::operator*(const long double clfArg) /*throw(CException)*/ const {
+CMatriceDouble CMatriceDouble::operator*(const long double clfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) clfArg; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCConversion.EXCSetCommentaire("operator* (type de l'argument incompatible)");
 		throw(EXCConversion);
 	}
 
 	//init
-	CMatriceDouble MADMult = CMatriceDouble();
+	CMatriceDouble MADMult;
 	MADMult.uiMATdimLigne = uiMATdimLigne;
 	MADMult.uiMATdimColonne = uiMATdimColonne;
 
@@ -86,7 +88,7 @@ CMatriceDouble CMatriceDouble::operator*(const long double clfArg) /*throw(CExce
 	return MADMult;
 }
 
-CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) {
+CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) throw(CException) {
 	//init
 	CMatriceDouble MADMult = CMatriceDouble(MADArg);
 
@@ -99,17 +101,18 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 	return MADMult;
 }
 
-CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CException)*/ const {
+CMatriceDouble CMatriceDouble::operator/(const long double clfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) clfArg; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCConversion.EXCSetCommentaire("operator/ (type de l'argument incompatible)");
 		throw(EXCConversion);
 	}
 
 	//init
-	CMatriceDouble MADDiv = CMatriceDouble();
+	CMatriceDouble MADDiv;
 	MADDiv.uiMATdimLigne = uiMATdimLigne;
 	MADDiv.uiMATdimColonne = uiMATdimColonne;
 
@@ -125,23 +128,23 @@ CMatriceDouble CMatriceDouble::operator/(const long double clfArg) /*throw(CExce
 	return MADDiv;
 }
 
-CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
+CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) const throw(CException) {
 	//Lever une exception en cas de dimensions differentes entre MADActuelle et MADArg.
 	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		EXCConversion.EXCSetCommentaire("operator+ (nombre de LIGNES de l'argument incoherent)");
 		throw(EXCConversion);
 	}
 	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("nombre de COLONNES de l'argument incoherent");
+		EXCConversion.EXCSetCommentaire("operator+ (nombre de COLONNES de l'argument incoherent)");
 		throw(EXCConversion);
 	}
 
 	//init
-	CMatriceDouble MADAdd = CMatriceDouble();
+	CMatriceDouble MADAdd;
 	MADAdd.uiMATdimLigne = uiMATdimLigne;
 	MADAdd.uiMATdimColonne = uiMATdimColonne;
 
@@ -157,23 +160,23 @@ CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) /*throw(C
 	return MADAdd;
 }
 
-CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
+CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) const throw(CException) {
 	//Lever une exception en cas de dimensions differentes entre MADActuelle et MADArg.
 	if (uiMATdimLigne != MADArg.uiMATdimLigne) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		EXCConversion.EXCSetCommentaire("operator- (nombre de LIGNES de l'argument incoherent)");
 		throw(EXCConversion);
 	}
 	if (uiMATdimColonne != MADArg.uiMATdimColonne) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("nombre de COLONNES de l'argument incoherent");
+		EXCConversion.EXCSetCommentaire("operator- (nombre de COLONNES de l'argument incoherent)");
 		throw(EXCConversion);
 	}
 
 	//init
-	CMatriceDouble MADSous = CMatriceDouble();
+	CMatriceDouble MADSous;
 	MADSous.uiMATdimLigne = uiMATdimLigne;
 	MADSous.uiMATdimColonne = uiMATdimColonne;
 
@@ -189,18 +192,18 @@ CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) /*throw(C
 	return MADSous;
 }
 
-CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) /*throw(CException)*/ const {
+CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) const throw(CException) {
 	//Lever une exception en cas de dimensions incompatibles entre MADActuelle et MADArg :
 	if (uiMATdimColonne != MADArg.uiMATdimLigne) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("nombre de LIGNES de l'argument incoherent");
+		EXCConversion.EXCSetCommentaire("operator* (nombre de LIGNES de l'argument incoherent)");
 		throw(EXCConversion);
 	}
 	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
 
 	//init
-	CMatriceDouble MADMult = CMatriceDouble();
+	CMatriceDouble MADMult;
 	MADMult.uiMATdimLigne = uiMATdimLigne;
 	MADMult.uiMATdimColonne = MADArg.uiMATdimColonne;
 
@@ -247,7 +250,7 @@ void CMatriceDouble::MATPrint(bool bEndl) const {
 
 CMatriceDouble CMatriceDouble::MADt() const {
 	//init
-	CMatriceDouble MADt = CMatriceDouble();
+	CMatriceDouble MADt;
 	/*
 	 *	Chaque element de coordonnees (x,y) prend la valeur de celui dans MADt de coordonnees (y,x).
 	 *	Les dimensions de la matrice sont donc logiquement inversees.
