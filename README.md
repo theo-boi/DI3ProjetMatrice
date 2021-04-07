@@ -15,5 +15,5 @@ Commande(s) utile(s):
 rm vgcore.*
 ```
 ```
-valgrind --leak-check=full --track-origins=yes ~/DI3ProjetMatrice/DI3ProjetMatrice/Debug/DI3ProjetMatrice
+valgrind --leak-check=full --track-origins=yes ~/DI3ProjetMatrice/DI3ProjetMatrice/Debug/DI3ProjetMatrice.exe
 ```

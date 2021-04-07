@@ -20,11 +20,14 @@ int CMatriceDoubleConstTest() {
 		*pMAD1 - 10 * CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
 		pMAD1->MADGetElem((double)0, (double)0);
 		*pMAD1 * pMAD1->MADt();
+		//*pMAD1 = *pMAD1 * *pMAD1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
 		//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
 	}
+
+	delete pMAD1;
 	return 0;
 }
 

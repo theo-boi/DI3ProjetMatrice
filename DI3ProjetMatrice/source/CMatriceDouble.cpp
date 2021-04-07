@@ -231,6 +231,40 @@ CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) const thr
 	return MADMult;
 }
 
+CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CException) {
+	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
+	if (MADArg.ppdMADElem != nullptr) {
+		try { (double)MADArg.ppdMADElem[0][0]; }
+		catch (...) {
+			CException EXCConversion;
+			EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+			EXCConversion.EXCSetCommentaire("Constructeur de recopie (type de l'argument incompatible)");
+			throw(EXCConversion);
+		}
+	}
+
+	//liberation de chaque ligne de la memoire
+	for (unsigned int uiBoucleFor = 0; uiBoucleFor < uiMATdimLigne; uiBoucleFor++)
+		delete[] ppdMADElem[uiBoucleFor];
+	delete[] ppdMADElem;
+
+	//init
+	uiMATdimLigne = MADArg.uiMATdimLigne;
+	uiMATdimColonne = MADArg.uiMATdimColonne;
+
+	//allocation dynamique de chaque ligne
+	ppdMADElem = new double*[uiMATdimLigne];
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		//recopie chaque element de MADArg par colonne (par ligne)
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			ppdMADElem[uiBoucleForX][uiBoucleForY] = MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
+		}
+	}
+
+	return *this;
+}
+
 
 /*** Autres methodes ***/
 

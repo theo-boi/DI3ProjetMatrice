@@ -163,6 +163,17 @@ class CMatriceDouble : public CMatrice {
 		 */
 		CMatriceDouble operator*(const CMatriceDouble& MADArg) const throw(CException);
 
+		/*
+		 *	Methode de type operateur a un argument recopiant la matrice MADArg
+		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MATArg : CMatriceDouble
+		 *	Precondition : neant
+		 *	Sortie : MADEgal : CMatriceDouble
+		 *	Postcondition : {MADEgal = MATActuelle * MATArg}
+		 */
+		CMatriceDouble& operator=(const CMatriceDouble& MADArg) throw(CException);
+
 
 	//autres methodes
 	public:

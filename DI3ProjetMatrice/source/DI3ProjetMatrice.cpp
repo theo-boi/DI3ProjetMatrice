@@ -19,6 +19,7 @@ int main()
 	pMAD3->MADSetElem(1, 1, 5);
 	pMAD3->MADSetElem(1, 2, 6);
 
+	*pMAD2 = MAD1CopieStatique * MAD1CopieStatique;
 	CMatriceDouble* pMADArg = pMAD3;
 	
 	//tests

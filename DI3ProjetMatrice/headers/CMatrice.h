@@ -2,7 +2,7 @@
 #ifndef CEXCEPTIONH
 #include "../headers/CException.h"
 #endif
-#include "CMatrice.cpp"
+#include "../source/CMatrice.cpp"
 #include <iostream>
 
 class CMatrice {
