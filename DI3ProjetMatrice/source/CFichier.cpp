@@ -76,4 +76,7 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 	}
 	////////////////////////////////////!!!!!!! Problème ligne du dessous !!!!!!/////////////////////////////
 	pcFICnom = nullptr;
+
+	//on replace le curseur au début du fichier
+	fseek(pFICfichier, 0, SEEK_SET);
 }
