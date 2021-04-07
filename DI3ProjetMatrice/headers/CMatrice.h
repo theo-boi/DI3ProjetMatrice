@@ -8,8 +8,8 @@
 class CMatrice {
 	//attributs
 	protected:
-		unsigned int uiMATdimLigne;
-		unsigned int uiMATdimColonne;
+		unsigned int uiMATdimLigne; //nombre de lignes de la matrice
+		unsigned int uiMATdimColonne; //nombre de colonnes de la matrice
 
 	//accesseurs et mutateurs
 	public:

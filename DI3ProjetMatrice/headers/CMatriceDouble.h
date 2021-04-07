@@ -10,7 +10,8 @@
 class CMatriceDouble : public CMatrice {
 	//attributs
 	private:
-		double** ppdMADElem;
+		double** ppdMADElem; //tableau des elements de la matrice
+
 
 	//constructeurs et destructeurs
 	public:
@@ -21,7 +22,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Attributs de CMatriceDouble alloues/initialises
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises
 		 */
 		CMatriceDouble();
 
@@ -33,7 +34,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloues/initialises
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises
 		 */
 		CMatriceDouble(const CMatriceDouble& MADArg) throw(CException);
 
@@ -45,7 +46,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : MATArg : CMatrice
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloues/initialises
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises
 		 */
 		CMatriceDouble(const CMatrice& MADArg) { CMatriceDouble((CMatriceDouble&) MADArg); };
 
@@ -57,7 +58,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
 		 */
 		CMatriceDouble(const unsigned int uiX, const unsigned int uiY);
 
@@ -67,37 +68,37 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : Attributs de CMatriceDouble liberes
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont liberes
 		 */
 		~CMatriceDouble();
 
 
-		//accesseurs et mutateurs
-public:
+	//accesseurs et mutateurs
+	public:
 
-	/*
-	 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
-	 *	Remarques :
-	 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
-	 *
-	 *	Entree : uiX : entier non signe, uiY : entier non signe
-	 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
-	 *	Sortie : dElem : double
-	 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
-	 */
-	inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
+		/*
+		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiX : entier non signe, uiY : entier non signe
+		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Sortie : dElem : double
+		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
+		 */
+		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
 
-	/*
-	 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
-	 *	Remarques :
-	 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
-	 *
-	 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
-	 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
-	 *	Sortie : rien
-	 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
-	 */
-	inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem);
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
+		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Sortie : rien
+		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
+		 */
+		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem);
 
 
 	//operateurs

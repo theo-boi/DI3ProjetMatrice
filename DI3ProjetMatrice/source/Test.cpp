@@ -24,7 +24,6 @@ int CMatriceDoubleConstTest() {
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
-		return 1;
 	}
 	return 0;
 }
@@ -35,9 +34,7 @@ int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
 		MADArg.MATPrint(1);
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -52,9 +49,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 		( MADArg * 10 ).MATPrint(1); //MADArg*10
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	cout << endl;
 	/*
@@ -66,9 +61,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 		( 10 * MADArg ).MATPrint(1); //10*MADArg
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -83,9 +76,7 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 		(MADArg / 10).MATPrint(1); //MADArg/21
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 
 	/*
@@ -101,9 +92,7 @@ int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 		MADArg.MADt().MATPrint(1);
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -115,9 +104,7 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 		(MADArg + (10 * MADDix)).MATPrint();
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -129,9 +116,7 @@ int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
 		(MADArg - MADDix).MATPrint();
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -143,9 +128,7 @@ int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
 		(MADArg * MADArgT).MATPrint();
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException())
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
+		EXCLevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -166,11 +149,7 @@ int CExceptionTest() {
 		
 	}
 	catch (CException EXCLevee) {
-		if (EXCLevee.EXCGestionaireException()) {
-			cout << "On a arrete l'execution du bloc.\n";
-			//on admet qu'on ne sait pas quoi faire et on arrete brusquement le programme
-			throw(EXCLevee);
-		}
+		EXCLevee.EXCGestionaireException(); //si EXCLevee est inconnue, throw(EXCLevee) au niveau superieur
 	}
 	cout << "L'execution du programme continue !\n\n\n";
 	return 0;

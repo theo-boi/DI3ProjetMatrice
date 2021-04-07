@@ -4,23 +4,25 @@
 class CException {
 	//attributs
 	private:
-		unsigned int uiEXCId;
-		char pcEXCCommentaire[80];
+		unsigned int uiEXCId; //Id de l'exception
+		const char* pcEXCCommentaire; //Commentaire sur l'exception
+
+
 	//constructeurs et destructeurs
 	public:
 
 		/*
-		 *	Constructeur par defaut permettant d'initialiser une exception
+		 *	Constructeur INLINE par defaut permettant d'initialiser une exception
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : ExcNew : CException
 		 *	Postcondition : Attributs de CException initialises
 		 */
-		inline CException() { uiEXCId = pcEXCCommentaire[0] = 0; };
+		inline CException();
 
 		/*
-		 *	Destructeur
+		 *	Destructeur INLINE
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
@@ -28,6 +30,8 @@ class CException {
 		 *	Postcondition : neant
 		 */
 		inline ~CException() {};
+
+
 	//accesseurs et mutateurs
 	public:
 
@@ -54,9 +58,47 @@ class CException {
 		 *	Postcondition : neant
 		 */
 		inline const char* EXCGetCommentaire() const { return pcEXCCommentaire; };
-		inline void EXCSetId(const unsigned int cuiArg) { uiEXCId = cuiArg; };
-		void EXCSetCommentaire(const char* pccArg);
+
+		/*
+		 *	Methode INLINE de type mutateur sans arguments attribuant a l'id la valeur uiArg
+		 *	Remarques :
+		 *		- uiArg est constant car il ne doit pas etre modifie durant l'execution de la methode
+		 *
+		 *	Entree : uiArg : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : {uiEXCId = uiArg}
+		 */
+		inline void EXCSetId(const unsigned int uiArg) { uiEXCId = uiArg; };
+
+		/*
+		 *	Methode INLINE de type mutateur sans arguments attribuant au commentaire la chaine de caracteres pcArg
+		 *	Remarques :
+		 *		- uiArg est constant car il ne doit pas etre modifie durant l'execution de la methode
+		 *
+		 *	Entree : pcArg : *caractere
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : {pcEXCCommentaire = pcArg}
+		 */
+		void EXCSetCommentaire(const char* pcArg) { pcEXCCommentaire = pcArg; };
+
+
 	//methodes
 	public:
-		bool EXCGestionaireException() const;
+
+		/*
+		 *	Methode sans argument gerant une exception
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : L'objet CException est gere sinon il est a nouveau releve
+		 */
+		void EXCGestionaireException() const throw(CException);
 };
+
+CException::CException() {
+	uiEXCId = 0;
+	pcEXCCommentaire = "";
+}

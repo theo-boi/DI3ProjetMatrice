@@ -20,7 +20,6 @@ CFichier::CFichier()
 
 CFichier::~CFichier()
 {
-	delete pcFICnom;
 	delete pFICfichier;
 	delete pMADmatrice;
 }
@@ -75,7 +74,7 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 		printf("CFichier : type attendu incorrect\n");
 	}
 	////////////////////////////////////!!!!!!! Problème ligne du dessous !!!!!!/////////////////////////////
-	pcFICnom = nullptr;
+	//pcFICnom = nullptr;
 
 	//on replace le curseur au debut du fichier
 	fseek(pFICfichier, 0, SEEK_SET);
