@@ -6,7 +6,7 @@ int main()
 	//init
 	
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
-	CMatriceDouble MAD1Copie = *pMAD1;
+	const CMatriceDouble MAD1CopieStatique = *pMAD1;
 
 	CMatriceDouble* pMAD2 = new CMatriceDouble(2, 2); //MAD2 = I_2
 	pMAD2->MADSetElem(0, 1, 0);
@@ -22,21 +22,7 @@ int main()
 	CMatriceDouble* pMADArg = pMAD3;
 	
 	//tests
-	/*
-	 *	Teste la compatibilite avec les objets constants
-	 */
-	
-	cout << "Afficher MADConstante\n\n";
-	pMAD1->MATPrint(1);
-	*pMAD1 * 10; //MADArg*10
-	10 * *pMAD1; //10*MADArg
-	*pMAD1 / 10; //MADArg/10
-	pMAD1->MADt();
-	*pMAD1 + 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
-	*pMAD1 - 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
-	pMAD1->MADGetElem((double)0, (double)0);
-	*pMAD1 * pMAD1->MADt();
-	//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
+	CMatriceDoubleConstTest();
 	cout << "---------\n\n\n---------\n\n\n";
 	
 	CMatriceDoubleTestPrint(*pMADArg); //MAD
@@ -61,6 +47,7 @@ int main()
 	cout << "---------\n\n\n";
 
 	CExceptionTest();
+	cout << "---------\n\n\n";
 
 	//delete
 	delete pMAD1;

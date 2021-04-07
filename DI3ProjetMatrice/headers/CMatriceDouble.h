@@ -21,7 +21,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloue
+		 *	Postcondition : Attributs de CMatriceDouble alloues/initialises
 		 */
 		CMatriceDouble();
 
@@ -33,7 +33,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloue
+		 *	Postcondition : Objet CMatriceDouble alloues/initialises
 		 */
 		CMatriceDouble(const CMatriceDouble& MADArg) throw(CException);
 
@@ -45,7 +45,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : MATArg : CMatrice
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloue
+		 *	Postcondition : Objet CMatriceDouble alloues/initialises
 		 */
 		CMatriceDouble(const CMatrice& MADArg) { CMatriceDouble((CMatriceDouble&) MADArg); };
 
@@ -57,7 +57,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Objet CMatriceDouble alloue et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
+		 *	Postcondition : Objet CMatriceDouble alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
 		 */
 		CMatriceDouble(const unsigned int uiX, const unsigned int uiY);
 
@@ -67,9 +67,37 @@ class CMatriceDouble : public CMatrice {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : Objet CMatriceDouble libere
+		 *	Postcondition : Attributs de CMatriceDouble liberes
 		 */
 		~CMatriceDouble();
+
+
+		//accesseurs et mutateurs
+public:
+
+	/*
+	 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+	 *	Remarques :
+	 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+	 *
+	 *	Entree : uiX : entier non signe, uiY : entier non signe
+	 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+	 *	Sortie : dElem : double
+	 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
+	 */
+	inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
+
+	/*
+	 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+	 *	Remarques :
+	 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+	 *
+	 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
+	 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+	 *	Sortie : rien
+	 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
+	 */
+	inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem);
 
 
 	//operateurs
@@ -86,7 +114,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADMult : CMatriceDouble
 		 *	Postcondition : {MADMult = MADActuelle * clfArg}
 		 */
-		CMatriceDouble operator*(const long double clfArg) const throw(CException);
+		CMatriceDouble operator*(const long double lfArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice divisee par un nombre constant clfArg
@@ -99,7 +127,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADDiv : CMatriceDouble
 		 *	Postcondition : {MADDiv = MADActuelle / clfArg}
 		 */
-		CMatriceDouble operator/(const long double clfArg) const throw(CException);
+		CMatriceDouble operator/(const long double lfArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
@@ -133,34 +161,6 @@ class CMatriceDouble : public CMatrice {
 		 *	Postcondition : {MADMult = MATActuelle * MATArg}
 		 */
 		CMatriceDouble operator*(const CMatriceDouble& MADArg) const throw(CException);
-
-
-	//accesseurs et mutateurs
-	public:
-
-		/*
-		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
-		 *	Remarques :
-		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
-		 *	
-		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
-		 *	Sortie : dElem : double
-		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
-		 */
-		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
-		
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
-		 *	Remarques :
-		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
-		 *
-		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
-		 *	Sortie : rien
-		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
-		 */
-		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem);
 
 
 	//autres methodes
@@ -203,15 +203,16 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg);
 
 /* Methodes INLINE */
 
-void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem) {
+void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) {
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
-	try { (const double) cldElem; }
+	try { (const double) ldElem; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCConversion.EXCSetCommentaire("MADSetElem (type de l'argument incompatible)");
 		throw(EXCConversion);
 	}
 
 	//set
-	ppdMADElem[uiX][uiY] = (const double) cldElem;
+	ppdMADElem[uiX][uiY] = (const double) ldElem;
 }

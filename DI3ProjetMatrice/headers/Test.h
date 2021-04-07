@@ -2,6 +2,8 @@
 #include "../headers/DI3ProjetMatrice.h"
 #endif
 
+int CMatriceDoubleConstTest();
+
 int CMatriceDoubleTestPrint(CMatriceDouble& MADArg);
 
 int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg);
