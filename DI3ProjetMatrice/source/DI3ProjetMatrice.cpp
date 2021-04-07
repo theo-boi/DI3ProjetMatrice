@@ -22,19 +22,26 @@ int main()
 	
 	//tests
 	/*
-	 *	Teste la compatibilite avec les objets constants
+	 *	Teste la compatibilite avec les objets constants (dans la fonction main car test de compilation)
 	 */
-	cout << "Afficher MADConstante\n\n";
-	pMAD1->MATPrint(1);
-	*pMAD1 * 10; //MADArg*10
-	10 * *pMAD1; //10*MADArg
-	*pMAD1 / 10; //MADArg/10
-	pMAD1->MADt();
-	*pMAD1 + 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
-	*pMAD1 - 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
-	pMAD1->MADGetElem((double)0, (double)0);
-	*pMAD1 * pMAD1->MADt();
-	//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
+	try {
+		cout << "Afficher MADConstante\n\n";
+		pMAD1->MATPrint(1);
+		*pMAD1 * 10; //MADArg*10
+		10 * *pMAD1; //10*MADArg
+		*pMAD1 / 10; //MADArg/10
+		*pMAD1 / 10; //MADArg/10
+		pMAD1->MADt();
+		*pMAD1 + 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
+		*pMAD1 - 10*CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
+		pMAD1->MADGetElem((double)0, (double)0);
+		*pMAD1 * pMAD1->MADt();
+		*pMAD1 * CMatriceDouble(pMAD1->MATGetDimLigne()+1, pMAD1->MATGetDimColonne()); //cree une erreur a cause de dimensions incoherentes
+		//*pMAD1->MADSetElem(0, 0, 0); //ne compile pas car MADSetElem ne peut pas etre une methode constante
+	}
+	catch (CException EXCLevee) {
+		EXCLevee.EXCGestionaireException();
+	}
 	cout << "---------\n\n\n---------\n\n\n";
 	
 	CMatriceDoubleTestPrint(*pMADArg); //MAD
@@ -59,6 +66,7 @@ int main()
 	cout << "---------\n\n\n";
 
 	CExceptionTest();
+	cout << "---------\n\n\n";
 
 	//delete
 	delete pMAD1;

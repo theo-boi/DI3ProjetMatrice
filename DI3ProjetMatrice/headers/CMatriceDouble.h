@@ -1,7 +1,7 @@
+#define CMATRICEDOUBLEH
 #ifndef CMATRICEH
 #include "CMatrice.h"
 #endif 
-#define CMATRICEDOUBLEH
 
 /*
  *	Attention developpeurs : definitions inline predefinies (non-indiquees dans la specification) a enlever.
@@ -35,7 +35,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADNew : CMatriceDouble
 		 *	Postcondition : Objet CMatriceDouble alloue
 		 */
-		CMatriceDouble(const CMatriceDouble& MADArg);
+		CMatriceDouble(const CMatriceDouble& MADArg) throw(CException);
 
 		/*
 		 *	Constructeur de recopie
@@ -86,7 +86,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADMult : CMatriceDouble
 		 *	Postcondition : {MADMult = MADActuelle * clfArg}
 		 */
-		CMatriceDouble operator*(const long double clfArg) const;
+		CMatriceDouble operator*(const long double clfArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice divisee par un nombre constant clfArg
@@ -99,7 +99,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADDiv : CMatriceDouble
 		 *	Postcondition : {MADDiv = MADActuelle / clfArg}
 		 */
-		CMatriceDouble operator/(const long double clfArg) const;
+		CMatriceDouble operator/(const long double clfArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
@@ -110,7 +110,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MATAdd : CMatriceDouble
 		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
 		 */
-		CMatriceDouble operator+(const CMatriceDouble& MADArg) const;
+		CMatriceDouble operator+(const CMatriceDouble& MADArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MATArg
@@ -121,7 +121,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MATSous : CMatriceDouble
 		 *	Postcondition : {MATSous = MATActuelle - MATArg}
 		 */
-		CMatriceDouble operator-(const CMatriceDouble& MADArg) const;
+		CMatriceDouble operator-(const CMatriceDouble& MADArg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MATArg
@@ -132,7 +132,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : MADMult : CMatriceDouble
 		 *	Postcondition : {MADMult = MATActuelle * MATArg}
 		 */
-		CMatriceDouble operator*(const CMatriceDouble& MADArg) const;
+		CMatriceDouble operator*(const CMatriceDouble& MADArg) const throw(CException);
 
 
 	//accesseurs et mutateurs
@@ -205,12 +205,13 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg);
 
 void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double cldElem) {
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
-	/*try { (double) cldElem; }
-	catch (const std::exception&) {
-		;
-	}*/
-	const double dElem = (const double) cldElem;
+	try { (const double) cldElem; }
+	catch (...) {
+		CException EXCConversion;
+		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
+		throw(EXCConversion);
+	}
 
 	//set
-	ppdMADElem[uiX][uiY] = dElem;
+	ppdMADElem[uiX][uiY] = (const double) cldElem;
 }
