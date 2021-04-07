@@ -61,9 +61,9 @@ CMatriceDouble::~CMatriceDouble() {
 
 /*** Operateurs ***/
 
-CMatriceDouble CMatriceDouble::operator*(const long double clfArg) const throw(CException) {
+CMatriceDouble CMatriceDouble::operator*(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
-	try { (const double) clfArg; }
+	try { (const double) lfArg; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -82,7 +82,7 @@ CMatriceDouble CMatriceDouble::operator*(const long double clfArg) const throw(C
 		MADMult.ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat de la multiplication de chaque element par cfConst pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			MADMult.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * clfArg;
+			MADMult.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * lfArg;
 		}
 	}
 	return MADMult;
@@ -101,9 +101,9 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 	return MADMult;
 }
 
-CMatriceDouble CMatriceDouble::operator/(const long double clfArg) const throw(CException) {
+CMatriceDouble CMatriceDouble::operator/(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
-	try { (const double) clfArg; }
+	try { (const double) lfArg; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -122,7 +122,7 @@ CMatriceDouble CMatriceDouble::operator/(const long double clfArg) const throw(C
 		MADDiv.ppdMADElem[uiBoucleForX] = new double[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat de la division de chaque element par cfConst pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			MADDiv.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / clfArg;
+			MADDiv.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / lfArg;
 		}
 	}
 	return MADDiv;
