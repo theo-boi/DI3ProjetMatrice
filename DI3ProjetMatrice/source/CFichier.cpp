@@ -29,6 +29,7 @@ CFichier::~CFichier()
 void CFichier::FICprincipale(const char* pcNomFichier)
 {
 	pcFICnom = (char*)pcNomFichier;
+	
 	fopen_s(&pFICfichier, pcFICnom, "r");
 	char pligneCourante[20];
 
@@ -73,5 +74,6 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 	{
 		printf("CFichier : type attendu incorrect\n");
 	}
+	////////////////////////////////////!!!!!!! Problème ligne du dessous !!!!!!/////////////////////////////
 	pcFICnom = nullptr;
 }
