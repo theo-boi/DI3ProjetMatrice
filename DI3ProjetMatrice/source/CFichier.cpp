@@ -30,30 +30,44 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 {
 	pcFICnom = (char*)pcNomFichier;
 	fopen_s(&pFICfichier, pcFICnom, "r");
-	CMatriceDouble MAD;
 	char pligneCourante[20];
 
-	fgets(pligneCourante, 20, pFICfichier);
-	puts(pligneCourante);	
+	fgets(pligneCourante, 20, pFICfichier);	
 
 	const char* pcTypeAttendu = "TypeMatrice=double";
 	
 	if (*pligneCourante == *(char*)pcTypeAttendu)
-	{
-		printf("CFichier : type attendu correct\n");
-		
+	{		
 		unsigned int uiNbLignes;
 		unsigned int uiNbColonnes;
 
-		//on déplace le curseur afin de scanner le nombre de lignes
+		//on deplace le curseur afin de scanner le nombre de lignes
 		fseek(pFICfichier, 9, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbLignes);
-		printf("nb lignes : %u\n", uiNbLignes);
 
-		//on déplace le curseur afin de scanner le nombre de colonnes
+		//on deplace le curseur afin de scanner le nombre de colonnes
 		fseek(pFICfichier, 13, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbColonnes);
-		printf("nb colonnes : %u\n", uiNbColonnes);
+
+		//creation de la matrice
+		CMatriceDouble* pMAD = new CMatriceDouble(uiNbLignes, uiNbColonnes);
+		double dElement;
+
+		//on positionne le curseur sur le premier element de la matrice
+		fseek(pFICfichier, 11, SEEK_CUR);
+
+		/*on initialise les elements de la matrice creee en memoire a partir
+		de ceux du fichier texte */
+		for (unsigned int i = 0; i < uiNbLignes; i++)
+		{
+			for (unsigned int j = 0; j < uiNbColonnes; j++)
+			{
+				fscanf_s(pFICfichier, "%lf", &dElement);
+				pMAD->MADSetElem(i, j, dElement);
+			}
+		}
+		//on garde la variable MAD dans notre objet CFichier
+		pMADmatrice = pMAD;
 	}
 	else
 	{
