@@ -49,8 +49,12 @@ int main()
 	CExceptionTest();
 	cout << "---------\n\n\n---------\n\n\n";
 
-	CMatriceTest<int>(); //MATint
+
+	CMatriceTest<int>(); //MAT
+	CMatriceTest<bool>(); //MAT
+	CMatriceTest<double>(); //MAT
 	cout << "---------\n\n\n---------\n\n\n";
+
 
 	//delete
 	delete pMAD1;

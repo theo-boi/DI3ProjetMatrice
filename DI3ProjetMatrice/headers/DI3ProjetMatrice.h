@@ -1,27 +1,27 @@
 #define DI3PROJETMATRICEH
 
 #ifndef CEXCEPTIONH
-#include "../headers/CException.h"
+#include "CException.h"
 #endif
 
 #ifndef CFICHIERH
-#include "../headers/CFichier.h"
+#include "CFichier.h"
 #endif
 
 #ifndef CMATRICEGENERIQUEH
-#include "../headers/CMatriceGenerique.h"
+#include "CMatriceStructure.h"
 #endif
 
 #ifndef CMATRICEH
-#include "../headers/CMatrice.h"
+#include "CMatrice.h"
 #endif
 
 #ifndef CMATRICEDOUBLEH
-#include "../headers/CMatriceDouble.h"
+#include "CMatriceDouble.h"
 #endif
 
 #ifndef TESTH
-#include "../headers/Test.h"
+#include "Test.h"
 #endif
 
 #include <iostream>

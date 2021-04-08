@@ -1,11 +1,10 @@
 #define CMATRICEH
 #ifndef CMATRICEGENERIQUEH
-#include "CMatriceGenerique.h"
-#endif 
-#include <iostream>
+#include "CMatriceStructure.h"
+#endif
 
 template<class T>
-class CMatrice : public CMatriceGenerique {
+class CMatrice : public CMatriceStructure {
 	//attributs
 	private:
 		T** ppdMATelem; //tableau des elements de la matrice
@@ -35,32 +34,32 @@ class CMatrice : public CMatriceGenerique {
 		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises
 		 */
 		template<class T2>
-		CMatrice(const CMatrice<T2>& MADArg) throw(CException);
+		CMatrice(CMatrice<T2>& MADArg) throw(CException);
 
 		/*
-		 *	Constructeur de recopie
+		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiArgX x uiArgY elements nuls
 		 *	Remarques :
-		 *		- MAGArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		- uiArgX et uiArgY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
-		 *	Entree : MAGArg : CMatriceGenerique
+		 *	Entree : uiArgX : entier non signe, uiArgY : entier non signe
 		 *	Precondition : neant
 		 *	Sortie : MATNew : CMatrice<T>
-		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises
-		 */
-		/*template<class T2>
-		CMatrice(const CMatriceGenerique& MAGArg) { CMatriceDouble((CMatriceDouble&)MAGArg); };*/ //pas necessaire avec le template
-
-		/*
-		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
-		 *	Remarques :
-		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
-		 *
-		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : MADNew : CMatriceDouble
-		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = T())
 		 */
 		CMatrice(const unsigned int uiX, const unsigned int uiY);
+
+		/*
+		 *	Constructeur a trois arguments permettant d'initialiser une matrice de uiArgX x uiArgY elements dont la valeur est T2elem
+		 *	Remarques :
+		 *		- uiArgX et uiArgY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiArgX : entier non signe, uiArgY : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : MATNew : CMatrice<T>
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = T2elem)
+		 */
+		template<class T2>
+		CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem) throw(CException);
 
 		/*
 		 *	Destructeur
@@ -77,29 +76,29 @@ class CMatrice : public CMatriceGenerique {
 	public:
 
 		/*
-		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Methode de type accesseur a deux arguments renvoyant l'element de coordonnees (uiArgX, uiArgY)
 		 *	Remarques :
-		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *		- uiArgX et uiArgY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
-		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Entree : uiArgX : entier non signe, uiArgY : entier non signe
+		 *	Precondition : (uiArgX < eMATdimLigne)^(uiArgY < eMATdimLigne)
 		 *	Sortie : dElem : double
-		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
+		 *	Postcondition : {dElem = ppdMAIElem[uiArgX][uiArgY]}
 		 */
-		inline T MATgetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) { return 10; };
+		T MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) const throw(CException);
 
 		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+		 *	Methode de type mutateur a trois arguments attribuant a l'element de coordonnees (uiArgX, uiArgY) la valeur dElem
 		 *	Remarques :
-		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *		- uiArgX et uiArgY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
-		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Entree : uiArgX : entier non signe, uiArgY : entier non signe, dElem : double
+		 *	Precondition : (uiArgX < eMATdimLigne)^(uiArgY < eMATdimLigne)
 		 *	Sortie : rien
-		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
+		 *	Postcondition : {ppdMAIElem[uiArgX][uiArgY] = dElem}
 		 */
 		template<class T2>
-		inline void MATsetElem(const unsigned int uiX, const unsigned int uiY, const T2 T2elem) throw(CException) {};
+		void MATsetElem(const unsigned int uiArgX, const unsigned int uiArgY, T2 T2elem) throw(CException);
 
 
 	//operateurs
@@ -177,7 +176,7 @@ class CMatrice : public CMatriceGenerique {
 		 *	Postcondition : {MATactuelle = MAT2arg}
 		 */
 		template<class T2>
-		CMatrice<T>& operator=(const CMatrice<T2>& MAT2arg) throw(CException) { return *this; };
+		CMatrice<T>& operator=(const CMatrice<T2>& MAT2arg) throw(CException);
 
 
 	//autres methodes
@@ -189,7 +188,7 @@ class CMatrice : public CMatriceGenerique {
 		 *	Entree : bEndl : booleen
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : Affiche les elements de CMatrice
+		 *	Postcondition : Affiche les elements de MATactuelle
 		 */
 		virtual void MATprint(const bool bEndl = 0) const;
 
@@ -219,5 +218,5 @@ CMatrice<T> operator*(const T2 T2arg, const CMatrice<T2> MAT2arg) throw(CExcepti
 
 
 /* Definitions des methodes */
-#define CMATRICEHOK
+
 #include "CMatrice.inc.h"

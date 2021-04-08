@@ -1,10 +1,10 @@
 #define CMATRICEGENERIQUEH
 #ifndef CEXCEPTIONH
-#include "../headers/CException.h"
+#include "CException.h"
 #endif
-#include "../source/CMatriceGenerique.cpp"
+#include "CMatriceStructure.inc.h"
 
-class CMatriceGenerique {
+class CMatriceStructure {
 	//attributs
 	protected:
 		unsigned int uiMATdimLigne; //nombre de lignes de la matrice
@@ -19,10 +19,10 @@ class CMatriceGenerique {
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : MADNew : CMatriceGenerique
-		 *	Postcondition : Les attributs propres a CMatriceGenerique sont initialises
+		 *	Sortie : MASNew : CMatriceStructure
+		 *	Postcondition : Les attributs de MASNew (propres a CMatriceStructure) sont initialises
 		 */
-		CMatriceGenerique() { uiMATdimLigne = uiMATdimColonne = 0; };
+		CMatriceStructure() { uiMATdimLigne = uiMATdimColonne = 0; };
 
 		/*
 		 *	Destructeur
@@ -30,9 +30,10 @@ class CMatriceGenerique {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : Les attributs propres a CMatriceGenerique sont reinitialises
+		 *	Postcondition : Les attributs de MASNew (propres a CMatriceStructure) sont reinitialises
 		 */
-		~CMatriceGenerique() { uiMATdimLigne = uiMATdimColonne = 0; };
+		~CMatriceStructure() { uiMATdimLigne = uiMATdimColonne = 0; };
+
 
 	//accesseurs et mutateurs
 	public:

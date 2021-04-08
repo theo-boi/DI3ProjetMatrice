@@ -1,10 +1,10 @@
 #define CMATRICEDOUBLEH
 #ifndef CMATRICEGENERIQUEH
-#include "CMatriceGenerique.h"
+#include "CMatriceStructure.h"
 #endif 
 #include <iostream>
 
-class CMatriceDouble : public CMatriceGenerique {
+class CMatriceDouble : public CMatriceStructure {
 	//attributs
 	private:
 		double** ppdMADElem; //tableau des elements de la matrice
@@ -40,12 +40,12 @@ class CMatriceDouble : public CMatriceGenerique {
 		 *	Remarques :
 		 *		- MAGArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MAGArg : CMatriceGenerique
+		 *	Entree : MAGArg : CMatriceStructure
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
 		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises
 		 */
-		CMatriceDouble(const CMatriceGenerique& MAGArg) { CMatriceDouble((CMatriceDouble&) MAGArg); };
+		CMatriceDouble(const CMatriceStructure& MAGArg) { CMatriceDouble((CMatriceDouble&) MAGArg); };
 
 		/*
 		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
@@ -215,10 +215,10 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 double CMatriceDouble::MADGetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
-		CException EXCConversion;
-		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
-		throw(EXCConversion);
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
+		throw(EXCconversion);
 	}
 
 	return ppdMADElem[uiX][uiY];
@@ -228,17 +228,17 @@ void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, 
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
 	try { (const double) ldElem; }
 	catch (...) {
-		CException EXCConversion;
-		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCConversion.EXCSetCommentaire("MADSetElem (type de l'argument incompatible)");
-		throw(EXCConversion);
+		CException EXCconversion;
+		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCconversion.EXCSetCommentaire("MADSetElem (type de l'argument incompatible)");
+		throw(EXCconversion);
 	}
 	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
-		CException EXCConversion;
-		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCConversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
-		throw(EXCConversion);
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
+		throw(EXCconversion);
 	}
 
 	//set

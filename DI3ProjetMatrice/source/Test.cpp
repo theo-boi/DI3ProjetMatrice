@@ -24,8 +24,8 @@ int CMatriceDoubleConstTest() {
 		//*pMAD1 = *pMAD1 * *pMAD1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
 		//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 
 	delete pMAD1;
@@ -37,8 +37,8 @@ int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
 	try {
 		MADArg.MATprint(1);
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -52,8 +52,8 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	try {
 		( MADArg * 10 ).MATprint(1); //MADArg*10
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	cout << endl;
 	/*
@@ -64,8 +64,8 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	try {
 		( 10 * MADArg ).MATprint(1); //10*MADArg
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -79,8 +79,8 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 	try {
 		(MADArg / 10).MATprint(1); //MADArg/21
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 
 	/*
@@ -95,8 +95,8 @@ int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 	try {
 		MADArg.MADt().MATprint(1);
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -107,8 +107,8 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 	try {
 		(MADArg + (10 * MADDix)).MATprint();
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -119,8 +119,8 @@ int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
 		CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATgetDimLigne(), MADArg.MATgetDimColonne());
 		(MADArg - MADDix).MATprint();
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -131,8 +131,8 @@ int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
 		CMatriceDouble MADArgT = MADArg.MADt();
 		(MADArg * MADArgT).MATprint();
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException();
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException();
 	}
 	return 0;
 }
@@ -152,8 +152,8 @@ int CExceptionTest() {
 		MAD1*MAD2; //type d'exception 2 // arrete l'execution du bloc et leve l'execution B
 		
 	}
-	catch (CException EXCLevee) {
-		EXCLevee.EXCGestionaireException(); //si EXCLevee est inconnue, throw(EXCLevee) au niveau superieur
+	catch (CException EXClevee) {
+		EXClevee.EXCGestionaireException(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur
 	}
 	cout << "L'execution du programme continue !\n\n\n";
 	return 0;
