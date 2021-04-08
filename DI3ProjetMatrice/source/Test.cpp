@@ -1,23 +1,24 @@
+#ifndef TESTH
 #include "../headers/Test.h"
+#endif
 using namespace std;
 
 /* Tests */
 
 int CMatriceDoubleConstTest() {
+	//init
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2, 2); //MAD1 = ((1,1), (1,1))
 
-	/*
-	 *	Teste la compatibilite des fonctions avec les objets constants
-	 */
+	//teste la compatibilite des fonctions avec les objets constants
+	cout << "Afficher MADConstante\n\n";
 	try {
-		cout << "Afficher MADConstante\n\n";
-		pMAD1->MATPrint(1);
+		pMAD1->MATprint(1);
 		*pMAD1 * 10; //MADArg*10
 		10 * *pMAD1; //10*MADArg
 		*pMAD1 / 10; //MADArg/10
 		pMAD1->MADt();
-		*pMAD1 + 10 * CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
-		*pMAD1 - 10 * CMatriceDouble(pMAD1->MATGetDimLigne(), pMAD1->MATGetDimColonne());
+		*pMAD1 + 10 * CMatriceDouble(pMAD1->MATgetDimLigne(), pMAD1->MATgetDimColonne());
+		*pMAD1 - 10 * CMatriceDouble(pMAD1->MATgetDimLigne(), pMAD1->MATgetDimColonne());
 		pMAD1->MADGetElem((double)0, (double)0);
 		*pMAD1 * pMAD1->MADt();
 		//*pMAD1 = *pMAD1 * *pMAD1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
@@ -34,7 +35,7 @@ int CMatriceDoubleConstTest() {
 int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg\n\n";
 	try {
-		MADArg.MATPrint(1);
+		MADArg.MATprint(1);
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -49,7 +50,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	 *	Le compilateur utilise MADArg.operator*(10)
 	 */
 	try {
-		( MADArg * 10 ).MATPrint(1); //MADArg*10
+		( MADArg * 10 ).MATprint(1); //MADArg*10
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -61,7 +62,7 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	 *	car 10.operator*(MADArg) n'est pas surchargeable
 	 */
 	try {
-		( 10 * MADArg ).MATPrint(1); //10*MADArg
+		( 10 * MADArg ).MATprint(1); //10*MADArg
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -76,7 +77,7 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 	 *	Le compilateur utilise MADArg.operator/(10)
 	 */
 	try {
-		(MADArg / 10).MATPrint(1); //MADArg/21
+		(MADArg / 10).MATprint(1); //MADArg/21
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -92,7 +93,7 @@ int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
 int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 	cout << "Afficher la transposee de MADArg\n\n\n";
 	try {
-		MADArg.MADt().MATPrint(1);
+		MADArg.MADt().MATprint(1);
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -102,9 +103,9 @@ int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 
 int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg + [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
-	CMatriceDouble MADDix = CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
+	CMatriceDouble MADDix = CMatriceDouble(MADArg.MATgetDimLigne(), MADArg.MATgetDimColonne());
 	try {
-		(MADArg + (10 * MADDix)).MATPrint();
+		(MADArg + (10 * MADDix)).MATprint();
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -115,8 +116,8 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg - [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
 	try {
-		CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATGetDimLigne(), MADArg.MATGetDimColonne());
-		(MADArg - MADDix).MATPrint();
+		CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATgetDimLigne(), MADArg.MATgetDimColonne());
+		(MADArg - MADDix).MATprint();
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();
@@ -128,7 +129,7 @@ int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
 	cout << "Afficher MADArg * MADArg^t\n\n\n";
 	try {
 		CMatriceDouble MADArgT = MADArg.MADt();
-		(MADArg * MADArgT).MATPrint();
+		(MADArg * MADArgT).MATprint();
 	}
 	catch (CException EXCLevee) {
 		EXCLevee.EXCGestionaireException();

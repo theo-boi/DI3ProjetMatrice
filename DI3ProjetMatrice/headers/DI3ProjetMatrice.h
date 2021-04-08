@@ -8,21 +8,20 @@
 #include "../headers/CFichier.h"
 #endif
 
-#ifndef CMATRICEH
-#include "../headers/CMatrice.h"
+#ifndef CMATRICEGENERIQUEH
+#include "../headers/CMatriceGenerique.h"
 #endif
 
-#ifndef CMATRICECARACTEREH
-#include "../headers/CMatriceCaractere.h"
+#ifndef CMATRICEH
+#include "../headers/CMatrice.h"
 #endif
 
 #ifndef CMATRICEDOUBLEH
 #include "../headers/CMatriceDouble.h"
 #endif
 
-#ifndef CMATRICEENTIERH
-#include "../headers/CMatriceEntier.h"
+#ifndef TESTH
+#include "../headers/Test.h"
 #endif
 
 #include <iostream>
-#include "Test.h"

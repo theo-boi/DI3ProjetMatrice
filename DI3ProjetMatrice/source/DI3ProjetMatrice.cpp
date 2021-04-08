@@ -4,7 +4,6 @@ using namespace std;
 int main()
 {
 	//init
-	
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
 	const CMatriceDouble MAD1CopieStatique = *pMAD1;
 
@@ -45,10 +44,13 @@ int main()
 	cout << "---------\n\n\n";
 
 	CMatriceDoubleTestMult(*pMADArg); //MAD * MAD
-	cout << "---------\n\n\n";
+	cout << "---------\n\n\n---------\n\n\n";
 
 	CExceptionTest();
-	cout << "---------\n\n\n";
+	cout << "---------\n\n\n---------\n\n\n";
+
+	CMatriceTest<int>(); //MATint
+	cout << "---------\n\n\n---------\n\n\n";
 
 	//delete
 	delete pMAD1;
@@ -59,6 +61,5 @@ int main()
 	printf("TESTS FICHIER\n");
 	CFichier fichier;
 	fichier.FICprincipale("fichierMatrice.txt");
-
 	return 0;
 }

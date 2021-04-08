@@ -92,9 +92,9 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 	//init
 	CMatriceDouble MADMult = CMatriceDouble(MADArg);
 
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MADMult.MATGetDimLigne(); uiBoucleForX++) {
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MADMult.MATgetDimLigne(); uiBoucleForX++) {
 		//calcul de chaque element par vecteur
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MADMult.MATGetDimColonne(); uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MADMult.MATgetDimColonne(); uiBoucleForY++) {
 			MADMult.MADSetElem(uiBoucleForX, uiBoucleForY, MADMult.MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
 		}
 	}
@@ -268,7 +268,7 @@ CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CE
 
 /*** Autres methodes ***/
 
-void CMatriceDouble::MATPrint(bool bEndl) const {
+void CMatriceDouble::MATprint(bool bEndl) const {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) { //affiche les uiMATdimLigne elements de la uiBoucleForX-ieme ligne
 			std::cout << ppdMADElem[uiBoucleForX][uiBoucleForY];

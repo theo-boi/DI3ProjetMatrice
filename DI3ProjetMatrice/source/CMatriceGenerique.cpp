@@ -1,6 +1,6 @@
 #define CMATRICECPP
-#ifndef CMATRICEH
-#include "../headers/CMatrice.h"
+#ifndef CMATRICEGENERIQUEH
+#include "../headers/CMatriceGenerique.h"
 #endif
 
 /*

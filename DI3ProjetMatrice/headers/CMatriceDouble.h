@@ -1,13 +1,10 @@
 #define CMATRICEDOUBLEH
-#ifndef CMATRICEH
-#include "CMatrice.h"
+#ifndef CMATRICEGENERIQUEH
+#include "CMatriceGenerique.h"
 #endif 
+#include <iostream>
 
-/*
- *	Attention developpeurs : definitions inline predefinies (non-indiquees dans la specification) a enlever.
- *	Presentes uniquement pour eviter les erreurs de compilation.
- */
-class CMatriceDouble : public CMatrice {
+class CMatriceDouble : public CMatriceGenerique {
 	//attributs
 	private:
 		double** ppdMADElem; //tableau des elements de la matrice
@@ -41,14 +38,14 @@ class CMatriceDouble : public CMatrice {
 		/*
 		 *	Constructeur de recopie
 		 *	Remarques :
-		 *		- MATArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *		- MAGArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatrice
+		 *	Entree : MAGArg : CMatriceGenerique
 		 *	Precondition : neant
 		 *	Sortie : MADNew : CMatriceDouble
 		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises
 		 */
-		CMatriceDouble(const CMatrice& MADArg) { CMatriceDouble((CMatriceDouble&) MADArg); };
+		CMatriceDouble(const CMatriceGenerique& MAGArg) { CMatriceDouble((CMatriceDouble&) MAGArg); };
 
 		/*
 		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
@@ -86,7 +83,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : dElem : double
 		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
 		 */
-		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const { return ppdMADElem[uiX][uiY]; };
+		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException);
 
 		/*
 		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
@@ -98,7 +95,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : rien
 		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
-		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem);
+		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException);
 
 
 	//operateurs
@@ -169,8 +166,8 @@ class CMatriceDouble : public CMatrice {
 		 *
 		 *	Entree : MATArg : CMatriceDouble
 		 *	Precondition : neant
-		 *	Sortie : MADEgal : CMatriceDouble
-		 *	Postcondition : {MADEgal = MATActuelle * MATArg}
+		 *	Sortie : MADActuelle : CMatriceDouble
+		 *	Postcondition : {MADActuelle = MATArg}
 		 */
 		CMatriceDouble& operator=(const CMatriceDouble& MADArg) throw(CException);
 
@@ -186,7 +183,7 @@ class CMatriceDouble : public CMatrice {
 		 *	Sortie : rien
 		 *	Postcondition : Affiche les elements de CMatriceDouble
 		 */
-		virtual void MATPrint(bool bEndl = 0) const;
+		virtual void MATprint(const bool bEndl = 0) const;
 
 		/*
 		 *	Methode sans argument renvoyant la transposee de la matrice
@@ -215,13 +212,32 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 
 /* Methodes INLINE */
 
-void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) {
+double CMatriceDouble::MADGetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) {
+	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
+	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
+		throw(EXCConversion);
+	}
+
+	return ppdMADElem[uiX][uiY];
+}
+
+void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
 	try { (const double) ldElem; }
 	catch (...) {
 		CException EXCConversion;
 		EXCConversion.EXCSetId(types_incompatibles); //erreur de type 1
 		EXCConversion.EXCSetCommentaire("MADSetElem (type de l'argument incompatible)");
+		throw(EXCConversion);
+	}
+	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
+	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
+		CException EXCConversion;
+		EXCConversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCConversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
 		throw(EXCConversion);
 	}
 

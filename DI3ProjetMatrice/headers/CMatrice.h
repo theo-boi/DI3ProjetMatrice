@@ -1,61 +1,223 @@
 #define CMATRICEH
-#ifndef CEXCEPTIONH
-#include "../headers/CException.h"
-#endif
-#include "../source/CMatrice.cpp"
+#ifndef CMATRICEGENERIQUEH
+#include "CMatriceGenerique.h"
+#endif 
 #include <iostream>
 
-class CMatrice {
+template<class T>
+class CMatrice : public CMatriceGenerique {
 	//attributs
-	protected:
-		unsigned int uiMATdimLigne; //nombre de lignes de la matrice
-		unsigned int uiMATdimColonne; //nombre de colonnes de la matrice
+	private:
+		T** ppdMATelem; //tableau des elements de la matrice
+
+
+	//constructeurs et destructeurs
+	public:
+
+		/*
+		 *	Constructeur par defaut permettant d'initialiser une matrice de 0 elements
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : MATNew : CMatrice
+		 *	Postcondition : Les attributs de l'objet CMatrice sont alloues/initialises
+		 */
+		CMatrice();
+
+		/*
+		 *	Constructeur de recopie
+		 *	Remarques :
+		 *		- MATArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MATArg : CMatrice<T2>
+		 *	Precondition : neant
+		 *	Sortie : MATNew : CMatrice<T>
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises
+		 */
+		template<class T2>
+		CMatrice(const CMatrice<T2>& MADArg) throw(CException);
+
+		/*
+		 *	Constructeur de recopie
+		 *	Remarques :
+		 *		- MAGArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAGArg : CMatriceGenerique
+		 *	Precondition : neant
+		 *	Sortie : MATNew : CMatrice<T>
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATNew sont alloues/initialises
+		 */
+		/*template<class T2>
+		CMatrice(const CMatriceGenerique& MAGArg) { CMatriceDouble((CMatriceDouble&)MAGArg); };*/ //pas necessaire avec le template
+
+		/*
+		 *	Constructeur a deux arguments permettant d'initialiser une matrice de uiX x uiY elements unitaires
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiX : entier non signe, uiY : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : MADNew : CMatriceDouble
+		 *	Postcondition : Les attributs de l'objet CMatriceDouble sont alloues/initialises et pour tout uiXi < uiX et uiYi < uiY, (ppdMAIElem[uiXi][uiYi] = 1)
+		 */
+		CMatrice(const unsigned int uiX, const unsigned int uiY);
+
+		/*
+		 *	Destructeur
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : Les attributs de l'objet CMatrice sont liberes
+		 */
+		~CMatrice();
+
 
 	//accesseurs et mutateurs
 	public:
 
 		/*
-		 *	Methode INLINE de type accesseur sans arguments renvoyant le nombre de ligne
+		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
-		 *	Entree : rien
-		 *	Precondition : neant
-		 *	Sortie : uiDimLigne : entier non signe
-		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
+		 *	Entree : uiX : entier non signe, uiY : entier non signe
+		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Sortie : dElem : double
+		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
 		 */
-		virtual unsigned int MATGetDimLigne() const { return uiMATdimLigne; };
+		inline T MATgetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) { return 10; };
 
 		/*
-		 *	Methode INLINE de type accesseur sans arguments renvoyant le nombre de colonne
+		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
-		 *	Entree : rien
-		 *	Precondition : neant
-		 *	Sortie : uiDimColonne : entier non signe
-		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
+		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
+		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Sortie : rien
+		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
-		virtual unsigned int MATGetDimColonne() const { return uiMATdimColonne; };
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimLigne
-		 *
-		 *	Entree : uiDimLigne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
-		 */
-		virtual void MATSetDimLigne(const unsigned int uiDimLigne) { uiMATdimLigne = uiDimLigne; };
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimColonne
-		 *
-		 *	Entree : uiDimColonne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
-		 */
-		virtual void MATSetDimColonne(const unsigned int uiDimColonne) { uiMATdimColonne = uiDimColonne; };
+		template<class T2>
+		inline void MATsetElem(const unsigned int uiX, const unsigned int uiY, const T2 T2elem) throw(CException) {};
 
 
-	//methodes
+	//operateurs
 	public:
-		virtual void MATPrint(bool bEndl) const =0;
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par un nombre constant T2 T2arg
+		 *	Remarques :
+		 *		- T2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : T2arg : T2
+		 *	Precondition : neant
+		 *	Sortie : MATmult : CMatrice
+		 *	Postcondition : {MATmult = MATactuelle * T2arg}
+		 */
+		template<class T2>
+		CMatrice<T> operator*(const T2 T2arg) const throw(CException) { return *this; };
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice divisee par un nombre constant  T2 T2arg
+		 *	Remarques :
+		 *		- T2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : T2arg : T2
+		 *	Precondition : neant
+		 *	Sortie : MATdiv : CMatrice
+		 *	Postcondition : {MATdiv = MATactuelle / T2arg}
+		 */
+		template<class T2>
+		CMatrice<T> operator/(const T2 T2arg) const throw(CException) { return *this; };
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatrice<T2> MAT2arg
+		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAT2arg : CMatrice
+		 *	Precondition : neant
+		 *	Sortie : MATadd : CMatrice
+		 *	Postcondition : {MATadd = MATactuelle + MAT2arg}
+		 */
+		template<class T2>
+		CMatrice<T> operator+(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatrice<T2> MAT2arg
+		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAT2arg : CMatrice
+		 *	Precondition : neant
+		 *	Sortie : MATsous : CMatrice
+		 *	Postcondition : {MATsous = MATactuelle - MAT2arg}
+		 */
+		template<class T2>
+		CMatrice<T> operator-(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+
+		/*
+		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatrice<T2> MAT2arg
+		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAT2arg : CMatrice<T2>
+		 *	Precondition : neant
+		 *	Sortie : MATmult : CMatrice<T>
+		 *	Postcondition : {MATmult = MATactuelle * MAT2arg}
+		 */
+		template<class T2>
+		CMatrice<T> operator*(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+
+		/*
+		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T2> MAT2arg
+		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAT2arg : CMatrice<T2>
+		 *	Precondition : neant
+		 *	Sortie : MATactuelle : CMatrice<T>
+		 *	Postcondition : {MATactuelle = MAT2arg}
+		 */
+		template<class T2>
+		CMatrice<T>& operator=(const CMatrice<T2>& MAT2arg) throw(CException) { return *this; };
+
+
+	//autres methodes
+	public:
+
+		/*
+		 *	Methode sans argument affichant la matrice (puis un saut de ligne si bEndl est vrai)
+		 *
+		 *	Entree : bEndl : booleen
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : Affiche les elements de CMatrice
+		 */
+		virtual void MATprint(const bool bEndl = 0) const;
+
+		/*
+		 *	Methode sans argument renvoyant la transposee de la matrice
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : MATt : CMatrice<T>
+		 *	Postcondition : MATt est la transposee de MATactuelle
+		 */
+		CMatrice<T> MATt() const;
 };
+
+/*
+ *	Methode de type operateur a deux argument renvoyant un nombre constant T2 T2arg multiplie par la matrice CMatrice<T2> MAT2arg
+ *	Remarques :
+ *		- T2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+ *
+ *	Entree : T2arg : T2, MAT2arg : CMatrice<T2>
+ *	Precondition : neant
+ *	Sortie : MATmult : CMatrice<T>
+ *	Postcondition : {MATmult = T2arg * MAT2arg}
+ */
+template<class T, class T2>
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T2> MAT2arg) throw(CException) { return this; };
+
+
+/* Definitions des methodes */
+#define CMATRICEHOK
+#include "CMatrice.inc.h"
