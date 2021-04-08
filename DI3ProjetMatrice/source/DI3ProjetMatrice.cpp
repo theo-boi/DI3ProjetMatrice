@@ -61,5 +61,7 @@ int main()
 	printf("TESTS FICHIER\n");
 	CFichier fichier;
 	fichier.FICprincipale("fichierMatrice.txt");
+	CFichier fichier1(fichier);
+	CFichier fichier2 = fichier1;
 	return 0;
 }
