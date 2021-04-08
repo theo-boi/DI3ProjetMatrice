@@ -45,7 +45,47 @@ class CFichier {
 		 */
         ~CFichier();
 
-        //FONCTION PRINCIPALE
+
+	//ACCESSEURS
+		//EN ECRITURE
+		void FICsetNomFichier(const char* pcNomFichier);
+
+		//EN LECTURE
+
+		/*
+		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : pcNew : char*
+		 *	Postcondition : {pcNew = pcFICnom}
+		 */
+		char* FICgetNomFichier();
+
+		/*
+		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMADmatrice et de le stocker en mémoire
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : MADnew : CMatriceDouble
+		 *	Postcondition : {MADnew = pMADmatrice}
+		 */
+		CMatriceDouble* FICgetMatrice();
+
+		/*
+		 *	Methode de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Remarques :
+		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
+		 *
+		 *	Entree : uiX : entier non signe, uiY : entier non signe
+		 *	Precondition : (uiX < CFichier.pMADmatrice.eMATdimLigne)^(uiY < CFichier.pMADmatrice.eMATdimLigne)
+		 *	Sortie : dElem : double
+		 *	Postcondition : {dElem = CFichier.pMADmatrice.ppdMATElem[uiX][uiY]}
+		 */
+		double FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY);
+
+
+	//FONCTION PRINCIPALE
         /*
 		 *	Methode prenant en argument le nom d'un fichier texte (formaté) permettant d'en lire le contenu d'une matrice double et de créer une matrice en mémoire à partie des données lues
 		 *
@@ -56,7 +96,7 @@ class CFichier {
 		 */
         void FICprincipale(const char* pcNomFichier);
 
-		//OPERATEURS
+	//OPERATEURS
 		/*
 		 *	Methode de type operateur a un argument recopiant le CFichier FICarg
 		 *
