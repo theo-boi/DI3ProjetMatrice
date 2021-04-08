@@ -4,11 +4,13 @@ using namespace std;
 /* Tests */
 
 int CMatriceDoubleConstTest() {
-	const CMatriceDouble* pMAD1 = new CMatriceDouble(2, 2); //MAD1 = ((1,1), (1,1))
-
+	const CMatriceDouble MAD1 = CMatriceDouble(2, 2); //MAD1 = ((1,1), (1,1))
+	CMatriceDouble MAD2;
+	MAD2 = CMatriceDouble(2, 2); //MAD1 = ((1,1), (1,1))
+	
 	/*
 	 *	Teste la compatibilite des fonctions avec les objets constants
-	 */
+	 
 	try {
 		cout << "Afficher MADConstante\n\n";
 		pMAD1->MATPrint(1);
@@ -27,7 +29,7 @@ int CMatriceDoubleConstTest() {
 		EXCLevee.EXCGestionaireException();
 	}
 
-	delete pMAD1;
+	delete pMAD1;*/
 	return 0;
 }
 

@@ -18,6 +18,35 @@ CFichier::CFichier()
 }
 
 
+CFichier::CFichier(CFichier &FICarg)
+{
+	if (FICarg.pcFICnom != nullptr)
+	{
+		pcFICnom = new char(*FICarg.pcFICnom);
+	}
+	else
+	{
+		pcFICnom = nullptr;
+	}
+	if (FICarg.pFICfichier != nullptr)
+	{
+		pFICfichier = new FILE(*FICarg.pFICfichier);
+	}
+	else
+	{
+		pFICfichier = nullptr;
+	}
+	if (FICarg.pMADmatrice != nullptr)
+	{
+		pMADmatrice = new CMatriceDouble(*FICarg.pMADmatrice);
+	}
+	else
+	{
+		pMADmatrice = nullptr;
+	}
+}
+
+
 CFichier::~CFichier()
 {
 	delete pFICfichier;
@@ -30,6 +59,7 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 	pcFICnom = (char*)pcNomFichier;
 	
 	fopen_s(&pFICfichier, pcFICnom, "r");
+	fseek(pFICfichier, 0, SEEK_SET); //cette ligne est-elle vraiment utile ?
 	char pligneCourante[20];
 
 	fgets(pligneCourante, 20, pFICfichier);	
@@ -73,9 +103,38 @@ void CFichier::FICprincipale(const char* pcNomFichier)
 	{
 		printf("CFichier : type attendu incorrect\n");
 	}
-	////////////////////////////////////!!!!!!! Problème ligne du dessous !!!!!!/////////////////////////////
-	//pcFICnom = nullptr;
 
-	//on replace le curseur au debut du fichier
-	fseek(pFICfichier, 0, SEEK_SET);
+	//on referme le fichier
+	fclose(pFICfichier);
+}
+
+//opérateurs
+
+CFichier& CFichier::operator=(CFichier &FICarg)
+{
+	if (FICarg.pcFICnom != nullptr)
+	{
+		pcFICnom = new char(*FICarg.pcFICnom);
+	}
+	else
+	{
+		pcFICnom = nullptr;
+	}
+	if (FICarg.pFICfichier != nullptr)
+	{
+		pFICfichier = new FILE(*FICarg.pFICfichier);
+	}
+	else
+	{
+		pFICfichier = nullptr;
+	}
+	if (FICarg.pMADmatrice != nullptr)
+	{
+		pMADmatrice = new CMatriceDouble(*FICarg.pMADmatrice);
+	}
+	else
+	{
+		pMADmatrice = nullptr;
+	}
+	return *this;
 }
