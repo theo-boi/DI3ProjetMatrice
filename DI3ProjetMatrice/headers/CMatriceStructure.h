@@ -1,4 +1,4 @@
-#define CMATRICEGENERIQUEH
+#define CMATRICESTRUCTUREH
 #ifndef CEXCEPTIONH
 #include "CException.h"
 #endif

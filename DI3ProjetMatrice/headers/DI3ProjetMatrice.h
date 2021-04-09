@@ -8,7 +8,7 @@
 #include "CFichier.h"
 #endif
 
-#ifndef CMATRICEGENERIQUEH
+#ifndef CMATRICESTRUCTUREH
 #include "CMatriceStructure.h"
 #endif
 

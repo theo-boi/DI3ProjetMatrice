@@ -13,6 +13,7 @@ CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) throw(CException) {
 	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
 	if (MADArg.ppdMADElem != nullptr) {
 		try { (double) MADArg.ppdMADElem[0][0]; }
+		catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 		catch (...) {
 			CException EXCconversion;
 			EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -64,6 +65,7 @@ CMatriceDouble::~CMatriceDouble() {
 CMatriceDouble CMatriceDouble::operator*(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) lfArg; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -85,7 +87,7 @@ CMatriceDouble CMatriceDouble::operator*(const long double lfArg) const throw(CE
 			MADMult.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] * lfArg;
 		}
 	}
-	return MADMult;
+	return MADMult; //passage par valeur : MADMult est recopie
 }
 
 CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) throw(CException) {
@@ -98,12 +100,13 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 			MADMult.MADSetElem(uiBoucleForX, uiBoucleForY, MADMult.MADGetElem(uiBoucleForX, uiBoucleForY)*cldArg);
 		}
 	}
-	return MADMult;
+	return MADMult; //passage par valeur : MADMult est recopie
 }
 
 CMatriceDouble CMatriceDouble::operator/(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) lfArg; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -125,7 +128,7 @@ CMatriceDouble CMatriceDouble::operator/(const long double lfArg) const throw(CE
 			MADDiv.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] / lfArg;
 		}
 	}
-	return MADDiv;
+	return MADDiv; //passage par valeur : MADDiv est recopie
 }
 
 CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) const throw(CException) {
@@ -157,7 +160,7 @@ CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) const thr
 			MADAdd.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] + MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
 		}
 	}
-	return MADAdd;
+	return MADAdd; //passage par valeur : MADAdd est recopie
 }
 
 CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) const throw(CException) {
@@ -189,7 +192,7 @@ CMatriceDouble CMatriceDouble::operator-(const CMatriceDouble& MADArg) const thr
 			MADSous.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForX][uiBoucleForY] - MADArg.ppdMADElem[uiBoucleForX][uiBoucleForY];
 		}
 	}
-	return MADSous;
+	return MADSous; //passage par valeur : MADSous est recopie
 }
 
 CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) const throw(CException) {
@@ -228,13 +231,14 @@ CMatriceDouble CMatriceDouble::operator*(const CMatriceDouble& MADArg) const thr
 
 		}
 	}
-	return MADMult;
+	return MADMult; //passage par valeur : MADMult est recopie
 }
 
 CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CException) {
 	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
 	if (MADArg.ppdMADElem != nullptr) {
-		try { (double)MADArg.ppdMADElem[0][0]; }
+		try { (double) MADArg.ppdMADElem[0][0]; }
+		catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 		catch (...) {
 			CException EXCconversion;
 			EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -262,7 +266,7 @@ CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CE
 		}
 	}
 
-	return *this;
+	return *this; //passage par reference
 }
 
 
@@ -301,5 +305,5 @@ CMatriceDouble CMatriceDouble::MADt() const {
 			MADt.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForY][uiBoucleForX];
 		}
 	}
-	return MADt;
+	return MADt; //passage par valeur : MAT2 est recopie
 }

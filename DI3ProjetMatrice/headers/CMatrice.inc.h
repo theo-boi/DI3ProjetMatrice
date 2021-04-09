@@ -7,12 +7,13 @@
 template<class T>
 CMatrice<T>::CMatrice() {
 	ppdMATelem = nullptr;
-};
+}
 
-template<class T> template<class T2>
-CMatrice<T>::CMatrice(CMatrice<T2>& MAT2arg) throw(CException) {
-	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
+template<class T>
+CMatrice<T>::CMatrice(const CMatrice<T>& MAT2arg) throw(CException) {
+	//Leve l'exception de conversion si type trop different
 	try { (T) MAT2arg.MATgetElem(0,0); }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -54,8 +55,9 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY) {
 
 template<class T> template<class T2>
 CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem) throw(CException) {
-	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	//Leve l'exception de conversion si type trop different
 	try { (T) T2elem; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -85,14 +87,14 @@ CMatrice<T>::~CMatrice() {
 	for (unsigned int uiBoucleFor = 0; uiBoucleFor < uiMATdimLigne; uiBoucleFor++)
 		delete[] ppdMATelem[uiBoucleFor];
 	delete[] ppdMATelem;
-};
+}
 
 
 /*** Accesseurs et mutateurs ***/
 
 template<class T>
 T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) const throw(CException) {
-	//Effectuer un try pour lever les erreurs de conversion si uiArgX ou uiArgY sont trop grands
+	//Leve l'exception de conversion si uiArgX ou uiArgY sont trop grands
 	if (uiArgX >= uiMATdimLigne || uiArgY >= uiMATdimColonne) {
 		CException EXCdimension;
 		EXCdimension.EXCSetId(dimensions_incompatibles); //erreur de type 2
@@ -105,8 +107,9 @@ T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) 
 
 template<class T> template<class T2>
 void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArgY, T2 T2elem) throw(CException) {
-	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
+	//Leve l'exception de conversion si type trop different
 	try { (T) T2elem; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -128,10 +131,11 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 
 /*** Operateurs ***/
 
-template<class T> template<class T2>
-CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T2>& MAT2arg) throw(CException) {
-	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
+template<class T>
+CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException) {
+	//Leve l'exception de conversion si type trop different
 	try { (T) MAT2arg.MATgetElem(0, 0); }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -158,8 +162,8 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T2>& MAT2arg) throw(CExceptio
 		}
 	}
 
-	return *this;
-};
+	return *this; //passage par reference
+}
 
 
 
@@ -178,7 +182,7 @@ void CMatrice<T>::MATprint(const bool bEndl) const {
 	}
 	std::cout << std::endl;
 	if (bEndl) std::cout << std::endl << std::endl; //revient une 2e fois a la ligne seulement si bEndl est vrai
-};
+}
 
 template<class T>
 CMatrice<T> CMatrice<T>::MATt() const {
@@ -201,4 +205,4 @@ CMatrice<T> CMatrice<T>::MATt() const {
 		}
 	}
 	return MATt;
-};
+}

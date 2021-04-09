@@ -50,9 +50,9 @@ int main()
 	cout << "---------\n\n\n---------\n\n\n";
 
 
-	CMatriceTest<int>(); //MAT
-	CMatriceTest<bool>(); //MAT
-	CMatriceTest<double>(); //MAT
+	CMatriceTest<int,double>(); //MAT
+	CMatriceTest<bool,float>(); //MAT
+	CMatriceTest<double,int>(); //MAT
 	cout << "---------\n\n\n---------\n\n\n";
 
 

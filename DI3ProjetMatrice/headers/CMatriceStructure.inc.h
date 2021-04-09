@@ -1,5 +1,4 @@
-#define CMATRICECPP
-#ifndef CMATRICEGENERIQUEH
+#ifndef CMATRICESTRUCTUREH
 #include "CMatriceStructure.h"
 #endif
 
