@@ -136,13 +136,23 @@ void CFichier::FICprincipale()
 	fclose(pFICfichier);
 }
 
-//opérateurs
+
+// FONCTION D'AFFICHAGE DE LA MATRICE
+
+void CFichier::FICafficherMatrice()
+{
+	pMATDmatrice->MATprint();
+}
+
+
+
+//OPERATEURS
 
 CFichier& CFichier::operator=(CFichier &FICarg)
 {
 	if (FICarg.pcFICnom != nullptr)
 	{
-		pcFICnom = new char(*FICarg.pcFICnom);
+		pcFICnom = new const char(*FICarg.pcFICnom);
 	}
 	else
 	{

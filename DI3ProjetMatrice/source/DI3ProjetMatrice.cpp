@@ -68,14 +68,7 @@ int main()
 	CFichier fichier1(fichier);
 	CFichier fichier2 = fichier1;
 	CMatrice<double> MATD = fichier2.FICgetMatrice();
-	for (int i = 0; i < MATD.MATgetDimLigne(); i++)
-	{
-		for (int j = 0; j < MATD.MATgetDimColonne(); j++)
-		{
-			printf("%lf	", MATD.MATgetElem(i, j));
-		}
-		printf("\n");
-	}
+	fichier2.FICafficherMatrice();
 
 	return 0;
 }

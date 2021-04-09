@@ -110,7 +110,7 @@ class CFichier {
 
 	//FONCTION PRINCIPALE
         /*
-		 *	Methode de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
+		 *	Methode permettant de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
 		 *
 		 *	Entree : rien
 		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
@@ -118,6 +118,17 @@ class CFichier {
 		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
 		 */
         void FICprincipale();
+
+	//FONCTION D AFFICHAGE DE LA MATRICE
+		/*
+		 *	Methode d'afficher le contenu de pMATDmatrice a l'ecran
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : affichage de la matrice a l'ecran
+		 */
+		void FICafficherMatrice();
 
 	//OPERATEURS
 		/*
