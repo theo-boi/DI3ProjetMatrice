@@ -30,6 +30,7 @@ CFichier::CFichier(const char* pcNomFichier) {
 }
 
 CFichier::~CFichier() {
+	pcFICnom = nullptr;
 	delete pFICfichier;
 	delete pMATDmatrice;
 }
@@ -72,23 +73,36 @@ CFichier& CFichier::operator=(CFichier &FICarg) {
 
 /*** Autres methodes ***/
 
-void CFichier::FICparcourir() {
-
+int CFichier::FICparcourir() {
+	//init
 	fopen_s(&pFICfichier, pcFICnom, "r");
 
-	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
-	char pligneCourante[20];
-	fgets(pligneCourante, 20, pFICfichier);
-	const char* pcTypeAttendu = "TypeMatrice=double";
+	//Leve une exception si l'ouverture du fichier a rencontre un probleme
+	if (pFICfichier == nullptr) {
+		CException EXCouverture;
+		EXCouverture.EXCSetId( (unsigned int)"ouverture_echouee" ); //erreur de type 4
+		EXCouverture.EXCSetCommentaire("nomDeLaFonction : ouverture du fichier impossible");
+		throw(EXCouverture);
+	}
 
-	if (*pligneCourante == *(char*)pcTypeAttendu) {
+	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
+	char pligneCourante[19];
+	fgets(pligneCourante, 19, pFICfichier);
+
+	bool formatIncorrect = false;
+	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 18; uiBoucleFor++) {
+		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double"[uiBoucleFor])
+			formatIncorrect = true;
+	}
+
+	if (!formatIncorrect) {
 		//on deplace le curseur afin de scanner le nombre de lignes
-		unsigned int uiNbLignes;
-		fseek(pFICfichier, 9, SEEK_CUR);
+		unsigned int uiNbLignes = 0;
+		fseek(pFICfichier, 11, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbLignes);
 
 		//on deplace le curseur afin de scanner le nombre de colonnes
-		unsigned int uiNbColonnes;
+		unsigned int uiNbColonnes = 0;
 		fseek(pFICfichier, 13, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbColonnes);
 
@@ -100,7 +114,7 @@ void CFichier::FICparcourir() {
 
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
-		double dElement;
+		double dElement = 0;
 		for (unsigned int i = 0; i < uiNbLignes; i++) {
 			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
@@ -111,11 +125,14 @@ void CFichier::FICparcourir() {
 		pMATDmatrice = pMATD;
 	}
 	else {
-		printf("CFichier : type attendu incorrect\n");
+		CException EXCformatContenu;
+		EXCformatContenu.EXCSetId((unsigned int)"format_incompatible"); //erreur de type 4
+		EXCformatContenu.EXCSetCommentaire("nomDeLaFonction : contenu du fichier incompatible");
+		throw(EXCformatContenu);
 	}
 
 	//on referme le fichier
-	fclose(pFICfichier);
+	return fclose(pFICfichier);
 }
 
 void CFichier::FICprintCMatrice() {

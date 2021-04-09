@@ -9,9 +9,9 @@
 class CFichier {
 	//attributs
     private :
-        const char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
-        FILE* pFICfichier; //un pointeur placé au début du fichier
-        CMatrice<double>* pMATDmatrice; //un pointeur sur un objet CMatriceDouble
+        const char* pcFICnom; //le nom du fichier
+        FILE* pFICfichier; //pointeur pour la lecture du fichier
+        CMatrice<double>* pMATDmatrice; //pointeur sur un objet CMatrice<double>
 
 
 	//constructeurs et destructeurs
@@ -22,7 +22,7 @@ class CFichier {
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : FICNew : un objet CFichier
+		 *	Sortie : FICNew : CFichier
 		 *	Postcondition : Les attributs de l'objet CFichier sont alloues/initialises
 		 */
         CFichier();
@@ -32,7 +32,7 @@ class CFichier {
 		 *
 		 *	Entree : FICarg : CFichier
 		 *	Precondition : FICarg existe et est alloue
-		 *	Sortie : FICNew : un objet CFichier
+		 *	Sortie : FICNew : CFichier
 		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises et possèdent la même valeur que ceux de FICarg
 		 */
 		CFichier(CFichier &FICarg);
@@ -40,9 +40,9 @@ class CFichier {
 		/*
 		 *	Constructeur prenant en argument le nom d'un fichier
 		 *
-		 *	Entree : pcNomFichier : char*
+		 *	Entree : pcNomFichier : *caractere
 		 *	Precondition : pcNomFichier existe
-		 *	Sortie : FICNew : un objet CFichier
+		 *	Sortie : FICNew : CFichier
 		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises à partir du fichier concerné
 		 */
 		CFichier(const char* pcNomFichier);
@@ -62,9 +62,9 @@ class CFichier {
 	public:
 
 		/*
-		 *	Methode de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
+		 *	Methode sans argument de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
 		 *
-		 *	Entree : pcNomFichier : char*
+		 *	Entree : pcNomFichier : *caractere
 		 *	Precondition : pcNomFichier existe
 		 *	Sortie : Rien
 		 *	Postcondition : {pcFICnom = pcNomFichier}
@@ -72,17 +72,17 @@ class CFichier {
 		void FICsetNomFichier(const char* pcNomFichier);
 
 		/*
-		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
+		 *	Methode sans argument de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : pcNew : char*
+		 *	Sortie : pcNew : *caractere
 		 *	Postcondition : {pcNew = pcFICnom}
 		 */
 		const char* FICgetNomFichier();
 
 		/*
-		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
+		 *	Methode sans argument de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
@@ -122,17 +122,17 @@ class CFichier {
 	public:
 
 		/*
-		 *	Methode permettant de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
+		 *	Methode sans argument renvoyant 0 une fois finie, permettant d'instancier la matrice double depuis un pattern specifique dans le fichier
 		 *
 		 *	Entree : rien
-		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
+		 *	Precondition : { (pcFICnom != nil)^(pFICfichier != nil) }
 		 *	Sortie : rien
 		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
 		 */
-        void FICparcourir();
+        int FICparcourir();
 
 		/*
-		 *	Methode d'afficher le contenu de pMATDmatrice a l'ecran
+		 *	Methode sans argument affichant le contenu de la matrice MATDmatrice a l'ecran
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant

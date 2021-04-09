@@ -1,3 +1,4 @@
+#pragma warning( disable : 4290 )
 #define CEXCEPTIONH
 #include <iostream>
 
