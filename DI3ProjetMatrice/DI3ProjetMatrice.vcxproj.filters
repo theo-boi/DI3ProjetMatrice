@@ -65,6 +65,7 @@
     <None Include="Terminal développeur Visual Studio 2017.cmd" />
     <None Include="..\README.md" />
     <None Include="buildAndRunCpp.sh" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fichierMatrice.txt" />

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="CException">
+    <Position X="9.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACABAAAAAMAAAAAAAAAAAAAAAgAEKAAEAAAAA=</HashCode>
+      <FileName>headers\CException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFichier">
+    <Position X="1.5" Y="1.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAACAAAAAAQARAACAAAAAAAAACABiAAAAAAg=</HashCode>
+      <FileName>headers\CFichier.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMatriceDouble">
+    <Position X="0.5" Y="7.25" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAIABAAAQAAEAAAAAAAAgAAEAACA=</HashCode>
+      <FileName>headers\CMatriceDouble.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMatrice&lt;T&gt;">
+    <Position X="8.25" Y="7.25" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAEAAAAAAAABAAARAAEAAAAAAAAgIAEAAAA=</HashCode>
+      <FileName>headers\CMatrice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMatriceStructure">
+    <Position X="9.25" Y="3.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAgAQACIAAAAAAEAAAAAAAAQAAAAEAAAA=</HashCode>
+      <FileName>headers\CMatriceStructure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
