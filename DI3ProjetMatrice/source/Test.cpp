@@ -3,6 +3,65 @@
 #endif
 using namespace std;
 
+int CMatriceTestGlobal() {
+	//init
+	const CMatrice<double>* pMAT1 = new CMatrice<double>(2, 2, 1); //*pMAT1 = ((1,1), (1,1))
+
+	CMatrice<double>* pMAT2 = new CMatrice<double>(2, 2); //*pMAT2 = I_2
+	pMAT2->MATsetElem(1, 0, 1);
+	pMAT2->MATsetElem(0, 1, 1);
+
+	CMatrice<double> MAT3 = CMatrice<double>(3, 4); //MAT3 = ((1,4,0), (2,5,0), (3,6,0), (1,1,0))
+	MAT3.MATsetElem(0, 0, 1);
+	MAT3.MATsetElem(0, 1, 2);
+	MAT3.MATsetElem(0, 2, 3);
+	MAT3.MATsetElem(1, 0, 4);
+	MAT3.MATsetElem(1, 1, 5);
+	MAT3.MATsetElem(1, 2, 6);
+
+	//tests
+	CMatriceTestConst(pMAT1);
+	cout << "---------\n\n\n---------\n\n\n";
+
+	CMatriceTestPrint(MAT3); //MAT
+	cout << "---------\n\n\n";
+
+	CMatriceTestMultConst(MAT3); //MAT*10 et 10*MAT
+	cout << "---------\n\n\n";
+
+	CMatriceTestDivConst(MAT3); //MAT/10 et 10/MAT
+	cout << "---------\n\n\n";
+
+	CMatriceTestT(MAT3); //MAT^T
+	cout << "---------\n\n\n";
+
+	CMatriceTestAdd(MAT3); //MAT + (MAT*10)
+	cout << "---------\n\n\n";
+
+	CMatriceTestSous(MAT3); //MAT1 - (MAT*10)
+	cout << "---------\n\n\n";
+
+	CMatriceTestMult(MAT3); //MAT * MAT
+	cout << "---------\n\n\n---------\n\n\n";
+
+	CExceptionTest();
+	cout << "---------\n\n\n---------\n\n\n";
+
+	std::cout << "Afficher MATint\n\n";
+	CMatriceTest<int, double>(); //MAT
+	std::cout << "Afficher MATbool\n\n";
+	CMatriceTest<bool, float>(); //MAT
+	std::cout << "Afficher MATdouble\n\n";
+	CMatriceTest<double, int>(); //MAT
+	cout << "---------\n\n\n---------\n\n\n";
+
+	//delete
+	delete pMAT1;
+	delete pMAT2;
+	return 0;
+}
+
+
 /* Tests */
 
 int CMatriceTestConst(const CMatrice<double>* pMATConst) {
@@ -143,8 +202,7 @@ int CExceptionTest() {
 	try {
 		
 		CException A;
-		A.EXCSetId(types_incompatibles); //type d'exception 1
-		//A.EXCSetId(0); //type d'exception inconnu
+		A.EXCSetId((int) "mystère"); //type d'exception inconnu
 		A.EXCSetCommentaire("CExceptionTest() : test");
 		//throw(A); //arrete l'execution du bloc et leve l'exception A
 		
@@ -152,7 +210,7 @@ int CExceptionTest() {
 		
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur
+		EXClevee.EXCGestionaireException(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur. Ici : arrete le programme
 	}
 	cout << "L'execution du programme continue !\n\n\n";
 	return 0;

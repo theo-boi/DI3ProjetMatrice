@@ -3,6 +3,8 @@
 #include "../headers/DI3ProjetMatrice.h"
 #endif
 
+int CMatriceTestGlobal();
+
 template<class T, class T2>
 int CMatriceTest() {
 	try {
