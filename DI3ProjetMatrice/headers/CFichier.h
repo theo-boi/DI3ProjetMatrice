@@ -1,7 +1,4 @@
 #define CFICHIERH
-/*#ifndef CMATRICEDOUBLEH
-#include "../headers/CMatriceDouble.h"
-#endif*/
 
 #ifndef CMATRICEH
 #include "CMatrice.h"
