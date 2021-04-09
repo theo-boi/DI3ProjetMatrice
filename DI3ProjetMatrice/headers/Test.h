@@ -5,7 +5,6 @@
 
 template<class T, class T2>
 int CMatriceTest() {
-	std::cout << "Afficher MAT\n\n";
 	try {
 		//constructeur (uiArgX,uiArgY,Targ) potentielle conversion de 1.1 (double) en T
 		CMatrice<T> MAT = CMatrice<T>(5, 5, 1.1);
@@ -26,12 +25,13 @@ int CMatriceTest() {
 		MAT.MATsetElem(4, 4, T()); //T() est le constructeur par defaut de T
 
 		//generation d'une erreur de dimensions incompatibles
-		//MAT.MATsetElem(5, 5, 0);
+		MAT.MATsetElem(5, 5, 0);
 
 		MAT.MATprint(1);
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
+		std::cout << "\n\n";
 	}
 	return 0;
 };

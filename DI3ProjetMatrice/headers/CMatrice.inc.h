@@ -98,7 +98,7 @@ T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) 
 	if (uiArgX >= uiMATdimLigne || uiArgY >= uiMATdimColonne) {
 		CException EXCdimension;
 		EXCdimension.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdimension.EXCSetCommentaire("MATgetElem (valeurs des arguments incompatibles)");
+		EXCdimension.EXCSetCommentaire("MATgetElem (valeurs des arguments incoherents)");
 		throw(EXCdimension);
 	}
 
@@ -120,7 +120,7 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 	if (uiArgX >= uiMATdimLigne || uiArgY >= uiMATdimColonne) {
 		CException EXCdimension;
 		EXCdimension.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdimension.EXCSetCommentaire("MATsetElem (valeurs des arguments incompatibles)");
+		EXCdimension.EXCSetCommentaire("MATsetElem (valeurs des arguments incoherents)");
 		throw(EXCdimension);
 	}
 

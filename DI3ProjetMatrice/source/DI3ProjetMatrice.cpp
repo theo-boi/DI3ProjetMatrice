@@ -51,8 +51,11 @@ int main()
 	cout << "---------\n\n\n---------\n\n\n";
 
 
+	std::cout << "Afficher MATint\n\n";
 	CMatriceTest<int,double>(); //MAT
+	std::cout << "Afficher MATbool\n\n";
 	CMatriceTest<bool,float>(); //MAT
+	std::cout << "Afficher MATdouble\n\n";
 	CMatriceTest<double,int>(); //MAT
 	cout << "---------\n\n\n---------\n\n\n";
 

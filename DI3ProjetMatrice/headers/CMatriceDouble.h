@@ -217,7 +217,7 @@ double CMatriceDouble::MADGetElem(const unsigned int uiX, const unsigned int uiY
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
+		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incoherents)");
 		throw(EXCconversion);
 	}
 
@@ -238,7 +238,7 @@ void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, 
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incompatibles)");
+		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incoherents)");
 		throw(EXCconversion);
 	}
 
