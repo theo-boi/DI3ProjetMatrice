@@ -1,4 +1,4 @@
-#define CMATRICEDOUBLEH
+#define CMADRICEDOUBLEH
 #ifndef CMATRICESTRUCTUREH
 #include "CMatriceStructure.h"
 #endif 
@@ -79,7 +79,7 @@ class CMatriceDouble : public CMatriceStructure {
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Precondition : (uiX < eMADdimLigne)^(uiY < eMADdimLigne)
 		 *	Sortie : dElem : double
 		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
 		 */
@@ -91,7 +91,7 @@ class CMatriceDouble : public CMatriceStructure {
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe, dElem : double
-		 *	Precondition : (uiX < eMATdimLigne)^(uiY < eMATdimLigne)
+		 *	Precondition : (uiX < eMADdimLigne)^(uiY < eMADdimLigne)
 		 *	Sortie : rien
 		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
@@ -128,35 +128,35 @@ class CMatriceDouble : public CMatriceStructure {
 		CMatriceDouble operator/(const long double lfArg) const throw(CException);
 
 		/*
-		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MATArg
+		 *	Methode de type operateur a un argument renvoyant la matrice additionnee par une CMatriceDouble MADArg
 		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatriceDouble
+		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
-		 *	Sortie : MATAdd : CMatriceDouble
-		 *	Postcondition : {MATAdd = MATActuelle + MATArg}
+		 *	Sortie : MADAdd : CMatriceDouble
+		 *	Postcondition : {MADAdd = MADActuelle + MADArg}
 		 */
 		CMatriceDouble operator+(const CMatriceDouble& MADArg) const throw(CException);
 
 		/*
-		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MATArg
+		 *	Methode de type operateur a un argument renvoyant la matrice soustraite par une CMatriceDouble MADArg
 		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatriceDouble
+		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
-		 *	Sortie : MATSous : CMatriceDouble
-		 *	Postcondition : {MATSous = MATActuelle - MATArg}
+		 *	Sortie : MADSous : CMatriceDouble
+		 *	Postcondition : {MADSous = MADActuelle - MADArg}
 		 */
 		CMatriceDouble operator-(const CMatriceDouble& MADArg) const throw(CException);
 
 		/*
-		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MATArg
+		 *	Methode de type operateur a un argument renvoyant la matrice multipliee par une CMatriceDouble MADArg
 		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatriceDouble
+		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
 		 *	Sortie : MADMult : CMatriceDouble
-		 *	Postcondition : {MADMult = MATActuelle * MATArg}
+		 *	Postcondition : {MADMult = MADActuelle * MADArg}
 		 */
 		CMatriceDouble operator*(const CMatriceDouble& MADArg) const throw(CException);
 
@@ -164,10 +164,10 @@ class CMatriceDouble : public CMatriceStructure {
 		 *	Methode de type operateur a un argument recopiant la matrice MADArg
 		 *		- MADArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatriceDouble
+		 *	Entree : MADArg : CMatriceDouble
 		 *	Precondition : neant
 		 *	Sortie : MADActuelle : CMatriceDouble
-		 *	Postcondition : {MADActuelle = MATArg}
+		 *	Postcondition : {MADActuelle = MADArg}
 		 */
 		CMatriceDouble& operator=(const CMatriceDouble& MADArg) throw(CException);
 

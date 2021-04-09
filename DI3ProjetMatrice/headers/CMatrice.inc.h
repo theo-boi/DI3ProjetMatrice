@@ -12,7 +12,7 @@ CMatrice<T>::CMatrice() {
 template<class T>
 CMatrice<T>::CMatrice(const CMatrice<T>& MAT2arg) throw(CException) {
 	//Leve l'exception de conversion si type trop different
-	try { (T) MAT2arg.MATgetElem(0,0); }
+	try { (const T) MAT2arg.MATgetElem(0,0); }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
@@ -31,7 +31,7 @@ CMatrice<T>::CMatrice(const CMatrice<T>& MAT2arg) throw(CException) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MAT2arg par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMATelem[uiBoucleForX][uiBoucleForY] = (T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
+			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
 		}
 	}
 }
@@ -56,7 +56,7 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY) {
 template<class T> template<class T2>
 CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem) throw(CException) {
 	//Leve l'exception de conversion si type trop different
-	try { (T) T2elem; }
+	try { (const T) T2elem; }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
@@ -75,7 +75,7 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem)
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//initialisation de chaque element a 1 par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMATelem[uiBoucleForX][uiBoucleForY] = (T) T2elem; //on initialise chaque element par sa valeur d'initialisation
+			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) T2elem; //on initialise chaque element par sa valeur d'initialisation
 		}
 	}
 }
@@ -108,7 +108,7 @@ T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) 
 template<class T> template<class T2>
 void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArgY, T2 T2elem) throw(CException) {
 	//Leve l'exception de conversion si type trop different
-	try { (T) T2elem; }
+	try { (const T) T2elem; }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
@@ -125,7 +125,7 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 	}
 
 	//set
-	ppdMATelem[uiArgX][uiArgY] = (T) T2elem;
+	ppdMATelem[uiArgX][uiArgY] = (const T) T2elem;
 }
 
 
@@ -133,8 +133,8 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 
 template<class T>
 CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException) {
-	//Leve l'exception de conversion si type trop different
-	try { (T) MAT2arg.MATgetElem(0, 0); }
+	//Leve une exception de conversion si type trop different
+	try { (const T) MAT2arg.MATgetElem(0, 0); }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
@@ -158,13 +158,200 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MATarg par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMATelem[uiBoucleForX][uiBoucleForY] = (T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
+			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
 		}
 	}
 
 	return *this; //passage par reference
 }
 
+template<class T> template<class T2>
+CMatrice<T> CMatrice<T>::operator*(const T2 T2arg) const throw(CException) {
+	//Leve une exception de conversion si type trop different
+	try { (const T) T2arg; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (...) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCconversion.EXCSetCommentaire("operator* (type de l'argument incompatible)");
+		throw(EXCconversion);
+	}
+
+	//init
+	CMatrice<T> MATmult;
+	MATmult.uiMATdimLigne = uiMATdimLigne;
+	MATmult.uiMATdimColonne = uiMATdimColonne;
+
+	//calcul
+	MATmult.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		MATmult.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		//recopie le resultat de la multiplication de chaque element par cfConst pour chaque colonne
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			MATmult.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] * (const T) T2arg;
+		}
+	}
+	return MATmult; //passage par valeur : MATmult est recopie
+}
+
+template<class T, class T2>
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T> MAT2arg) throw(CException) {
+	//Leve une exception de conversion si type trop different
+	try { (const T) T2arg; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (...) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCconversion.EXCSetCommentaire("operator* (type de l'argument incompatible)");
+		throw(EXCconversion);
+	}
+
+	//init
+	CMatrice<T> MATmult = CMatrice<T>(MAT2arg);
+
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MATmult.MATgetDimLigne(); uiBoucleForX++) {
+		//calcul de chaque element par vecteur
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATmult.MATgetDimColonne(); uiBoucleForY++) {
+			MATmult.MATsetElem(uiBoucleForX, uiBoucleForY, MATmult.MATgetElem(uiBoucleForX, uiBoucleForY) * (const T) T2arg);
+		}
+	}
+	return MATmult; //passage par valeur : MATmult est recopie
+}
+
+template<class T> template<class T2>
+CMatrice<T> CMatrice<T>::operator/(const T2 T2arg) const throw(CException) {
+	//Leve une exception de conversion si type trop different
+	try { (const T) T2arg; }
+	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (...) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCconversion.EXCSetCommentaire("operator/ (type de l'argument incompatible)");
+		throw(EXCconversion);
+	}
+
+	//init
+	CMatrice<T> MATdiv;
+	MATdiv.uiMATdimLigne = uiMATdimLigne;
+	MATdiv.uiMATdimColonne = uiMATdimColonne;
+
+	//calcul
+	MATdiv.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		MATdiv.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		//recopie le resultat de la division de chaque element par cfConst pour chaque colonne
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			MATdiv.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] / T2arg;
+		}
+	}
+	return MATdiv; //passage par valeur : MATdiv est recopie
+}
+
+template<class T> template<class T2>
+CMatrice<T> CMatrice<T>::operator+(const CMatrice<T2>& MAT2arg) const throw(CException) {
+	//Leve une exception en cas de dimensions incompatibles entre MADActuelle et MATarg
+	if (uiMATdimLigne != MAT2arg.uiMATdimLigne) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("operator+ (nombre de LIGNES de l'argument incoherent)");
+		throw(EXCconversion);
+	}
+	if (uiMATdimColonne != MAT2arg.uiMATdimColonne) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("operator+ (nombre de COLONNES de l'argument incoherent)");
+		throw(EXCconversion);
+	}
+
+	//init
+	CMatrice<T> MATadd;
+	MATadd.uiMATdimLigne = uiMATdimLigne;
+	MATadd.uiMATdimColonne = uiMATdimColonne;
+
+	//calcul
+	MATadd.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		MATadd.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MAT2arg, pour chaque colonne
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			MATadd.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] + MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
+		}
+	}
+	return MATadd; //passage par valeur : MATadd est recopie
+}
+
+template<class T> template<class T2>
+CMatrice<T> CMatrice<T>::operator-(const CMatrice<T2>& MAT2arg) const throw(CException) {
+	//Leve une exception en cas de dimensions incompatibles entre MADActuelle et MATarg
+	if (uiMATdimLigne != MAT2arg.uiMATdimLigne) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("operator- (nombre de LIGNES de l'argument incoherent)");
+		throw(EXCconversion);
+	}
+	if (uiMATdimColonne != MAT2arg.uiMATdimColonne) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("operator- (nombre de COLONNES de l'argument incoherent)");
+		throw(EXCconversion);
+	}
+
+	//init
+	CMatrice<T> MATsous;
+	MATsous.uiMATdimLigne = uiMATdimLigne;
+	MATsous.uiMATdimColonne = uiMATdimColonne;
+
+	//calcul
+	MATsous.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
+		MATsous.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MAT2arg, pour chaque colonne
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+			MATsous.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] - MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
+		}
+	}
+	return MATsous; //passage par valeur : MATsous est recopie
+}
+
+template<class T> template<class T2>
+CMatrice<T> CMatrice<T>::operator*(const CMatrice<T2>& MAT2arg) const throw(CException) {
+	//Leve une exception en cas de dimensions incompatibles entre MADActuelle et MATarg
+	if (uiMATdimColonne != MAT2arg.uiMATdimLigne) {
+		CException EXCconversion;
+		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCconversion.EXCSetCommentaire("operator* (nombre de LIGNES de l'argument incoherent)");
+		throw(EXCconversion);
+	}
+	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.
+
+	//init
+	CMatrice<T> MATmult;
+	MATmult.uiMATdimLigne = uiMATdimLigne;
+	MATmult.uiMATdimColonne = MAT2arg.uiMATdimColonne;
+
+	//calcul
+	MATmult.ppdMATelem = new T*[MATmult.uiMATdimLigne]; //allocation dynamique de chaque ligne
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MATmult.uiMATdimLigne; uiBoucleForX++) {
+		MATmult.ppdMATelem[uiBoucleForX] = new T[MATmult.uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
+		/*
+		 *	Chaque element de coordonnees (x,y) de la matrice de resultat MATmult est egal
+		 *	au produit scalaire de la uiBoucleForX-ieme ligne de MADActuelle par la uiBoucleForY-ieme colonne de MAT2arg
+		 */
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATmult.uiMATdimColonne; uiBoucleForY++) {
+
+			//pour chaque ligne de MADActuelle
+			T dSommeProdScalaireVects = 0;
+			//on parcourt la ligne de MADActuelle (soit aussi la colonne de MAT2arg)
+			for (unsigned int uiBoucleForYCalcul = 0; uiBoucleForYCalcul < uiMATdimColonne; uiBoucleForYCalcul++) {
+				//on somme le produit de chaque uiBoucleForYCalcul-ieme element
+				dSommeProdScalaireVects += ppdMATelem[uiBoucleForX][uiBoucleForYCalcul] * MAT2arg.ppdMATelem[uiBoucleForYCalcul][uiBoucleForY];
+			}
+			MATmult.ppdMATelem[uiBoucleForX][uiBoucleForY] = dSommeProdScalaireVects;
+
+		}
+	}
+	return MATmult; //passage par valeur : MATmult est recopie
+}
 
 
 /*** Autres methodes ***/

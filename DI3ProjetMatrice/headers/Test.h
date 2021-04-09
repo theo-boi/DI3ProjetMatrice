@@ -25,7 +25,7 @@ int CMatriceTest() {
 		MAT.MATsetElem(4, 4, T()); //T() est le constructeur par defaut de T
 
 		//generation d'une erreur de dimensions incompatibles
-		MAT.MATsetElem(5, 5, 0);
+		//MAT.MATsetElem(5, 5, 0);
 
 		MAT.MATprint(1);
 	}
@@ -36,20 +36,20 @@ int CMatriceTest() {
 	return 0;
 };
 
-int CMatriceDoubleConstTest();
+int CMatriceTestConst(const CMatrice<double>*);
 
-int CMatriceDoubleTestPrint(CMatriceDouble& MADArg);
+int CMatriceTestPrint(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg);
+int CMatriceTestMultConst(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg);
+int CMatriceTestDivConst(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestT(CMatriceDouble& MADArg);
+int CMatriceTestT(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestAdd(CMatriceDouble& MADArg);
+int CMatriceTestAdd(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestSous(CMatriceDouble& MADArg);
+int CMatriceTestSous(CMatrice<double>& MADArg);
 
-int CMatriceDoubleTestMult(CMatriceDouble& MADArg);
+int CMatriceTestMult(CMatrice<double>& MADArg);
 
 int CExceptionTest();

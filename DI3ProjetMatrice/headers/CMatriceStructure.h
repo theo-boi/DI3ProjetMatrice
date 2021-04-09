@@ -36,6 +36,28 @@ class CMatriceStructure {
 
 
 	//accesseurs et mutateurs
+	protected:
+
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimLigne
+		 *
+		 *	Entree : uiDimLigne : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : neant
+		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
+		 */
+		virtual void MATsetDimLigne(const unsigned int uiDimLigne) { uiMATdimLigne = uiDimLigne; };
+
+		/*
+		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimColonne
+		 *
+		 *	Entree : uiDimColonne : entier non signe
+		 *	Precondition : neant
+		 *	Sortie : neant
+		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
+		 */
+		virtual void MATsetDimColonne(const unsigned int uiDimColonne) { uiMATdimColonne = uiDimColonne; };
+
 	public:
 
 		/*
@@ -57,26 +79,6 @@ class CMatriceStructure {
 		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
 		 */
 		virtual unsigned int MATgetDimColonne() const { return uiMATdimColonne; };
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimLigne
-		 *
-		 *	Entree : uiDimLigne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
-		 */
-		virtual void MATsetDimLigne(const unsigned int uiDimLigne) { uiMATdimLigne = uiDimLigne; };
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimColonne
-		 *
-		 *	Entree : uiDimColonne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
-		 */
-		virtual void MATsetDimColonne(const unsigned int uiDimColonne) { uiMATdimColonne = uiDimColonne; };
 
 
 	//methodes

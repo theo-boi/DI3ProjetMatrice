@@ -5,37 +5,36 @@ using namespace std;
 
 /* Tests */
 
-int CMatriceDoubleConstTest() {
+int CMatriceTestConst(const CMatrice<double>* pMATConst) {
 	//init
-	const CMatriceDouble* pMAD1 = new CMatriceDouble(2, 2); //MAD1 = ((1,1), (1,1))
+	const CMatrice<double>* pMAT1 = pMATConst; //MAT1 = ((1,1), (1,1))
 
 	//teste la compatibilite des fonctions avec les objets constants
-	cout << "Afficher MADConstante\n\n";
+	cout << "Afficher MATConstante\n\n";
 	try {
-		pMAD1->MATprint(1);
-		*pMAD1 * 10; //MADArg*10
-		10 * *pMAD1; //10*MADArg
-		*pMAD1 / 10; //MADArg/10
-		pMAD1->MADt();
-		*pMAD1 + 10 * CMatriceDouble(pMAD1->MATgetDimLigne(), pMAD1->MATgetDimColonne());
-		*pMAD1 - 10 * CMatriceDouble(pMAD1->MATgetDimLigne(), pMAD1->MATgetDimColonne());
-		pMAD1->MADGetElem((double)0, (double)0);
-		*pMAD1 * pMAD1->MADt();
-		//*pMAD1 = *pMAD1 * *pMAD1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
-		//*pMAD1->MADSetElem(0, 0, 0); //ne fonctionne pas car MADSetElem ne peut pas etre une methode constante
+		pMAT1->MATprint(1);
+		*pMAT1 * 10; //MATArg*10
+		10 * *pMAT1; //10*MATArg
+		*pMAT1 / 10; //MATArg/10
+		pMAT1->MATt();
+		*pMAT1 + 10 * CMatrice<double>(pMAT1->MATgetDimLigne(), pMAT1->MATgetDimColonne());
+		*pMAT1 - 10 * CMatrice<double>(pMAT1->MATgetDimLigne(), pMAT1->MATgetDimColonne());
+		pMAT1->MATgetElem((double)0, (double)0);
+		*pMAT1 * pMAT1->MATt();
+		//*pMAT1 = *pMAT1 * *pMAT1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
+		//*pMAT1->MATSetElem(0, 0, 0); //ne fonctionne pas car MATSetElem ne peut pas etre une methode constante
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
 	}
 
-	delete pMAD1;
 	return 0;
 }
 
-int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg\n\n";
+int CMatriceTestPrint(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg\n\n";
 	try {
-		MADArg.MATprint(1);
+		MATArg.MATprint(1);
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -43,26 +42,26 @@ int CMatriceDoubleTestPrint(CMatriceDouble& MADArg) {
 	return 0;
 }
 
-int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg*10 et 10*MADArg\n\n\n";
+int CMatriceTestMultConst(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg*10 et 10*MATArg\n\n\n";
 	/*
-	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
-	 *	Le compilateur utilise MADArg.operator*(10)
+	 *	Calcul puis affichage de l'objet CMatrice<double> temporaire
+	 *	Le compilateur utilise MATArg.operator*(10)
 	 */
 	try {
-		( MADArg * 10 ).MATprint(1); //MADArg*10
+		( MATArg * 10 ).MATprint(1); //MATArg*10
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
 	}
 	cout << endl;
 	/*
-	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
-	 *	Le compilateur utilise operator*(10, MADArg)
-	 *	car 10.operator*(MADArg) n'est pas surchargeable
+	 *	Calcul puis affichage de l'objet CMatrice<double> temporaire
+	 *	Le compilateur utilise operator*(10, MATArg)
+	 *	car 10.operator*(MATArg) n'est pas surchargeable
 	 */
 	try {
-		( 10 * MADArg ).MATprint(1); //10*MADArg
+		( 10 * MATArg ).MATprint(1); //10*MATArg
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -70,30 +69,30 @@ int CMatriceDoubleTestMultConst(CMatriceDouble& MADArg) {
 	return 0;
 }
 
-int CMatriceDoubleTestDivConst(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg/10 (10/MADArg n'est pas demande)\n\n\n";
+int CMatriceTestDivConst(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg/10 (10/MATArg n'est pas demande)\n\n\n";
 	/*
-	 *	Calcul puis affichage de l'objet CMatriceDouble temporaire
-	 *	Le compilateur utilise MADArg.operator/(10)
+	 *	Calcul puis affichage de l'objet CMatrice<double> temporaire
+	 *	Le compilateur utilise MATArg.operator/(10)
 	 */
 	try {
-		(MADArg / 10).MATprint(1); //MADArg/21
+		(MATArg / 10).MATprint(1); //MATArg/21
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
 	}
 
 	/*
-	 *	10/MADArg = 10*MADArg^(-1), donc il faudrait coder une methode pour inverser MADArg
+	 *	10/MATArg = 10*MATArg^(-1), donc il faudrait coder une methode pour inverser MATArg
 	 *	or, ni cette operation ni cette methode  ne sont demandees dans les specifications
 	 */
 	return 0;
 }
 
-int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
-	cout << "Afficher la transposee de MADArg\n\n\n";
+int CMatriceTestT(CMatrice<double>& MATArg) {
+	cout << "Afficher la transposee de MATArg\n\n\n";
 	try {
-		MADArg.MADt().MATprint(1);
+		MATArg.MATt().MATprint(1);
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -101,11 +100,11 @@ int CMatriceDoubleTestT(CMatriceDouble& MADArg) {
 	return 0;
 }
 
-int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg + [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
-	CMatriceDouble MADDix = CMatriceDouble(MADArg.MATgetDimLigne(), MADArg.MATgetDimColonne());
+int CMatriceTestAdd(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg + [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
+	CMatrice<double> MATDix = CMatrice<double>(MATArg.MATgetDimLigne(), MATArg.MATgetDimColonne(), 1);
 	try {
-		(MADArg + (10 * MADDix)).MATprint();
+		(MATArg + (10 * MATDix)).MATprint();
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -113,11 +112,11 @@ int CMatriceDoubleTestAdd(CMatriceDouble& MADArg) {
 	return 0;
 }
 
-int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg - [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
+int CMatriceTestSous(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg - [10 10 10 ... 10]x[10 10 10 ... 10]\n\n\n";
 	try {
-		CMatriceDouble MADDix = 10 * CMatriceDouble(MADArg.MATgetDimLigne(), MADArg.MATgetDimColonne());
-		(MADArg - MADDix).MATprint();
+		CMatrice<double> MATDix = 10 * CMatrice<double>(MATArg.MATgetDimLigne(), MATArg.MATgetDimColonne(), 1);
+		(MATArg - MATDix).MATprint();
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -125,11 +124,11 @@ int CMatriceDoubleTestSous(CMatriceDouble& MADArg) {
 	return 0;
 }
 
-int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
-	cout << "Afficher MADArg * MADArg^t\n\n\n";
+int CMatriceTestMult(CMatrice<double>& MATArg) {
+	cout << "Afficher MATArg * MATArg^t\n\n\n";
 	try {
-		CMatriceDouble MADArgT = MADArg.MADt();
-		(MADArg * MADArgT).MATprint();
+		CMatrice<double> MATArgT = MATArg.MATt();
+		(MATArg * MATArgT).MATprint();
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -138,8 +137,8 @@ int CMatriceDoubleTestMult(CMatriceDouble& MADArg) {
 }
 
 int CExceptionTest() {
-	CMatriceDouble MAD1 = CMatriceDouble(2, 2);
-	CMatriceDouble MAD2 = CMatriceDouble(3, 3);
+	CMatrice<double> MAT1 = CMatrice<double>(2, 2);
+	CMatrice<double> MAT2 = CMatrice<double>(3, 3);
 
 	try {
 		
@@ -149,7 +148,7 @@ int CExceptionTest() {
 		A.EXCSetCommentaire("blablabla");
 		throw(A); //arrete l'execution du bloc et leve l'exception A
 		
-		MAD1*MAD2; //type d'exception 2 // arrete l'execution du bloc et leve l'execution B
+		MAT1*MAT2; //type d'exception 2 // arrete l'execution du bloc et leve l'execution B
 		
 	}
 	catch (CException EXClevee) {

@@ -148,7 +148,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : {MATmult = MATactuelle * T2arg}
 		 */
 		template<class T2>
-		CMatrice<T> operator*(const T2 T2arg) const throw(CException) { return *this; };
+		CMatrice<T> operator*(const T2 T2arg) const throw(CException);
 
 		/*
 		 *	Methode template de type operateur a un argument renvoyant la matrice divisee par un nombre constant  T2 T2arg
@@ -161,7 +161,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : {MATdiv = MATactuelle / T2arg}
 		 */
 		template<class T2>
-		CMatrice<T> operator/(const T2 T2arg) const throw(CException) { return *this; };
+		CMatrice<T> operator/(const T2 T2arg) const throw(CException);
 
 		/*
 		 *	Methode template de type operateur a un argument renvoyant la matrice additionnee par une CMatrice<T2> MAT2arg
@@ -173,7 +173,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : {MATadd = MATactuelle + MAT2arg}
 		 */
 		template<class T2>
-		CMatrice<T> operator+(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+		CMatrice<T> operator+(const CMatrice<T2>& MAT2arg) const throw(CException);
 
 		/*
 		 *	Methode template de type operateur a un argument renvoyant la matrice soustraite par une CMatrice<T2> MAT2arg
@@ -185,7 +185,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : {MATsous = MATactuelle - MAT2arg}
 		 */
 		template<class T2>
-		CMatrice<T> operator-(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+		CMatrice<T> operator-(const CMatrice<T2>& MAT2arg) const throw(CException);
 
 		/*
 		 *	Methode template de type operateur a un argument renvoyant la matrice multipliee par une CMatrice<T2> MAT2arg
@@ -197,7 +197,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : {MATmult = MATactuelle * MAT2arg}
 		 */
 		template<class T2>
-		CMatrice<T> operator*(const CMatrice<T2>& MAT2arg) const throw(CException) { return *this; };
+		CMatrice<T> operator*(const CMatrice<T2>& MAT2arg) const throw(CException);
 
 		/*
 		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T2> MAT2arg
@@ -246,7 +246,7 @@ class CMatrice : public CMatriceStructure {
  *	Postcondition : {MATmult = T2arg * MAT2arg}
  */
 template<class T, class T2>
-CMatrice<T> operator*(const T2 T2arg, const CMatrice<T2> MAT2arg) throw(CException) { return this; };
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T> MAT2arg) throw(CException);
 
 
 /* Definitions des methodes */

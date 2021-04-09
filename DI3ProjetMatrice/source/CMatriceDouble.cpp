@@ -305,5 +305,5 @@ CMatriceDouble CMatriceDouble::MADt() const {
 			MADt.ppdMADElem[uiBoucleForX][uiBoucleForY] = ppdMADElem[uiBoucleForY][uiBoucleForX];
 		}
 	}
-	return MADt; //passage par valeur : MAT2 est recopie
+	return MADt; //passage par valeur : MAD2 est recopie
 }

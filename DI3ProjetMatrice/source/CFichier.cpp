@@ -124,7 +124,7 @@ void CFichier::FICprincipale()
 				pMATD->MATsetElem(i, j, dElement);
 			}
 		}
-		//on garde la variable MAD dans notre objet CFichier
+		//on garde la variable MAT dans notre objet CFichier
 		pMATDmatrice = pMATD;
 	}
 	else
