@@ -1,16 +1,18 @@
 #define CFICHIERH
-#ifndef CMATRICEDOUBLEH
-#include "../headers/CMatriceDouble.h"
+
+#ifndef CMATRICEH
+#include "CMatrice.h"
 #endif
+
 #include <iostream>
 
 class CFichier {
 
     //ATTRIBUTS
     private :
-        char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
+        const char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
         FILE* pFICfichier; //un pointeur placé au début du fichier
-        CMatriceDouble* pMADmatrice; //un pointeur sur un objet CMatriceDouble
+        CMatrice<double>* pMATDmatrice; //un pointeur sur un objet CMatriceDouble
 
     //CONSTRUCTEURS ET DESTRUCTEUR
     public :
@@ -36,6 +38,16 @@ class CFichier {
 		CFichier(CFichier &FICarg);
 
 		/*
+		 *	Constructeur prenant en argument le nom d'un fichier
+		 *
+		 *	Entree : pcNomFichier : char*
+		 *	Precondition : pcNomFichier existe
+		 *	Sortie : FICNew : un objet CFichier
+		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises à partir du fichier concerné
+		 */
+		CFichier(const char* pcNomFichier);
+
+		/*
 		 *	Destructeur
 		 *
 		 *	Entree : rien
@@ -48,6 +60,14 @@ class CFichier {
 
 	//ACCESSEURS
 		//EN ECRITURE
+		/*
+		 *	Methode de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
+		 *
+		 *	Entree : pcNomFichier : char*
+		 *	Precondition : pcNomFichier existe
+		 *	Sortie : Rien
+		 *	Postcondition : {pcFICnom = pcNomFichier}
+		 */
 		void FICsetNomFichier(const char* pcNomFichier);
 
 		//EN LECTURE
@@ -60,41 +80,52 @@ class CFichier {
 		 *	Sortie : pcNew : char*
 		 *	Postcondition : {pcNew = pcFICnom}
 		 */
-		char* FICgetNomFichier();
+		const char* FICgetNomFichier();
 
 		/*
-		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMADmatrice et de le stocker en mémoire
+		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : MADnew : CMatriceDouble
-		 *	Postcondition : {MADnew = pMADmatrice}
+		 *	Sortie : MATDnew : CMatrice<double>
+		 *	Postcondition : {MATDnew = *pMATDmatrice}
 		 */
-		CMatriceDouble* FICgetMatrice();
+		CMatrice<double> FICgetMatrice();
 
 		/*
-		 *	Methode de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Methode de type accesseur a deux arguments renvoyant l'element de pMATDmatrice de coordonnees (uiX, uiY)
 		 *	Remarques :
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : (uiX < CFichier.pMADmatrice.eMATdimLigne)^(uiY < CFichier.pMADmatrice.eMATdimLigne)
+		 *	Precondition : (uiX < CFichier.pMATDmatrice.eMATdimLigne)^(uiY < CFichier.pMATDmatrice.eMATdimLigne)
 		 *	Sortie : dElem : double
-		 *	Postcondition : {dElem = CFichier.pMADmatrice.ppdMATElem[uiX][uiY]}
+		 *	Postcondition : {dElem = CFichier.pMATDmatrice.ppdMATElem[uiX][uiY]}
 		 */
 		double FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY);
 
 
 	//FONCTION PRINCIPALE
         /*
-		 *	Methode prenant en argument le nom d'un fichier texte (formaté) permettant d'en lire le contenu d'une matrice double et de créer une matrice en mémoire à partie des données lues
+		 *	Methode permettant de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
 		 *
 		 *	Entree : rien
 		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
 		 *	Sortie : rien
-		 *	Postcondition : les données de la matrice pMADmatrice correspondent à celles du fichier pFICfichier
+		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
 		 */
-        void FICprincipale(const char* pcNomFichier);
+        void FICprincipale();
+
+	//FONCTION D AFFICHAGE DE LA MATRICE
+		/*
+		 *	Methode d'afficher le contenu de pMATDmatrice a l'ecran
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : affichage de la matrice a l'ecran
+		 */
+		void FICafficherMatrice();
 
 	//OPERATEURS
 		/*

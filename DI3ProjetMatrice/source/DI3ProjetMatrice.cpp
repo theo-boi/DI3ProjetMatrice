@@ -4,6 +4,7 @@ using namespace std;
 int main()
 {
 	//init
+	
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
 	const CMatriceDouble MAD1CopieStatique = *pMAD1;
 
@@ -63,9 +64,11 @@ int main()
 	
 	//tests fichiers
 	printf("TESTS FICHIER\n");
-	CFichier fichier;
-	fichier.FICprincipale("fichierMatrice.txt");
+	CFichier fichier("fichierMatrice.txt");
 	CFichier fichier1(fichier);
 	CFichier fichier2 = fichier1;
+	CMatrice<double> MATD = fichier2.FICgetMatrice();
+	fichier2.FICafficherMatrice();
+
 	return 0;
 }
