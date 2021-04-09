@@ -8,7 +8,7 @@ class CFichier {
 
     //ATTRIBUTS
     private :
-        char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
+        const char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
         FILE* pFICfichier; //un pointeur placé au début du fichier
         CMatriceDouble* pMADmatrice; //un pointeur sur un objet CMatriceDouble
 
@@ -36,6 +36,16 @@ class CFichier {
 		CFichier(CFichier &FICarg);
 
 		/*
+		 *	Constructeur prenant en argument le nom d'un fichier
+		 *
+		 *	Entree : pcNomFichier : char*
+		 *	Precondition : pcNomFichier existe
+		 *	Sortie : FICNew : un objet CFichier
+		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises à partir du fichier concerné
+		 */
+		CFichier(const char* pcNomFichier);
+
+		/*
 		 *	Destructeur
 		 *
 		 *	Entree : rien
@@ -48,6 +58,14 @@ class CFichier {
 
 	//ACCESSEURS
 		//EN ECRITURE
+		/*
+		 *	Methode de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
+		 *
+		 *	Entree : pcNomFichier : char*
+		 *	Precondition : pcNomFichier existe
+		 *	Sortie : Rien
+		 *	Postcondition : {pcFICnom = pcNomFichier}
+		 */
 		void FICsetNomFichier(const char* pcNomFichier);
 
 		//EN LECTURE
@@ -60,7 +78,7 @@ class CFichier {
 		 *	Sortie : pcNew : char*
 		 *	Postcondition : {pcNew = pcFICnom}
 		 */
-		char* FICgetNomFichier();
+		const char* FICgetNomFichier();
 
 		/*
 		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMADmatrice et de le stocker en mémoire
@@ -68,9 +86,9 @@ class CFichier {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : MADnew : CMatriceDouble
-		 *	Postcondition : {MADnew = pMADmatrice}
+		 *	Postcondition : {MADnew = *pMADmatrice}
 		 */
-		CMatriceDouble* FICgetMatrice();
+		CMatriceDouble FICgetMatrice();
 
 		/*
 		 *	Methode de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
@@ -87,14 +105,14 @@ class CFichier {
 
 	//FONCTION PRINCIPALE
         /*
-		 *	Methode prenant en argument le nom d'un fichier texte (formaté) permettant d'en lire le contenu d'une matrice double et de créer une matrice en mémoire à partie des données lues
+		 *	Methode de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
 		 *
 		 *	Entree : rien
 		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
 		 *	Sortie : rien
 		 *	Postcondition : les données de la matrice pMADmatrice correspondent à celles du fichier pFICfichier
 		 */
-        void FICprincipale(const char* pcNomFichier);
+        void FICprincipale();
 
 	//OPERATEURS
 		/*

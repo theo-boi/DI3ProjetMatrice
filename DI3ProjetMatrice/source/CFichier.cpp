@@ -8,7 +8,7 @@
 using namespace std;
 
 
-// Constructeurs et destructeur
+// CONSTRUCTEURS ET DESTRUCTEUR
 
 CFichier::CFichier()
 {
@@ -22,7 +22,7 @@ CFichier::CFichier(CFichier &FICarg)
 {
 	if (FICarg.pcFICnom != nullptr)
 	{
-		pcFICnom = new char(*FICarg.pcFICnom);
+		pcFICnom = new const char(*FICarg.pcFICnom);
 	}
 	else
 	{
@@ -46,6 +46,12 @@ CFichier::CFichier(CFichier &FICarg)
 	}
 }
 
+CFichier::CFichier(const char* pcNomFichier)
+{
+	FICsetNomFichier(pcNomFichier);
+	FICprincipale();
+}
+
 
 CFichier::~CFichier()
 {
@@ -53,17 +59,39 @@ CFichier::~CFichier()
 	delete pMADmatrice;
 }
 
-//Fonction principale
-void CFichier::FICprincipale(const char* pcNomFichier)
+//ACCESSEURS
+
+void CFichier::FICsetNomFichier(const char* pcNomFichier)
 {
-	pcFICnom = (char*)pcNomFichier;
-	
+	pcFICnom = pcNomFichier;
+}
+
+
+const char* CFichier::FICgetNomFichier()
+{
+	return pcFICnom;
+}
+
+CMatriceDouble CFichier::FICgetMatrice()
+{
+	return *pMADmatrice;
+}
+
+double CFichier::FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY)
+{
+	return pMADmatrice->MADGetElem(uiX, uiY);
+}
+
+
+//FONCTION PRINCIPALE
+void CFichier::FICprincipale()
+{
+
 	fopen_s(&pFICfichier, pcFICnom, "r");
-	fseek(pFICfichier, 0, SEEK_SET); //cette ligne est-elle vraiment utile ?
+
+	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
 	char pligneCourante[20];
-
 	fgets(pligneCourante, 20, pFICfichier);	
-
 	const char* pcTypeAttendu = "TypeMatrice=double";
 	
 	if (*pligneCourante == *(char*)pcTypeAttendu)

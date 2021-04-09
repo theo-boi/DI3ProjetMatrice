@@ -63,9 +63,18 @@ int main()
 	
 	//tests fichiers
 	printf("TESTS FICHIER\n");
-	CFichier fichier;
-	fichier.FICprincipale("fichierMatrice.txt");
+	CFichier fichier("fichierMatrice.txt");
 	CFichier fichier1(fichier);
 	CFichier fichier2 = fichier1;
+	CMatriceDouble MAD = fichier2.FICgetMatrice();
+	for (int i = 0; i < MAD.MATgetDimLigne(); i++)
+	{
+		for (int j = 0; j < MAD.MATgetDimColonne(); j++)
+		{
+			printf("%lf	", MAD.MADGetElem(i, j));
+		}
+		printf("\n");
+	}
+
 	return 0;
 }
