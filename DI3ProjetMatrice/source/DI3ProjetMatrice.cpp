@@ -4,6 +4,7 @@ using namespace std;
 int main()
 {
 	//init
+	
 	const CMatriceDouble* pMAD1 = new CMatriceDouble(2,2); //MAD1 = ((1,1), (1,1))
 	const CMatriceDouble MAD1CopieStatique = *pMAD1;
 
@@ -66,12 +67,12 @@ int main()
 	CFichier fichier("fichierMatrice.txt");
 	CFichier fichier1(fichier);
 	CFichier fichier2 = fichier1;
-	CMatriceDouble MAD = fichier2.FICgetMatrice();
-	for (int i = 0; i < MAD.MATgetDimLigne(); i++)
+	CMatrice<double> MATD = fichier2.FICgetMatrice();
+	for (int i = 0; i < MATD.MATgetDimLigne(); i++)
 	{
-		for (int j = 0; j < MAD.MATgetDimColonne(); j++)
+		for (int j = 0; j < MATD.MATgetDimColonne(); j++)
 		{
-			printf("%lf	", MAD.MADGetElem(i, j));
+			printf("%lf	", MATD.MATgetElem(i, j));
 		}
 		printf("\n");
 	}

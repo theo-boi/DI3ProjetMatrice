@@ -1,7 +1,12 @@
 #define CFICHIERH
-#ifndef CMATRICEDOUBLEH
+/*#ifndef CMATRICEDOUBLEH
 #include "../headers/CMatriceDouble.h"
+#endif*/
+
+#ifndef CMATRICEH
+#include "CMatrice.h"
 #endif
+
 #include <iostream>
 
 class CFichier {
@@ -10,7 +15,7 @@ class CFichier {
     private :
         const char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
         FILE* pFICfichier; //un pointeur placé au début du fichier
-        CMatriceDouble* pMADmatrice; //un pointeur sur un objet CMatriceDouble
+        CMatrice<double>* pMATDmatrice; //un pointeur sur un objet CMatriceDouble
 
     //CONSTRUCTEURS ET DESTRUCTEUR
     public :
@@ -81,24 +86,24 @@ class CFichier {
 		const char* FICgetNomFichier();
 
 		/*
-		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMADmatrice et de le stocker en mémoire
+		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : MADnew : CMatriceDouble
-		 *	Postcondition : {MADnew = *pMADmatrice}
+		 *	Sortie : MATDnew : CMatrice<double>
+		 *	Postcondition : {MATDnew = *pMATDmatrice}
 		 */
-		CMatriceDouble FICgetMatrice();
+		CMatrice<double> FICgetMatrice();
 
 		/*
-		 *	Methode de type accesseur a deux arguments renvoyant l'element de coordonnees (uiX, uiY)
+		 *	Methode de type accesseur a deux arguments renvoyant l'element de pMATDmatrice de coordonnees (uiX, uiY)
 		 *	Remarques :
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
 		 *	Entree : uiX : entier non signe, uiY : entier non signe
-		 *	Precondition : (uiX < CFichier.pMADmatrice.eMATdimLigne)^(uiY < CFichier.pMADmatrice.eMATdimLigne)
+		 *	Precondition : (uiX < CFichier.pMATDmatrice.eMATdimLigne)^(uiY < CFichier.pMATDmatrice.eMATdimLigne)
 		 *	Sortie : dElem : double
-		 *	Postcondition : {dElem = CFichier.pMADmatrice.ppdMATElem[uiX][uiY]}
+		 *	Postcondition : {dElem = CFichier.pMATDmatrice.ppdMATElem[uiX][uiY]}
 		 */
 		double FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY);
 
@@ -110,7 +115,7 @@ class CFichier {
 		 *	Entree : rien
 		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
 		 *	Sortie : rien
-		 *	Postcondition : les données de la matrice pMADmatrice correspondent à celles du fichier pFICfichier
+		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
 		 */
         void FICprincipale();
 

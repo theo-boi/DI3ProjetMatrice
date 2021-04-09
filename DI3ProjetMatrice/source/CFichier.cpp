@@ -14,7 +14,7 @@ CFichier::CFichier()
 {
 	pcFICnom = nullptr;
 	pFICfichier = nullptr;
-	pMADmatrice = nullptr;
+	pMATDmatrice = nullptr;
 }
 
 
@@ -36,13 +36,13 @@ CFichier::CFichier(CFichier &FICarg)
 	{
 		pFICfichier = nullptr;
 	}
-	if (FICarg.pMADmatrice != nullptr)
+	if (FICarg.pMATDmatrice != nullptr)
 	{
-		pMADmatrice = new CMatriceDouble(*FICarg.pMADmatrice);
+		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
 	}
 	else
 	{
-		pMADmatrice = nullptr;
+		pMATDmatrice = nullptr;
 	}
 }
 
@@ -56,7 +56,7 @@ CFichier::CFichier(const char* pcNomFichier)
 CFichier::~CFichier()
 {
 	delete pFICfichier;
-	delete pMADmatrice;
+	delete pMATDmatrice;
 }
 
 //ACCESSEURS
@@ -72,14 +72,14 @@ const char* CFichier::FICgetNomFichier()
 	return pcFICnom;
 }
 
-CMatriceDouble CFichier::FICgetMatrice()
+CMatrice<double> CFichier::FICgetMatrice()
 {
-	return *pMADmatrice;
+	return *pMATDmatrice;
 }
 
 double CFichier::FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY)
 {
-	return pMADmatrice->MADGetElem(uiX, uiY);
+	return pMATDmatrice->MATgetElem(uiX, uiY);
 }
 
 
@@ -108,7 +108,7 @@ void CFichier::FICprincipale()
 		fscanf_s(pFICfichier, "%u", &uiNbColonnes);
 
 		//creation de la matrice
-		CMatriceDouble* pMAD = new CMatriceDouble(uiNbLignes, uiNbColonnes);
+		CMatrice<double>* pMATD = new CMatrice<double>(uiNbLignes, uiNbColonnes);
 		double dElement;
 
 		//on positionne le curseur sur le premier element de la matrice
@@ -121,11 +121,11 @@ void CFichier::FICprincipale()
 			for (unsigned int j = 0; j < uiNbColonnes; j++)
 			{
 				fscanf_s(pFICfichier, "%lf", &dElement);
-				pMAD->MADSetElem(i, j, dElement);
+				pMATD->MATsetElem(i, j, dElement);
 			}
 		}
 		//on garde la variable MAD dans notre objet CFichier
-		pMADmatrice = pMAD;
+		pMATDmatrice = pMATD;
 	}
 	else
 	{
@@ -156,13 +156,13 @@ CFichier& CFichier::operator=(CFichier &FICarg)
 	{
 		pFICfichier = nullptr;
 	}
-	if (FICarg.pMADmatrice != nullptr)
+	if (FICarg.pMATDmatrice != nullptr)
 	{
-		pMADmatrice = new CMatriceDouble(*FICarg.pMADmatrice);
+		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
 	}
 	else
 	{
-		pMADmatrice = nullptr;
+		pMATDmatrice = nullptr;
 	}
 	return *this;
 }
