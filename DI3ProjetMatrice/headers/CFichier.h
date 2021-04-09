@@ -8,10 +8,10 @@
 
 class CFichier {
 	//attributs
-    private :
-        const char* pcFICnom; //le nom du fichier
-        FILE* pFICfichier; //pointeur pour la lecture du fichier
-        CMatrice<double>* pMATDmatrice; //pointeur sur un objet CMatrice<double>
+	private:
+		const char* pcFICnom; //le nom du fichier
+		FILE* pFICfichier; //pointeur pour la lecture du fichier
+		CMatrice<double>* pMATDmatrice; //pointeur sur un objet CMatrice<double>
 
 
 	//constructeurs et destructeurs
@@ -25,7 +25,7 @@ class CFichier {
 		 *	Sortie : FICNew : CFichier
 		 *	Postcondition : Les attributs de l'objet CFichier sont alloues/initialises
 		 */
-        CFichier();
+		CFichier();
 
 		/*
 		 *	Constructeur de recopie
@@ -55,44 +55,44 @@ class CFichier {
 		 *	Sortie : rien
 		 *	Postcondition : Les attributs de l'objet CFichier sont liberes
 		 */
-        ~CFichier();
+		~CFichier();
 
 
 	//accesseurs et mutateurs
 	public:
 
 		/*
-		 *	Methode sans argument de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
+		 *	Methode INLINE sans argument de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
 		 *
 		 *	Entree : pcNomFichier : *caractere
 		 *	Precondition : pcNomFichier existe
 		 *	Sortie : Rien
 		 *	Postcondition : {pcFICnom = pcNomFichier}
 		 */
-		void FICsetNomFichier(const char* pcNomFichier);
+		void FICsetNomFichier(const char* pcNomFichier) { pcFICnom = pcNomFichier; }
 
 		/*
-		 *	Methode sans argument de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
+		 *	Methode INLINE sans argument de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : pcNew : *caractere
 		 *	Postcondition : {pcNew = pcFICnom}
 		 */
-		const char* FICgetNomFichier();
+		const char* FICgetNomFichier() { return pcFICnom; }
 
 		/*
-		 *	Methode sans argument de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
+		 *	Methode INLINE sans argument de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : MATDnew : CMatrice<double>
 		 *	Postcondition : {MATDnew = *pMATDmatrice}
 		 */
-		CMatrice<double> FICgetCMatrice();
+		CMatrice<double> FICgetCMatrice() { return *pMATDmatrice; }
 
 		/*
-		 *	Methode de type accesseur a deux arguments renvoyant l'element de pMATDmatrice de coordonnees (uiX, uiY)
+		 *	Methode INLINE de type accesseur a deux arguments renvoyant l'element de pMATDmatrice de coordonnees (uiX, uiY)
 		 *	Remarques :
 		 *		- uiX et uiY sont constants car ils ne doivent pas etre modifies durant l'execution de la methode
 		 *
@@ -101,7 +101,7 @@ class CFichier {
 		 *	Sortie : dElem : double
 		 *	Postcondition : {dElem = CFichier.pMATDmatrice.ppdMATElem[uiX][uiY]}
 		 */
-		double FICgetCMatriceElem(const unsigned int uiX, const unsigned int uiY);
+		double FICgetCMatriceElem(const unsigned int uiX, const unsigned int uiY) { return pMATDmatrice->MATgetElem(uiX, uiY); }
 
 
 	//operateurs
@@ -129,7 +129,7 @@ class CFichier {
 		 *	Sortie : rien
 		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
 		 */
-        int FICparcourir();
+        int FICparcourir() throw(CException);
 
 		/*
 		 *	Methode sans argument affichant le contenu de la matrice MATDmatrice a l'ecran

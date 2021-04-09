@@ -36,25 +36,6 @@ CFichier::~CFichier() {
 }
 
 
-/*** Accesseurs et mutateurs ***/
-
-void CFichier::FICsetNomFichier(const char* pcNomFichier) {
-	pcFICnom = pcNomFichier;
-}
-
-const char* CFichier::FICgetNomFichier() {
-	return pcFICnom;
-}
-
-CMatrice<double> CFichier::FICgetCMatrice() {
-	return *pMATDmatrice;
-}
-
-double CFichier::FICgetCMatriceElem(const unsigned int uiX, const unsigned int uiY) {
-	return pMATDmatrice->MATgetElem(uiX, uiY);
-}
-
-
 /*** Operateurs ***/
 
 CFichier& CFichier::operator=(CFichier &FICarg) {
@@ -73,7 +54,7 @@ CFichier& CFichier::operator=(CFichier &FICarg) {
 
 /*** Autres methodes ***/
 
-int CFichier::FICparcourir() {
+int CFichier::FICparcourir() throw(CException) {
 	//init
 	fopen_s(&pFICfichier, pcFICnom, "r");
 
