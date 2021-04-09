@@ -1,125 +1,108 @@
 #ifndef CFICHIERH
 #include "../headers/CFichier.h"
 #endif
-
-#include <iostream>
 #include <fstream>
-
 using namespace std;
 
+/*** Constructeurs et destructeurs ***/
 
-// CONSTRUCTEURS ET DESTRUCTEUR
-
-CFichier::CFichier()
-{
+CFichier::CFichier() {
 	pcFICnom = nullptr;
 	pFICfichier = nullptr;
 	pMATDmatrice = nullptr;
 }
 
-
-CFichier::CFichier(CFichier &FICarg)
-{
-	if (FICarg.pcFICnom != nullptr)
-	{
-		pcFICnom = new const char(*FICarg.pcFICnom);
+CFichier::CFichier(CFichier &FICarg) {
+	if (FICarg.pcFICnom != nullptr) {
+		pcFICnom = FICarg.pcFICnom;
 	}
-	else
-	{
-		pcFICnom = nullptr;
-	}
-	if (FICarg.pFICfichier != nullptr)
-	{
+	if (FICarg.pFICfichier != nullptr) {
 		pFICfichier = new FILE(*FICarg.pFICfichier);
 	}
-	else
-	{
-		pFICfichier = nullptr;
-	}
-	if (FICarg.pMATDmatrice != nullptr)
-	{
+	if (FICarg.pMATDmatrice != nullptr) {
 		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
 	}
-	else
-	{
-		pMATDmatrice = nullptr;
-	}
 }
 
-CFichier::CFichier(const char* pcNomFichier)
-{
+CFichier::CFichier(const char* pcNomFichier) {
 	FICsetNomFichier(pcNomFichier);
-	FICprincipale();
+	FICparcourir();
 }
 
-
-CFichier::~CFichier()
-{
+CFichier::~CFichier() {
 	delete pFICfichier;
 	delete pMATDmatrice;
 }
 
-//ACCESSEURS
 
-void CFichier::FICsetNomFichier(const char* pcNomFichier)
-{
+/*** Accesseurs et mutateurs ***/
+
+void CFichier::FICsetNomFichier(const char* pcNomFichier) {
 	pcFICnom = pcNomFichier;
 }
 
-
-const char* CFichier::FICgetNomFichier()
-{
+const char* CFichier::FICgetNomFichier() {
 	return pcFICnom;
 }
 
-CMatrice<double> CFichier::FICgetMatrice()
-{
+CMatrice<double> CFichier::FICgetCMatrice() {
 	return *pMATDmatrice;
 }
 
-double CFichier::FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY)
-{
+double CFichier::FICgetCMatriceElem(const unsigned int uiX, const unsigned int uiY) {
 	return pMATDmatrice->MATgetElem(uiX, uiY);
 }
 
 
-//FONCTION PRINCIPALE
-void CFichier::FICprincipale()
-{
+/*** Operateurs ***/
+
+CFichier& CFichier::operator=(CFichier &FICarg) {
+	if (FICarg.pcFICnom != nullptr) {
+		pcFICnom = FICarg.pcFICnom;
+	}
+	if (FICarg.pFICfichier != nullptr) {
+		pFICfichier = new FILE(*FICarg.pFICfichier);
+	}
+	if (FICarg.pMATDmatrice != nullptr) {
+		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
+	}
+	return *this;
+}
+
+
+/*** Autres methodes ***/
+
+void CFichier::FICparcourir() {
 
 	fopen_s(&pFICfichier, pcFICnom, "r");
 
 	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
 	char pligneCourante[20];
-	fgets(pligneCourante, 20, pFICfichier);	
+	fgets(pligneCourante, 20, pFICfichier);
 	const char* pcTypeAttendu = "TypeMatrice=double";
-	
-	if (*pligneCourante == *(char*)pcTypeAttendu)
-	{		
-		unsigned int uiNbLignes;
-		unsigned int uiNbColonnes;
 
+	if (*pligneCourante == *(char*)pcTypeAttendu) {
 		//on deplace le curseur afin de scanner le nombre de lignes
+		unsigned int uiNbLignes;
 		fseek(pFICfichier, 9, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbLignes);
 
 		//on deplace le curseur afin de scanner le nombre de colonnes
+		unsigned int uiNbColonnes;
 		fseek(pFICfichier, 13, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbColonnes);
 
 		//creation de la matrice
 		CMatrice<double>* pMATD = new CMatrice<double>(uiNbLignes, uiNbColonnes);
-		double dElement;
 
 		//on positionne le curseur sur le premier element de la matrice
 		fseek(pFICfichier, 11, SEEK_CUR);
 
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
-		for (unsigned int i = 0; i < uiNbLignes; i++)
-		{
-			for (unsigned int j = 0; j < uiNbColonnes; j++)
-			{
+		double dElement;
+		for (unsigned int i = 0; i < uiNbLignes; i++) {
+			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
 				pMATD->MATsetElem(i, j, dElement);
 			}
@@ -127,8 +110,7 @@ void CFichier::FICprincipale()
 		//on garde la variable MAT dans notre objet CFichier
 		pMATDmatrice = pMATD;
 	}
-	else
-	{
+	else {
 		printf("CFichier : type attendu incorrect\n");
 	}
 
@@ -136,43 +118,6 @@ void CFichier::FICprincipale()
 	fclose(pFICfichier);
 }
 
-
-// FONCTION D'AFFICHAGE DE LA MATRICE
-
-void CFichier::FICafficherMatrice()
-{
+void CFichier::FICprintCMatrice() {
 	pMATDmatrice->MATprint();
-}
-
-
-
-//OPERATEURS
-
-CFichier& CFichier::operator=(CFichier &FICarg)
-{
-	if (FICarg.pcFICnom != nullptr)
-	{
-		pcFICnom = new const char(*FICarg.pcFICnom);
-	}
-	else
-	{
-		pcFICnom = nullptr;
-	}
-	if (FICarg.pFICfichier != nullptr)
-	{
-		pFICfichier = new FILE(*FICarg.pFICfichier);
-	}
-	else
-	{
-		pFICfichier = nullptr;
-	}
-	if (FICarg.pMATDmatrice != nullptr)
-	{
-		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
-	}
-	else
-	{
-		pMATDmatrice = nullptr;
-	}
-	return *this;
 }

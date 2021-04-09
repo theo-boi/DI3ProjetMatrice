@@ -3,16 +3,16 @@ using namespace std;
 
 int main()
 {
-	//test
-	CMatriceTestGlobal();
+	//tests CMatrice
+	//CMatriceTestGlobal();
 	
-	//tests fichiers
+	//tests CFichier
 	printf("TESTS FICHIER\n");
 	CFichier fichier("fichierMatrice.txt");
 	CFichier fichier1(fichier);
 	CFichier fichier2 = fichier1;
-	CMatrice<double> MATD = fichier2.FICgetMatrice();
-	fichier2.FICafficherMatrice();
+	CMatrice<double> MATD = fichier2.FICgetCMatrice();
+	fichier2.FICprintCMatrice();
 
 	return 0;
 }

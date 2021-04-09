@@ -7,15 +7,15 @@
 #include <iostream>
 
 class CFichier {
-
-    //ATTRIBUTS
+	//attributs
     private :
         const char* pcFICnom; //un pointeur sur le premier caractère le nom du fichier
         FILE* pFICfichier; //un pointeur placé au début du fichier
         CMatrice<double>* pMATDmatrice; //un pointeur sur un objet CMatriceDouble
 
-    //CONSTRUCTEURS ET DESTRUCTEUR
-    public :
+
+	//constructeurs et destructeurs
+	public:
 
 		/*
 		 *	Constructeur par defaut permettant d'initialiser un CFichier
@@ -58,8 +58,9 @@ class CFichier {
         ~CFichier();
 
 
-	//ACCESSEURS
-		//EN ECRITURE
+	//accesseurs et mutateurs
+	public:
+
 		/*
 		 *	Methode de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
 		 *
@@ -69,8 +70,6 @@ class CFichier {
 		 *	Postcondition : {pcFICnom = pcNomFichier}
 		 */
 		void FICsetNomFichier(const char* pcNomFichier);
-
-		//EN LECTURE
 
 		/*
 		 *	Methode de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
@@ -90,7 +89,7 @@ class CFichier {
 		 *	Sortie : MATDnew : CMatrice<double>
 		 *	Postcondition : {MATDnew = *pMATDmatrice}
 		 */
-		CMatrice<double> FICgetMatrice();
+		CMatrice<double> FICgetCMatrice();
 
 		/*
 		 *	Methode de type accesseur a deux arguments renvoyant l'element de pMATDmatrice de coordonnees (uiX, uiY)
@@ -102,32 +101,12 @@ class CFichier {
 		 *	Sortie : dElem : double
 		 *	Postcondition : {dElem = CFichier.pMATDmatrice.ppdMATElem[uiX][uiY]}
 		 */
-		double FICgetMatriceElement(const unsigned int uiX, const unsigned int uiY);
+		double FICgetCMatriceElem(const unsigned int uiX, const unsigned int uiY);
 
 
-	//FONCTION PRINCIPALE
-        /*
-		 *	Methode permettant de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
-		 *
-		 *	Entree : rien
-		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
-		 *	Sortie : rien
-		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
-		 */
-        void FICprincipale();
+	//operateurs
+	public:
 
-	//FONCTION D AFFICHAGE DE LA MATRICE
-		/*
-		 *	Methode d'afficher le contenu de pMATDmatrice a l'ecran
-		 *
-		 *	Entree : rien
-		 *	Precondition : neant
-		 *	Sortie : rien
-		 *	Postcondition : affichage de la matrice a l'ecran
-		 */
-		void FICafficherMatrice();
-
-	//OPERATEURS
 		/*
 		 *	Methode de type operateur a un argument recopiant le CFichier FICarg
 		 *
@@ -137,5 +116,28 @@ class CFichier {
 		 *	Postcondition : {FICEgal = FICarg}
 		 */
 		CFichier& operator=(CFichier &FICarg);
-	
+
+
+	//autres methodes
+	public:
+
+		/*
+		 *	Methode permettant de lire le contenu d'une matrice double dans un fichier texte et de créer une matrice en mémoire à partie des données lues
+		 *
+		 *	Entree : rien
+		 *	Precondition : pcFICnom et pFICfichier ne sont pas null
+		 *	Sortie : rien
+		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
+		 */
+        void FICparcourir();
+
+		/*
+		 *	Methode d'afficher le contenu de pMATDmatrice a l'ecran
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : rien
+		 *	Postcondition : affichage de la matrice a l'ecran
+		 */
+		void FICprintCMatrice();
 };
