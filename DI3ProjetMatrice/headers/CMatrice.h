@@ -104,7 +104,7 @@ class CMatrice : public CMatriceStructure {
 	public:
 
 		/*
-		 *	Methode template INLINE de type operateur convertissant une matrice CMatrice<T> en une matrice CMatrice<T2>
+		 *	Methode template INLINE de type operateur de conversion renvoyant la conversion d'une matrice CMatrice<T> en une matrice CMatrice<T2>
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
@@ -136,6 +136,17 @@ class CMatrice : public CMatriceStructure {
 
 			return MAT2; //passage par valeur : MAT2 est recopie
 		}
+
+		/*
+		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T2> MAT2arg
+		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *
+		 *	Entree : MAT2arg : CMatrice<T2>
+		 *	Precondition : neant
+		 *	Sortie : MATactuelle : CMatrice<T>
+		 *	Postcondition : {MATactuelle = MAT2arg}
+		 */
+		CMatrice<T>& operator=(const CMatrice<T>& MAT2arg) throw(CException);
 
 		/*
 		 *	Methode template de type operateur a un argument renvoyant la matrice multipliee par un nombre constant T2 T2arg
@@ -199,17 +210,6 @@ class CMatrice : public CMatriceStructure {
 		template<class T2>
 		CMatrice<T> operator*(const CMatrice<T2>& MAT2arg) const throw(CException);
 
-		/*
-		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T2> MAT2arg
-		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
-		 *
-		 *	Entree : MAT2arg : CMatrice<T2>
-		 *	Precondition : neant
-		 *	Sortie : MATactuelle : CMatrice<T>
-		 *	Postcondition : {MATactuelle = MAT2arg}
-		 */
-		CMatrice<T>& operator=(const CMatrice<T>& MAT2arg) throw(CException);
-
 
 	//autres methodes
 	public:
@@ -246,7 +246,7 @@ class CMatrice : public CMatriceStructure {
  *	Postcondition : {MATmult = T2arg * MAT2arg}
  */
 template<class T, class T2>
-CMatrice<T> operator*(const T2 T2arg, const CMatrice<T> MAT2arg) throw(CException);
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MAT2arg) throw(CException);
 
 
 /* Definitions des methodes */

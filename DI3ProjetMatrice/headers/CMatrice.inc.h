@@ -17,7 +17,7 @@ CMatrice<T>::CMatrice(const CMatrice<T>& MAT2arg) throw(CException) {
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("Constructeur de recopie (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("Constructeur de recopie : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 
@@ -61,7 +61,7 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem)
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("MATsetElem (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("MATsetElem(unsigned int, unsigned int, T2) : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 
@@ -98,7 +98,7 @@ T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) 
 	if (uiArgX >= uiMATdimLigne || uiArgY >= uiMATdimColonne) {
 		CException EXCdimension;
 		EXCdimension.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdimension.EXCSetCommentaire("MATgetElem (valeurs des arguments incoherents)");
+		EXCdimension.EXCSetCommentaire("MATgetElem(unsigned int, unsigned int) : valeurs des arguments incoherents");
 		throw(EXCdimension);
 	}
 
@@ -113,14 +113,14 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("MATsetElem (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("MATsetElem(unsigned int, unsigned int, T2) : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
 	if (uiArgX >= uiMATdimLigne || uiArgY >= uiMATdimColonne) {
 		CException EXCdimension;
 		EXCdimension.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdimension.EXCSetCommentaire("MATsetElem (valeurs des arguments incoherents)");
+		EXCdimension.EXCSetCommentaire("MATsetElem(unsigned int, unsigned int, T2) : valeurs des arguments incoherents");
 		throw(EXCdimension);
 	}
 
@@ -139,7 +139,7 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("Constructeur de recopie (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("operator=(CMatrice<T>&) : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 
@@ -173,7 +173,7 @@ CMatrice<T> CMatrice<T>::operator*(const T2 T2arg) const throw(CException) {
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("operator* (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("operator*(T2) : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 
@@ -194,15 +194,16 @@ CMatrice<T> CMatrice<T>::operator*(const T2 T2arg) const throw(CException) {
 	return MATmult; //passage par valeur : MATmult est recopie
 }
 
+//Operateur declare apres la declaration de la classe
 template<class T, class T2>
-CMatrice<T> operator*(const T2 T2arg, const CMatrice<T> MAT2arg) throw(CException) {
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MAT2arg) throw(CException) {
 	//Leve une exception de conversion si type trop different
 	try { (const T) T2arg; }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("operator* (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("operator*(T2, CMatrice<T>) : type de l'argument incompatible");
 		throw(EXCconversion);
 	}
 
@@ -226,8 +227,15 @@ CMatrice<T> CMatrice<T>::operator/(const T2 T2arg) const throw(CException) {
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("operator/ (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("operator/(T2) : type de l'argument incompatible");
 		throw(EXCconversion);
+	}
+	//Leve une exception si T2arg = 0
+	if (T2arg == 0) {
+		CException EXCdivisionParZero;
+		EXCdivisionParZero.EXCSetId(division_zero); //erreur de type 3
+		EXCdivisionParZero.EXCSetCommentaire("operator/(T2) : l'argument est nul");
+		throw(EXCdivisionParZero);
 	}
 
 	//init
@@ -253,13 +261,13 @@ CMatrice<T> CMatrice<T>::operator+(const CMatrice<T2>& MAT2arg) const throw(CExc
 	if (uiMATdimLigne != MAT2arg.uiMATdimLigne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("operator+ (nombre de LIGNES de l'argument incoherent)");
+		EXCconversion.EXCSetCommentaire("operator+(CMatrice<T2>&) : nombre de LIGNES de l'argument incoherent");
 		throw(EXCconversion);
 	}
 	if (uiMATdimColonne != MAT2arg.uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("operator+ (nombre de COLONNES de l'argument incoherent)");
+		EXCconversion.EXCSetCommentaire("operator+(CMatrice<T2>&) : nombre de COLONNES de l'argument incoherent");
 		throw(EXCconversion);
 	}
 
@@ -286,13 +294,13 @@ CMatrice<T> CMatrice<T>::operator-(const CMatrice<T2>& MAT2arg) const throw(CExc
 	if (uiMATdimLigne != MAT2arg.uiMATdimLigne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("operator- (nombre de LIGNES de l'argument incoherent)");
+		EXCconversion.EXCSetCommentaire("operator-(CMatrice<T2>&) : nombre de LIGNES de l'argument incoherent");
 		throw(EXCconversion);
 	}
 	if (uiMATdimColonne != MAT2arg.uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("operator- (nombre de COLONNES de l'argument incoherent)");
+		EXCconversion.EXCSetCommentaire("operator-(CMatrice<T2>&) : nombre de COLONNES de l'argument incoherent");
 		throw(EXCconversion);
 	}
 
@@ -319,7 +327,7 @@ CMatrice<T> CMatrice<T>::operator*(const CMatrice<T2>& MAT2arg) const throw(CExc
 	if (uiMATdimColonne != MAT2arg.uiMATdimLigne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("operator* (nombre de LIGNES de l'argument incoherent)");
+		EXCconversion.EXCSetCommentaire("operator*(CMatrice<T2>&) : nombre de LIGNES de l'argument incoherent");
 		throw(EXCconversion);
 	}
 	//Le produit de MAD1 et MAD2 est possible <=> MAD1 est de dimensions NxR et MAD2 est de dimensions RxM. Le produit est alors de taille  MxN.

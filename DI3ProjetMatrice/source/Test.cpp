@@ -7,22 +7,22 @@ using namespace std;
 
 int CMatriceTestConst(const CMatrice<double>* pMATConst) {
 	//init
-	const CMatrice<double>* pMAT1 = pMATConst; //MAT1 = ((1,1), (1,1))
+	const CMatrice<double> MATConst = *pMATConst; //MAT1 = ((1,1), (1,1))
 
 	//teste la compatibilite des fonctions avec les objets constants
 	cout << "Afficher MATConstante\n\n";
 	try {
-		pMAT1->MATprint(1);
-		*pMAT1 * 10; //MATArg*10
-		10 * *pMAT1; //10*MATArg
-		*pMAT1 / 10; //MATArg/10
-		pMAT1->MATt();
-		*pMAT1 + 10 * CMatrice<double>(pMAT1->MATgetDimLigne(), pMAT1->MATgetDimColonne());
-		*pMAT1 - 10 * CMatrice<double>(pMAT1->MATgetDimLigne(), pMAT1->MATgetDimColonne());
-		pMAT1->MATgetElem((double)0, (double)0);
-		*pMAT1 * pMAT1->MATt();
-		//*pMAT1 = *pMAT1 * *pMAT1; //ne fonctionne pas car operator= ne peut pas etre une methode constante
-		//*pMAT1->MATSetElem(0, 0, 0); //ne fonctionne pas car MATSetElem ne peut pas etre une methode constante
+		MATConst.MATprint(1);
+		MATConst * 10; //MATArg*10
+		10 * MATConst; //10*MATArg
+		MATConst / 10; //MATArg/10
+		MATConst.MATt();
+		MATConst + 10 * CMatrice<double>(MATConst.MATgetDimLigne(), MATConst.MATgetDimColonne());
+		MATConst - 10 * CMatrice<double>(MATConst.MATgetDimLigne(), MATConst.MATgetDimColonne());
+		MATConst.MATgetElem((double)0, (double)0);
+		MATConst * MATConst.MATt();
+		//MATConst = MATConst * MATConst; //ne fonctionne pas car operator= ne peut pas etre une methode constante
+		//*MATConst.MATSetElem(0, 0, 0); //ne fonctionne pas car MATSetElem ne peut pas etre une methode constante
 	}
 	catch (CException EXClevee) {
 		EXClevee.EXCGestionaireException();
@@ -145,8 +145,8 @@ int CExceptionTest() {
 		CException A;
 		A.EXCSetId(types_incompatibles); //type d'exception 1
 		//A.EXCSetId(0); //type d'exception inconnu
-		A.EXCSetCommentaire("blablabla");
-		throw(A); //arrete l'execution du bloc et leve l'exception A
+		A.EXCSetCommentaire("CExceptionTest() : test");
+		//throw(A); //arrete l'execution du bloc et leve l'exception A
 		
 		MAT1*MAT2; //type d'exception 2 // arrete l'execution du bloc et leve l'execution B
 		

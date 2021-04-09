@@ -1,13 +1,12 @@
 #define CMADRICEDOUBLEH
 #ifndef CMATRICESTRUCTUREH
 #include "CMatriceStructure.h"
-#endif 
-#include <iostream>
+#endif
 
 class CMatriceDouble : public CMatriceStructure {
 	//attributs
 	private:
-		double** ppdMADElem; //tableau des elements de la matrice
+		double** ppdMADelem; //tableau des elements de la matrice
 
 
 	//constructeurs et destructeurs
@@ -83,7 +82,7 @@ class CMatriceDouble : public CMatriceStructure {
 		 *	Sortie : dElem : double
 		 *	Postcondition : {dElem = ppdMAIElem[uiX][uiY]}
 		 */
-		inline double MADGetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException);
+		inline double MADgetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException);
 
 		/*
 		 *	Methode INLINE de type mutateur a trois arguments attribuant a l'element de coordonnees (uiX, uiY) la valeur dElem
@@ -95,7 +94,7 @@ class CMatriceDouble : public CMatriceStructure {
 		 *	Sortie : rien
 		 *	Postcondition : {ppdMAIElem[uiX][uiY] = dElem}
 		 */
-		inline void MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException);
+		inline void MADsetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException);
 
 
 	//operateurs
@@ -212,36 +211,36 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 
 /* Methodes INLINE */
 
-double CMatriceDouble::MADGetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) {
+double CMatriceDouble::MADgetElem(const unsigned int uiX, const unsigned int uiY) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incoherents)");
+		EXCconversion.EXCSetCommentaire("MADgetElem (valeurs des arguments incoherents)");
 		throw(EXCconversion);
 	}
 
-	return ppdMADElem[uiX][uiY];
+	return ppdMADelem[uiX][uiY];
 }
 
-void CMatriceDouble::MADSetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException) {
+void CMatriceDouble::MADsetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
 	try { (const double) ldElem; }
 	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
-		EXCconversion.EXCSetCommentaire("MADSetElem (type de l'argument incompatible)");
+		EXCconversion.EXCSetCommentaire("MADsetElem (type de l'argument incompatible)");
 		throw(EXCconversion);
 	}
 	//Effectuer un try pour lever les erreurs de conversion si uiX ou uiY sont trop grands
 	if (uiX >= uiMATdimLigne || uiY >= uiMATdimColonne) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCconversion.EXCSetCommentaire("MADGetElem (valeurs des arguments incoherents)");
+		EXCconversion.EXCSetCommentaire("MADgetElem (valeurs des arguments incoherents)");
 		throw(EXCconversion);
 	}
 
 	//set
-	ppdMADElem[uiX][uiY] = (const double) ldElem;
+	ppdMADelem[uiX][uiY] = (const double) ldElem;
 }
