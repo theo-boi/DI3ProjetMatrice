@@ -2,12 +2,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	/*
+	
 	//tests CMatrice
 	CMatriceTestGlobal();
 	//tests CFichier
 	CFichierTest();
-	*/
+	
 	
 	//init
 	const unsigned int uiNbFichiers = argc - 1;
