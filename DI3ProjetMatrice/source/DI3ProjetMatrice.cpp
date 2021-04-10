@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
 		}
 		catch (CException EXCextraction) {
 			EXCextraction.EXCGestionaireException();
+			cout << endl;
 			uiBoucleArgs--; uiNbFichiers--; //on considere un fichier de moins
 		}
 	}
