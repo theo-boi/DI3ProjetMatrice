@@ -1,7 +1,8 @@
 TypeMatrice=double
-NBLignes=2
+NBLignes=3
 NBColonnes=3
 Matrice=[
-5.000000 3.88888 6.578484
-1.22205 -2.78845 8.4455151
+0	0	1
+0	1	0
+1	0	0
 ]

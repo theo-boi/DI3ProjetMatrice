@@ -175,6 +175,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\x64\Debug\fichierMatrice3.txt" />
     <Text Include="fichierMatrice.txt" />
     <Text Include="fichierMatrice2.txt" />
   </ItemGroup>
