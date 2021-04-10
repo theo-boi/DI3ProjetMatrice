@@ -33,7 +33,7 @@ class CFichier {
 		 *	Entree : FICarg : CFichier
 		 *	Precondition : FICarg existe et est alloue
 		 *	Sortie : FICNew : CFichier
-		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises et possèdent la même valeur que ceux de FICarg
+		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises et possedent la même valeur que ceux de FICarg
 		 */
 		CFichier(CFichier &FICarg);
 
@@ -43,7 +43,7 @@ class CFichier {
 		 *	Entree : pcNomFichier : *caractere
 		 *	Precondition : pcNomFichier existe
 		 *	Sortie : FICNew : CFichier
-		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises à partir du fichier concerné
+		 *	Postcondition : Les attributs de l'objet FICNew sont alloues/initialises a partir du fichier concerne
 		 */
 		CFichier(const char* pcNomFichier);
 
@@ -62,7 +62,7 @@ class CFichier {
 	public:
 
 		/*
-		 *	Methode INLINE sans argument de type accesseur prenant en argument un pointeur sur une chaine de caractère pcNomFichier
+		 *	Methode INLINE sans argument de type accesseur prenant en argument un pointeur sur une chaine de caractere pcNomFichier
 		 *
 		 *	Entree : pcNomFichier : *caractere
 		 *	Precondition : pcNomFichier existe
@@ -72,7 +72,7 @@ class CFichier {
 		void FICsetNomFichier(const char* pcNomFichier) { pcFICnom = pcNomFichier; }
 
 		/*
-		 *	Methode INLINE sans argument de type accesseur sans argument permettant de récupérer l'objet pcFICnom et de le stocker en mémoire
+		 *	Methode INLINE sans argument de type accesseur sans argument permettant de recuperer l'objet pcFICnom et de le stocker en memoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
@@ -82,7 +82,7 @@ class CFichier {
 		const char* FICgetNomFichier() { return pcFICnom; }
 
 		/*
-		 *	Methode INLINE sans argument de type accesseur sans argument permettant de récupérer l'objet pMATDmatrice et de le stocker en mémoire
+		 *	Methode INLINE sans argument de type accesseur sans argument permettant de recuperer l'objet pMATDmatrice et de le stocker en memoire
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
@@ -127,7 +127,7 @@ class CFichier {
 		 *	Entree : rien
 		 *	Precondition : { (pcFICnom != nil)^(pFICfichier != nil) }
 		 *	Sortie : rien
-		 *	Postcondition : les données de la matrice pMATDmatrice correspondent à celles du fichier pFICfichier
+		 *	Postcondition : les donnees de la matrice pMATDmatrice correspondent a celles du fichier pFICfichier
 		 */
         int FICparcourir() throw(CException);
 
