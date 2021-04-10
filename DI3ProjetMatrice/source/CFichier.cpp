@@ -39,6 +39,9 @@ CFichier::~CFichier() {
 /*** Operateurs ***/
 
 CFichier& CFichier::operator=(CFichier &FICarg) {
+	pcFICnom = nullptr;
+	delete pFICfichier;
+	delete pMATDmatrice;
 	if (FICarg.pcFICnom != nullptr) {
 		pcFICnom = FICarg.pcFICnom;
 	}
@@ -67,19 +70,19 @@ int CFichier::FICparcourir() throw(CException) {
 	}
 
 	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
-	char pligneCourante[19];
-	fgets(pligneCourante, 19, pFICfichier);
+	char pligneCourante[20];
+	fgets(pligneCourante, 20, pFICfichier);
 
 	bool formatIncorrect = false;
-	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 18; uiBoucleFor++) {
-		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double"[uiBoucleFor])
+	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++) {
+		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double\n"[uiBoucleFor])
 			formatIncorrect = true;
 	}
 
 	if (!formatIncorrect) {
 		//on deplace le curseur afin de scanner le nombre de lignes
 		unsigned int uiNbLignes = 0;
-		fseek(pFICfichier, 11, SEEK_CUR);
+		fseek(pFICfichier, 9, SEEK_CUR);
 		fscanf_s(pFICfichier, "%u", &uiNbLignes);
 
 		//on deplace le curseur afin de scanner le nombre de colonnes
@@ -114,8 +117,4 @@ int CFichier::FICparcourir() throw(CException) {
 
 	//on referme le fichier
 	return fclose(pFICfichier);
-}
-
-void CFichier::FICprintCMatrice() {
-	pMATDmatrice->MATprint();
 }

@@ -30,7 +30,7 @@ class CException {
 		 *	Sortie : rien
 		 *	Postcondition : neant
 		 */
-		inline ~CException() {};
+		inline ~CException();
 
 
 	//accesseurs et mutateurs
@@ -99,7 +99,15 @@ class CException {
 		void EXCGestionaireException() const throw(CException);
 };
 
+
+/* Methodes INLINE */
+
 CException::CException() {
+	uiEXCId = 0;
+	pcEXCCommentaire = "";
+}
+
+CException::~CException() {
 	uiEXCId = 0;
 	pcEXCCommentaire = "";
 }

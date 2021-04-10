@@ -3,6 +3,17 @@
 #endif
 using namespace std;
 
+int CFichierTest() {
+	printf("TESTS FICHIER\n");
+	CFichier fichier("fichierMatrice.txt");
+	CFichier fichier1(fichier); //utilise constructeur de recopie, meme signification pour le compilateur que la ligne suivante
+	CFichier fichier2 = fichier1; //utilise constructeur de recopie (car pendant une initialisation)
+	fichier2 = fichier1; //utilise operator=, signification differente pour le compilateur que la ligne precedente
+	CMatrice<double> MATD = fichier.FICgetCMatrice();
+	fichier.FICprintCMatrice();
+	return 0;
+}
+
 int CMatriceTestGlobal() {
 	//init
 	const CMatrice<double>* pMAT1 = new CMatrice<double>(2, 2, 1); //*pMAT1 = ((1,1), (1,1))

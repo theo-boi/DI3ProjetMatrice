@@ -132,12 +132,12 @@ class CFichier {
         int FICparcourir() throw(CException);
 
 		/*
-		 *	Methode sans argument affichant le contenu de la matrice MATDmatrice a l'ecran
+		 *	Methode INLINE sans argument affichant le contenu de la matrice MATDmatrice a l'ecran
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
 		 *	Postcondition : affichage de la matrice a l'ecran
 		 */
-		void FICprintCMatrice();
+		void FICprintCMatrice() { pMATDmatrice->MATprint(); }
 };
