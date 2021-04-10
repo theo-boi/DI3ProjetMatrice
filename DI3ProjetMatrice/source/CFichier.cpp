@@ -36,7 +36,7 @@ CFichier::CFichier(const char* pcNomFichier) {
 
 CFichier::~CFichier() {
 	pcFICnom = nullptr;
-	delete pFICfichier;
+	pFICfichier = nullptr;
 	delete pMATDmatrice;
 }
 
