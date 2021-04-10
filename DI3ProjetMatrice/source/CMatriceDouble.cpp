@@ -3,7 +3,9 @@
 #endif
 #include <iostream>
 
-/*** Constructeurs et destructeurs ***/
+/*******************************************************/
+/************ Constructeurs et destructeurs ************/
+/*******************************************************/
 
 CMatriceDouble::CMatriceDouble() {
 	ppdMADelem = nullptr;
@@ -61,7 +63,11 @@ CMatriceDouble::~CMatriceDouble() {
 }
 
 
-/*** Operateurs ***/
+/*******************************************************/
+/********************* Operateurs **********************/
+/*******************************************************/
+
+/************* Calculs avec les constantes *************/
 
 CMatriceDouble CMatriceDouble::operator*(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
@@ -131,6 +137,9 @@ CMatriceDouble CMatriceDouble::operator/(const long double lfArg) const throw(CE
 	}
 	return MADDiv; //passage par valeur : MADDiv est recopie
 }
+
+
+/************** Calculs avec les CMatrice **************/
 
 CMatriceDouble CMatriceDouble::operator+(const CMatriceDouble& MADArg) const throw(CException) {
 	//Lever une exception en cas de dimensions differentes entre MADActuelle et MADArg.
@@ -271,7 +280,9 @@ CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CE
 }
 
 
-/*** Autres methodes ***/
+/*******************************************************/
+/******************* Autres methodes *******************/
+/*******************************************************/
 
 void CMatriceDouble::MATprint(bool bEndl) const {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {

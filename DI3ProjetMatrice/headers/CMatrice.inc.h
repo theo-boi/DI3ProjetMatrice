@@ -2,7 +2,9 @@
 #include "CMatrice.h"
 #endif
 
-/*** Constructeurs et destructeurs ***/
+/*******************************************************/
+/************ Constructeurs et destructeurs ************/
+/*******************************************************/
 
 template<class T>
 CMatrice<T>::CMatrice() {
@@ -90,7 +92,9 @@ CMatrice<T>::~CMatrice() {
 }
 
 
-/*** Accesseurs et mutateurs ***/
+/*******************************************************/
+/*************** Accesseurs et mutateurs ***************/
+/*******************************************************/
 
 template<class T>
 T CMatrice<T>::MATgetElem(const unsigned int uiArgX, const unsigned int uiArgY) const throw(CException) {
@@ -129,7 +133,9 @@ void CMatrice<T>::MATsetElem(const unsigned int uiArgX, const unsigned int uiArg
 }
 
 
-/*** Operateurs ***/
+/*******************************************************/
+/********************* Operateurs **********************/
+/*******************************************************/
 
 template<class T>
 CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException) {
@@ -164,6 +170,9 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException
 
 	return *this; //passage par reference
 }
+
+
+/************* Calculs avec les constantes *************/
 
 template<class T> template<class T2>
 CMatrice<T> CMatrice<T>::operator*(const T2 T2arg) const throw(CException) {
@@ -254,6 +263,9 @@ CMatrice<T> CMatrice<T>::operator/(const T2 T2arg) const throw(CException) {
 	}
 	return MATdiv; //passage par valeur : MATdiv est recopie
 }
+
+
+/************** Calculs avec les CMatrice **************/
 
 template<class T> template<class T2>
 CMatrice<T> CMatrice<T>::operator+(const CMatrice<T2>& MAT2arg) const throw(CException) {
@@ -362,7 +374,9 @@ CMatrice<T> CMatrice<T>::operator*(const CMatrice<T2>& MAT2arg) const throw(CExc
 }
 
 
-/*** Autres methodes ***/
+/*******************************************************/
+/******************* Autres methodes *******************/
+/*******************************************************/
 
 template<class T>
 void CMatrice<T>::MATprint(const bool bEndl) const {

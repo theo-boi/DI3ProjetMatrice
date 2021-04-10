@@ -4,7 +4,9 @@
 #include <fstream>
 using namespace std;
 
-/*** Constructeurs et destructeurs ***/
+/*******************************************************/
+/************ Constructeurs et destructeurs ************/
+/*******************************************************/
 
 CFichier::CFichier() {
 	pcFICnom = nullptr;
@@ -36,16 +38,18 @@ CFichier::CFichier(const char* pcNomFichier) {
 
 CFichier::~CFichier() {
 	pcFICnom = nullptr;
-	delete pFICfichier;
+	pFICfichier = nullptr;
 	delete pMATDmatrice;
 }
 
 
-/*** Operateurs ***/
+/*******************************************************/
+/********************* Operateurs **********************/
+/*******************************************************/
 
 CFichier& CFichier::operator=(CFichier &FICarg) {
 	pcFICnom = nullptr;
-	delete pFICfichier;
+	pFICfichier = nullptr;
 	delete pMATDmatrice;
 	if (FICarg.pcFICnom != nullptr) {
 		pcFICnom = FICarg.pcFICnom;
@@ -60,7 +64,9 @@ CFichier& CFichier::operator=(CFichier &FICarg) {
 }
 
 
-/*** Autres methodes ***/
+/*******************************************************/
+/******************* Autres methodes *******************/
+/*******************************************************/
 
 int CFichier::FICparcourir() throw(CException) {
 	//init
