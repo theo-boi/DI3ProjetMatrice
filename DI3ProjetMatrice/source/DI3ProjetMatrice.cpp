@@ -65,8 +65,8 @@ int main(int argc, char *argv[]) {
 		for (unsigned int uiBoucleBdd = 1; uiBoucleBdd < uiNbFichiers; uiBoucleBdd++) {
 			MATDsomme = MATDsomme + pMATDbdd[uiBoucleBdd];
 		}
-	cout << " = \n\n";
-	MATDsomme.MATprint(1);
+		cout << " = \n\n";
+		MATDsomme.MATprint(1);
 	}
 	catch (CException EXCsomme) {
 		cout << endl;
