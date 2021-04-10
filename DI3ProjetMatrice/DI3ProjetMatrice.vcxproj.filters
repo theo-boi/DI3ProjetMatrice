@@ -66,5 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="fichierMatrice.txt" />
+    <Text Include="fichierMatrice2.txt" />
   </ItemGroup>
 </Project>

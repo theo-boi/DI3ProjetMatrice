@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="fichierMatrice.txt" />
+    <Text Include="fichierMatrice2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

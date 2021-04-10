@@ -22,14 +22,14 @@ int main(int argc, char *argv[]) {
 
 	//affichage des matrices
 	for (unsigned int uiBoucleBdd = 0; uiBoucleBdd < uiNbFichiers; uiBoucleBdd++) {
-		cout << "Matrice du fichier n°" << uiBoucleBdd << endl;
+		cout << "Matrice du fichier " << uiBoucleBdd << endl;
 		pMATDbdd->MATprint(1);
 	}
-
+	/*
 	double dConstante;
-	cout << "\nConstante c = "; cin >> dConstante;
+	cout << "Constante c = "; cin >> dConstante;
 	cout << dConstante;
-
+	*/
 	delete[] pMATDbdd;
 	return 0;
 }

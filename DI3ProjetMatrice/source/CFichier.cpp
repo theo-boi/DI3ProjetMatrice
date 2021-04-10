@@ -25,7 +25,12 @@ CFichier::CFichier(CFichier &FICarg) {
 }
 
 CFichier::CFichier(const char* pcNomFichier) {
-	FICsetNomFichier(pcNomFichier);
+	//init
+	pcFICnom = pcNomFichier;
+	pFICfichier = nullptr;
+	pMATDmatrice = nullptr;
+
+	//extrait CMatrice, donne une valeur aux deux precedents attributs
 	FICparcourir();
 }
 
@@ -69,7 +74,7 @@ int CFichier::FICparcourir() throw(CException) {
 		throw(EXCouverture);
 	}
 
-	//on récupère la première ligne afin de savoir si le type attendu de la matrice est le bon
+	//on recupere la premiere ligne afin de savoir si le type attendu de la matrice est le bon
 	char pligneCourante[20];
 	fgets(pligneCourante, 20, pFICfichier);
 

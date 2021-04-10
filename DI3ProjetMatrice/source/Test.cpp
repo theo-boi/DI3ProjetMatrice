@@ -213,7 +213,7 @@ int CExceptionTest() {
 	try {
 		
 		CException A;
-		A.EXCSetId((int) "mystère"); //type d'exception inconnu
+		A.EXCSetId((int) "mystere"); //type d'exception inconnu
 		A.EXCSetCommentaire("CExceptionTest() : test");
 		//throw(A); //arrete l'execution du bloc et leve l'exception A
 		
