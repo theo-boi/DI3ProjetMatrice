@@ -4,7 +4,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	
 	//tests CMatrice
-	//CMatriceTestGlobal();
+	CMatriceTestGlobal();
 	//tests CFichier
 	CFichierTest();
 	
@@ -20,16 +20,22 @@ int main(int argc, char *argv[]) {
 
 
 	//extraction des matrices depuis les fichiers entres en arguments de l'executable
+	unsigned int uiNbFichierDefaillants = 0;
 	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++)
+	{
 		try {
-			CFichier fichier( argv[uiBoucleArgs+1] ); //instancie un CFichier temporaire et sa CMatrice
-			pMATDbdd[uiBoucleArgs] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
+			CFichier fichier(argv[uiBoucleArgs + 1]); //instancie un CFichier temporaire et sa CMatrice
+			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
 		}
 		catch (CException EXCextraction) {
 			EXCextraction.EXCGestionaireException();
 			cout << endl;
-			uiBoucleArgs--; uiNbFichiers--; //on considere un fichier de moins
+			uiNbFichierDefaillants++;
+			//uiBoucleArgs--; uiNbFichiers--; //on considere un fichier de moins
 		}
+	}
+
+	uiNbFichiers -= uiNbFichierDefaillants;
 
 	//affichage de chaque matrice
 	cout << "Matrices de vos fichiers entres en arguments :\n\n";
