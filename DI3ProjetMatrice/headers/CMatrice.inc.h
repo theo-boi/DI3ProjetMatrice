@@ -32,9 +32,8 @@ CMatrice<T>::CMatrice(const CMatrice<T>& MAT2arg) throw(CException) {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MAT2arg par colonne (par ligne)
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
-		}
 	}
 }
 
@@ -49,9 +48,8 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY) {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//initialisation de chaque element a 1 par colonne (par ligne)
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			ppdMATelem[uiBoucleForX][uiBoucleForY] = T(); //on initialise chaque element par sa valeur d'initialisation
-		}
 	}
 }
 
@@ -76,9 +74,8 @@ CMatrice<T>::CMatrice(const unsigned int uiX, const unsigned int uiY, T2 T2elem)
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//initialisation de chaque element a 1 par colonne (par ligne)
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) T2elem; //on initialise chaque element par sa valeur d'initialisation
-		}
 	}
 }
 
@@ -163,9 +160,8 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MAT2arg) throw(CException
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MATarg par colonne (par ligne)
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
-		}
 	}
 
 	return *this; //passage par reference
@@ -196,9 +192,8 @@ CMatrice<T> CMatrice<T>::operator*(const T2 T2arg) const throw(CException) {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATmult.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat de la multiplication de chaque element par cfConst pour chaque colonne
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			MATmult.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] * (const T) T2arg;
-		}
 	}
 	return MATmult; //passage par valeur : MATmult est recopie
 }
@@ -219,12 +214,11 @@ CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MAT2arg) throw(CExcepti
 	//init
 	CMatrice<T> MATmult = CMatrice<T>(MAT2arg);
 
-	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MATmult.MATgetDimLigne(); uiBoucleForX++) {
+	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MATmult.MATgetDimLigne(); uiBoucleForX++)
 		//calcul de chaque element par vecteur
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATmult.MATgetDimColonne(); uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATmult.MATgetDimColonne(); uiBoucleForY++)
 			MATmult.MATsetElem(uiBoucleForX, uiBoucleForY, MATmult.MATgetElem(uiBoucleForX, uiBoucleForY) * (const T) T2arg);
-		}
-	}
+	
 	return MATmult; //passage par valeur : MATmult est recopie
 }
 
@@ -257,9 +251,8 @@ CMatrice<T> CMatrice<T>::operator/(const T2 T2arg) const throw(CException) {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATdiv.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat de la division de chaque element par cfConst pour chaque colonne
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			MATdiv.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] / T2arg;
-		}
 	}
 	return MATdiv; //passage par valeur : MATdiv est recopie
 }
@@ -293,9 +286,8 @@ CMatrice<T> CMatrice<T>::operator+(const CMatrice<T2>& MAT2arg) const throw(CExc
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATadd.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MAT2arg, pour chaque colonne
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			MATadd.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] + MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
-		}
 	}
 	return MATadd; //passage par valeur : MATadd est recopie
 }
@@ -326,9 +318,8 @@ CMatrice<T> CMatrice<T>::operator-(const CMatrice<T2>& MAT2arg) const throw(CExc
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATsous.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MAT2arg, pour chaque colonne
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++)
 			MATsous.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] - MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
-		}
 	}
 	return MATsous; //passage par valeur : MATsous est recopie
 }
@@ -362,10 +353,9 @@ CMatrice<T> CMatrice<T>::operator*(const CMatrice<T2>& MAT2arg) const throw(CExc
 			//pour chaque ligne de MADActuelle
 			T dSommeProdScalaireVects = 0;
 			//on parcourt la ligne de MADActuelle (soit aussi la colonne de MAT2arg)
-			for (unsigned int uiBoucleForYCalcul = 0; uiBoucleForYCalcul < uiMATdimColonne; uiBoucleForYCalcul++) {
+			for (unsigned int uiBoucleForYCalcul = 0; uiBoucleForYCalcul < uiMATdimColonne; uiBoucleForYCalcul++)
 				//on somme le produit de chaque uiBoucleForYCalcul-ieme element
 				dSommeProdScalaireVects += ppdMATelem[uiBoucleForX][uiBoucleForYCalcul] * MAT2arg.ppdMATelem[uiBoucleForYCalcul][uiBoucleForY];
-			}
 			MATmult.ppdMATelem[uiBoucleForX][uiBoucleForY] = dSommeProdScalaireVects;
 
 		}
@@ -409,9 +399,9 @@ CMatrice<T> CMatrice<T>::MATt() const {
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MATt.uiMATdimLigne; uiBoucleForX++) {
 		MATt.ppdMATelem[uiBoucleForX] = new T[MATt.uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de coordonnees (uiBoucleForY,uiBoucleForX) a (uiBoucleForX,uiBoucleForY) pour chaque colonne
-		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATt.uiMATdimColonne; uiBoucleForY++) {
+		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATt.uiMATdimColonne; uiBoucleForY++)
 			MATt.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForY][uiBoucleForX];
-		}
 	}
+
 	return MATt;
 }
