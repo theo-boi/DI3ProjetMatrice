@@ -77,8 +77,8 @@ int main(int argc, char *argv[]) {
 			MATDsommeAlternee = MATDsommeAlternee - pMATDbdd[uiBoucleBdd];
 		else
 			MATDsommeAlternee = MATDsommeAlternee + pMATDbdd[uiBoucleBdd];
-	cout << " = \n\n";
-	MATDsommeAlternee.MATprint(1);
+		cout << " = \n\n";
+		MATDsommeAlternee.MATprint(1);
 	}
 	catch (CException EXCsommeAlt) {
 		cout << endl;
