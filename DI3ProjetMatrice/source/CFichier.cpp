@@ -1,16 +1,13 @@
 #ifndef CFICHIERH
 #include "../headers/CFichier.h"
 #endif
-
-#define test 0
+#include <iostream>
+using namespace std;
 
 #define echec_ouverture_fichier 4 
 
-#define probleme_format_fichier 5
+#define fichier_incompatible 5
 
-#include <iostream>
-
-using namespace std;
 
 /*******************************************************/
 /************ Constructeurs et destructeurs ************/
@@ -126,8 +123,8 @@ int CFichier::FICparcourir() throw(CException) {
 	}
 	else {
 		CException EXCformatContenu;
-		EXCformatContenu.EXCSetId(probleme_format_fichier); //erreur de type 5
-		EXCformatContenu.EXCSetCommentaire("FICparcourir : contenu du fichier incompatible");
+		EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
+		EXCformatContenu.EXCSetCommentaire("FICparcourir() : contenu du fichier incompatible");
 		throw(EXCformatContenu);
 	}
 

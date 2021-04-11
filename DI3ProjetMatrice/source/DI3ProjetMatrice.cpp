@@ -2,13 +2,6 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	
-	//tests CMatrice
-	CMatriceTestGlobal();
-	//tests CFichier
-	CFichierTest();
-	
-	
 	//init
 	unsigned int uiNbFichiers = argc - 1; //nombre d'arguments entres en parametre de l'executable
 	CMatrice<double>* pMATDbdd = new CMatrice<double>[uiNbFichiers]; //conservation des matrices extraites des fichiers
@@ -21,7 +14,6 @@ int main(int argc, char *argv[]) {
 	//extraction des matrices depuis les fichiers entres en arguments de l'executable
 	unsigned int uiNbFichierDefaillants = 0;
 	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++)
-	{
 		try {
 			CFichier fichier(argv[uiBoucleArgs + 1]); //instancie un CFichier temporaire et sa CMatrice
 			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
@@ -30,10 +22,7 @@ int main(int argc, char *argv[]) {
 			EXCextraction.EXCGestionaireException();
 			cout << endl;
 			uiNbFichierDefaillants++;
-			//uiBoucleArgs--; uiNbFichiers--; //on considere un fichier de moins
 		}
-	}
-
 	uiNbFichiers -= uiNbFichierDefaillants;
 
 	//affichage de chaque matrice
@@ -43,7 +32,7 @@ int main(int argc, char *argv[]) {
 	
 	//initialisation de c
 	double dConstante;
-	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n";
+	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n"; /********* INTERVENTION UTILISATEUR *********/
 
 
 	//affichage du resultat de la multiplication de chaque matrice par la valeur dConstante : c*M
@@ -104,7 +93,7 @@ int main(int argc, char *argv[]) {
 		cout << endl;
 		EXCsommeM.EXCGestionaireException();
 	}
-	
+
 
 	delete[] pMATDbdd;
 	return 0;
