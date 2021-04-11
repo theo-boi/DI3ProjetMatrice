@@ -1,35 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="CException">
-    <Position X="9.5" Y="0.5" Width="3.25" />
+    <Position X="8.25" Y="1.25" Width="2.75" />
+    <Members>
+      <Method Name="~CException" Hidden="true" />
+      <Method Name="CException" Hidden="true" />
+      <Method Name="EXCGetCommentaire" Hidden="true" />
+      <Method Name="EXCGetId" Hidden="true" />
+      <Method Name="EXCSetCommentaire" Hidden="true" />
+      <Method Name="EXCSetId" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAACABAAAAAMAAAAAAAAAAAAAAAgAEKAAEAAAAA=</HashCode>
       <FileName>headers\CException.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CFichier">
-    <Position X="1.5" Y="1.5" Width="5" />
+    <Position X="8.25" Y="4" Width="5" />
+    <Members>
+      <Method Name="~CFichier" Hidden="true" />
+      <Method Name="FICgetCMatriceElem" Hidden="true" />
+      <Method Name="FICgetNomFichier" Hidden="true" />
+      <Method Name="FICsetNomFichier" Hidden="true" />
+      <Method Name="operator=" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAIAACAAAAAAQARAACAAAAAAAAACABiAAAAAAg=</HashCode>
       <FileName>headers\CFichier.h</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="CMatriceDouble">
-    <Position X="0.5" Y="7.25" Width="6" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAAIABAAAQAAEAAAAAAAAgAAEAACA=</HashCode>
-      <FileName>headers\CMatriceDouble.h</FileName>
-    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pMATDmatrice" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="CMatrice&lt;T&gt;">
-    <Position X="8.25" Y="7.25" Width="5.75" />
+    <Position X="0.5" Y="4" Width="5.75" />
+    <Members>
+      <Method Name="~CMatrice" Hidden="true" />
+      <Method Name="CMatrice" Hidden="true" />
+      <Method Name="MATgetElem" Hidden="true" />
+      <Method Name="MATprint" Hidden="true" />
+      <Method Name="MATsetElem" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAEAAAAAAAABAAARAAEAAAAAAAAgIAEAAAA=</HashCode>
       <FileName>headers\CMatrice.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMatriceStructure">
-    <Position X="9.25" Y="3.75" Width="4" />
+    <Position X="1.25" Y="0.5" Width="4.25" />
+    <Members>
+      <Method Name="~CMatriceStructure" Hidden="true" />
+      <Method Name="CMatriceStructure" Hidden="true" />
+      <Method Name="operator&lt;&lt;" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>GAAAAAAAAAAAgAQACIAAAAAAEAAAAAAAAQAAAAEAAAA=</HashCode>
       <FileName>headers\CMatriceStructure.h</FileName>

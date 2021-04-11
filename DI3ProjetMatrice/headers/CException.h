@@ -5,7 +5,7 @@
 class CException {
 	//attributs
 	private:
-		unsigned int uiEXCId; //Id de l'exception
+		unsigned int uiEXCid; //d de l'exception
 		const char* pcEXCCommentaire; //Commentaire sur l'exception
 
 
@@ -43,10 +43,10 @@ class CException {
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : uiEXCId : entier non signe
+		 *	Sortie : uiEXCid : entier non signe
 		 *	Postcondition : neant
 		 */
-		inline const unsigned int& EXCGetId() const { return uiEXCId; };
+		inline const unsigned int& EXCGetId() const { return uiEXCid; };
 
 		/*
 		 *	Methode INLINE de type accesseur sans arguments renvoyant le commentaire
@@ -68,9 +68,9 @@ class CException {
 		 *	Entree : uiArg : entier non signe
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : {uiEXCId = uiArg}
+		 *	Postcondition : {uiEXCid = uiArg}
 		 */
-		inline void EXCSetId(const unsigned int uiArg) { uiEXCId = uiArg; };
+		inline void EXCSetId(const unsigned int uiArg) { uiEXCid = uiArg; };
 
 		/*
 		 *	Methode INLINE de type mutateur sans arguments attribuant au commentaire la chaine de caracteres pcArg
@@ -103,11 +103,11 @@ class CException {
 /* Methodes INLINE */
 
 CException::CException() {
-	uiEXCId = 0;
+	uiEXCid = 0;
 	pcEXCCommentaire = "";
 }
 
 CException::~CException() {
-	uiEXCId = 0;
+	uiEXCid = 0;
 	pcEXCCommentaire = "";
 }

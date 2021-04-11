@@ -2,12 +2,12 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	/*
+	
 	//tests CMatrice
 	CMatriceTestGlobal();
 	//tests CFichier
 	CFichierTest();
-	*/
+	
 	
 	//init
 	unsigned int uiNbFichiers = argc - 1; //nombre d'arguments entres en parametre de l'executable

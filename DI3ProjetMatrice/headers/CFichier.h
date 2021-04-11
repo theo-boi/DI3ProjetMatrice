@@ -119,7 +119,7 @@ class CFichier {
 
 
 	//autres methodes
-	public:
+	private:
 
 		/*
 		 *	Methode sans argument renvoyant 0 une fois finie, permettant d'instancier la matrice double depuis un pattern specifique dans le fichier
@@ -130,6 +130,8 @@ class CFichier {
 		 *	Postcondition : les donnees de la matrice pMATDmatrice correspondent a celles du fichier pFICfichier
 		 */
         int FICparcourir() throw(CException);
+
+	public:
 
 		/*
 		 *	Methode INLINE sans argument affichant le contenu de la matrice MATDmatrice a l'ecran
