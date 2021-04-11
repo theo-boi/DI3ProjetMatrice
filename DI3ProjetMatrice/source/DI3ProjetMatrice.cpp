@@ -18,7 +18,6 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-
 	//extraction des matrices depuis les fichiers entres en arguments de l'executable
 	unsigned int uiNbFichierDefaillants = 0;
 	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++)
