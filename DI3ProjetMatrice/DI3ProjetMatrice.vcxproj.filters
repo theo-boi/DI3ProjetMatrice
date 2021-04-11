@@ -67,6 +67,6 @@
   <ItemGroup>
     <Text Include="fichierMatrice.txt" />
     <Text Include="fichierMatrice2.txt" />
-    <Text Include="..\x64\Debug\fichierMatrice3.txt" />
+    <Text Include="fichierMatrice3.txt" />
   </ItemGroup>
 </Project>
