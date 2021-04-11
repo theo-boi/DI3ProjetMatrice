@@ -4,7 +4,6 @@
 #include "CMatrice.h"
 #endif
 
-#include <iostream>
 
 class CFichier {
 	//attributs

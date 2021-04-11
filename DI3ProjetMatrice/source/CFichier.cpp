@@ -1,8 +1,15 @@
 #ifndef CFICHIERH
 #include "../headers/CFichier.h"
 #endif
-#include <fstream>
+
 #define test 0
+
+#define echec_ouverture_fichier 4 
+
+#define probleme_format_fichier 5
+
+#include <iostream>
+
 using namespace std;
 
 /*******************************************************/
@@ -72,10 +79,10 @@ int CFichier::FICparcourir() throw(CException) {
 	fopen_s(&pFICfichier, pcFICnom, "r");
 
 	//Leve une exception si l'ouverture du fichier a rencontre un probleme
-	if (pFICfichier == nullptr) {
+	if (!pFICfichier) {
 		CException EXCouverture;
-		EXCouverture.EXCSetId( (unsigned int)"ouverture_echouee" ); //erreur de type 4
-		EXCouverture.EXCSetCommentaire("nomDeLaFonction : ouverture du fichier impossible");
+		EXCouverture.EXCSetId(echec_ouverture_fichier); //erreur de type 4
+		EXCouverture.EXCSetCommentaire("FICparcourir : ouverture du fichier impossible");
 		throw(EXCouverture);
 	}
 
@@ -84,6 +91,7 @@ int CFichier::FICparcourir() throw(CException) {
 	fgets(pligneCourante, 20, pFICfichier);
 
 	bool formatIncorrect = false;
+	
 	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++)
 		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double\n"[uiBoucleFor])
 			formatIncorrect = true;
@@ -118,8 +126,8 @@ int CFichier::FICparcourir() throw(CException) {
 	}
 	else {
 		CException EXCformatContenu;
-		EXCformatContenu.EXCSetId((unsigned int)"format_incompatible"); //erreur de type 4
-		EXCformatContenu.EXCSetCommentaire("nomDeLaFonction : contenu du fichier incompatible");
+		EXCformatContenu.EXCSetId(probleme_format_fichier); //erreur de type 5
+		EXCformatContenu.EXCSetCommentaire("FICparcourir : contenu du fichier incompatible");
 		throw(EXCformatContenu);
 	}
 

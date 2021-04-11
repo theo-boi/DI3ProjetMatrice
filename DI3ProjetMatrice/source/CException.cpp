@@ -17,6 +17,12 @@ void CException::EXCGestionaireException() const throw(CException) {
 		case 3:
 			cout << " \"division par zero\"";
 			break;
+		case 4:
+			cout << " \"echec ouverture fichier\"";
+			break;
+		case 5:
+			cout << " \"probleme format fichier\"";
+			break;
 		default:
 			cout << " inconnue";
 			bInconnue = true;
