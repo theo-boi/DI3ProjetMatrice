@@ -88,10 +88,10 @@ int CFichier::FICparcourir() throw(CException) {
 	fgets(pligneCourante, 20, pFICfichier);
 
 	bool formatIncorrect = false;
-	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++) {
+	
+	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++)
 		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double\n"[uiBoucleFor])
 			formatIncorrect = true;
-	}
 
 	if (!formatIncorrect) {
 		//on deplace le curseur afin de scanner le nombre de lignes
@@ -113,12 +113,11 @@ int CFichier::FICparcourir() throw(CException) {
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
 		double dElement = 0;
-		for (unsigned int i = 0; i < uiNbLignes; i++) {
+		for (unsigned int i = 0; i < uiNbLignes; i++)
 			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
 				pMATD->MATsetElem(i, j, dElement);
 			}
-		}
 		//on garde la variable MAT dans notre objet CFichier
 		pMATDmatrice = pMATD;
 	}

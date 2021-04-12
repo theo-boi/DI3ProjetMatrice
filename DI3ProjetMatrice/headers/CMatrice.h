@@ -127,12 +127,10 @@ class CMatrice : public CMatriceStructure {
 			CMatrice<T2> MAT2 = CMatrice<T2>(MATgetDimLigne(), MATgetDimColonne()); //objet temporaire
 
 			//recopie des elements de la matrice dans MAT2
-			for (unsigned int uiBoucleForX = 0; uiBoucleForX < MAT2.MATgetDimLigne(); uiBoucleForX++) {
-				for (unsigned int uiBoucleForY = 0; uiBoucleForY < MAT2.MATgetDimColonne(); uiBoucleForY++) {
+			for (unsigned int uiBoucleForX = 0; uiBoucleForX < MAT2.MATgetDimLigne(); uiBoucleForX++)
+				for (unsigned int uiBoucleForY = 0; uiBoucleForY < MAT2.MATgetDimColonne(); uiBoucleForY++)
 					//conversion de chaque element T en T2 puis recopie a l'emplacement (uiBoucleForX,uiBoucleForY) de MAT2
 					MAT2.MATsetElem(uiBoucleForX, uiBoucleForY, (T2) MATgetElem(uiBoucleForX, uiBoucleForY));
-				}
-			}
 
 			return MAT2; //passage par valeur : MAT2 est recopie
 		}

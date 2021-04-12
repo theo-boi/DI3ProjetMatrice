@@ -33,7 +33,7 @@ CMatrice<T>::CMatrice(const CMatrice<T>& MATarg) throw(CException) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MAT2arg par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
+			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MATarg.MATgetElem(uiBoucleForX, uiBoucleForY);
 		}
 	}
 }
@@ -164,7 +164,7 @@ CMatrice<T>& CMatrice<T>::operator=(const CMatrice<T>& MATarg) throw(CException)
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie chaque element de MATarg par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MAT2arg.MATgetElem(uiBoucleForX, uiBoucleForY);
+			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MATarg.MATgetElem(uiBoucleForX, uiBoucleForY);
 		}
 	}
 
@@ -294,7 +294,7 @@ CMatrice<T> CMatrice<T>::operator+(const CMatrice<T>& MATarg) const throw(CExcep
 		MATadd.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
 		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MAT2arg, pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			MATadd.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] + MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
+			MATadd.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] + MATarg.ppdMATelem[uiBoucleForX][uiBoucleForY];
 		}
 	}
 	return MATadd; //passage par valeur : MATadd est recopie
@@ -325,9 +325,9 @@ CMatrice<T> CMatrice<T>::operator-(const CMatrice<T>& MATarg) const throw(CExcep
 	MATsous.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATsous.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
-//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MAT2arg, pour chaque colonne
+		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MAT2arg, pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
-			MATsous.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] - MAT2arg.ppdMATelem[uiBoucleForX][uiBoucleForY];
+			MATsous.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] - MATarg.ppdMATelem[uiBoucleForX][uiBoucleForY];
 		}
 	}
 	return MATsous; //passage par valeur : MATsous est recopie
@@ -361,10 +361,10 @@ CMatrice<T> CMatrice<T>::operator*(const CMatrice<T>& MATarg) const throw(CExcep
 
 			//pour chaque ligne de MADActuelle
 			T dSommeProdScalaireVects = 0;
-			//on parcourt la ligne de MADActuelle (soit aussi la colonne de MAT2arg)
+			//on parcourt la ligne de MADActuelle (soit aussi la colonne de MATarg)
 			for (unsigned int uiBoucleForYCalcul = 0; uiBoucleForYCalcul < uiMATdimColonne; uiBoucleForYCalcul++) {
 				//on somme le produit de chaque uiBoucleForYCalcul-ieme element
-				dSommeProdScalaireVects += ppdMATelem[uiBoucleForX][uiBoucleForYCalcul] * MAT2arg.ppdMATelem[uiBoucleForYCalcul][uiBoucleForY];
+				dSommeProdScalaireVects += ppdMATelem[uiBoucleForX][uiBoucleForYCalcul] * MATarg.ppdMATelem[uiBoucleForYCalcul][uiBoucleForY];
 			}
 			MATmult.ppdMATelem[uiBoucleForX][uiBoucleForY] = dSommeProdScalaireVects;
 
@@ -411,7 +411,7 @@ CMatrice<T> CMatrice<T>::MATt() const {
 		//recopie chaque element de coordonnees (uiBoucleForY,uiBoucleForX) a (uiBoucleForX,uiBoucleForY) pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MATt.uiMATdimColonne; uiBoucleForY++) {
 			MATt.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForY][uiBoucleForX];
-	}
+		}
 	}
 	return MATt;
 }
