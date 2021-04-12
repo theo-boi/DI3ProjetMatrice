@@ -115,12 +115,14 @@ int CFichier::FICparcourir() throw(CException) {
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
 		double dElement = 0;
+
 		for (unsigned int i = 0; i < uiNbLignes; i++) {
 			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
 				pMATD->MATsetElem(i, j, dElement);
 			}
 		}
+
 		//on garde la variable MAT dans notre objet CFichier
 		pMATDmatrice = pMATD;
 	}

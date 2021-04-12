@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 		try {
 			CFichier fichier( argv[uiBoucleArgs + 1] ); //instancie un CFichier temporaire et sa CMatrice
 			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
-			pMATDbdd[uiBoucleArgs].MATprint(1); //affichage de la matrice
+			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants].MATprint(1); //affichage de la matrice
 		}
 		catch (CException EXCextraction) {
 			EXCextraction.EXCGestionaireException();

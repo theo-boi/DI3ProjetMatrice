@@ -1,4 +1,4 @@
-TypeMatrice=int
+TypeMatrice=double
 NBLignes=2
 NBColonnes=3
 Matrice=[
