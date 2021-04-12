@@ -2,13 +2,6 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	/*
-	//tests CMatrice
-	CMatriceTestGlobal();
-	//tests CFichier
-	CFichierTest();
-	*/
-	
 	//init
 	unsigned int uiNbFichiers = argc - 1; //nombre d'arguments entres en parametre de l'executable
 	CMatrice<double>* pMATDbdd = new CMatrice<double>[uiNbFichiers]; //conservation des matrices extraites des fichiers
@@ -18,18 +11,20 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-
 	//extraction des matrices depuis les fichiers entres en arguments de l'executable
-	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++)
+	unsigned int uiNbFichierDefaillants = 0;
+	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++) {
 		try {
-			CFichier fichier( argv[uiBoucleArgs+1] ); //instancie un CFichier temporaire et sa CMatrice
-			pMATDbdd[uiBoucleArgs] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
+			CFichier fichier( argv[uiBoucleArgs + 1] ); //instancie un CFichier temporaire et sa CMatrice
+			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants] = fichier.FICgetCMatrice(); //sauvegarde la CMatrice dans pMATDbdd
 		}
 		catch (CException EXCextraction) {
 			EXCextraction.EXCGestionaireException();
 			cout << endl;
-			uiBoucleArgs--; uiNbFichiers--; //on considere un fichier de moins
+			uiNbFichierDefaillants++;
 		}
+	}
+	uiNbFichiers -= uiNbFichierDefaillants;
 
 	//affichage de chaque matrice
 	cout << "Matrices de vos fichiers entres en arguments :\n\n";
@@ -38,7 +33,7 @@ int main(int argc, char *argv[]) {
 	
 	//initialisation de c
 	double dConstante;
-	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n";
+	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n"; /********* INTERVENTION UTILISATEUR *********/
 
 
 	//affichage du resultat de la multiplication de chaque matrice par la valeur dConstante : c*M
@@ -77,8 +72,8 @@ int main(int argc, char *argv[]) {
 			MATDsommeAlternee = MATDsommeAlternee - pMATDbdd[uiBoucleBdd];
 		else
 			MATDsommeAlternee = MATDsommeAlternee + pMATDbdd[uiBoucleBdd];
-	cout << " = \n\n";
-	MATDsommeAlternee.MATprint(1);
+		cout << " = \n\n";
+		MATDsommeAlternee.MATprint(1);
 	}
 	catch (CException EXCsommeAlt) {
 		cout << endl;
@@ -99,7 +94,7 @@ int main(int argc, char *argv[]) {
 		cout << endl;
 		EXCsommeM.EXCGestionaireException();
 	}
-	
+
 
 	delete[] pMATDbdd;
 	return 0;

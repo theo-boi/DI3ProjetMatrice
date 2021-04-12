@@ -9,13 +9,19 @@ void CException::EXCGestionaireException() const throw(CException) {
 	cout << "Erreur";
 	switch (EXCGetId()) {
 		case 1:
-			cout << " \"types incompatibles\"";
+			cout << " \"type incompatible\"";
 			break;
 		case 2:
 			cout << " \"dimensions incompatibles\"";
 			break;
 		case 3:
 			cout << " \"division par zero\"";
+			break;
+		case 4:
+			cout << " \"echec ouverture fichier\"";
+			break;
+		case 5:
+			cout << " \"format fichier incompatible\"";
 			break;
 		default:
 			cout << " inconnue";

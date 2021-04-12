@@ -101,6 +101,7 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 	//init
 	CMatriceDouble MADMult = CMatriceDouble(MADArg);
 
+	//calcul
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < MADMult.MATgetDimLigne(); uiBoucleForX++) {
 		//calcul de chaque element par vecteur
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < MADMult.MATgetDimColonne(); uiBoucleForY++) {

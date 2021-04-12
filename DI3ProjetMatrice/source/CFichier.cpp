@@ -1,8 +1,13 @@
 #ifndef CFICHIERH
 #include "../headers/CFichier.h"
 #endif
-#include <fstream>
+#include <iostream>
 using namespace std;
+
+#define echec_ouverture_fichier 4 
+
+#define fichier_incompatible 5
+
 
 /*******************************************************/
 /************ Constructeurs et destructeurs ************/
@@ -15,15 +20,12 @@ CFichier::CFichier() {
 }
 
 CFichier::CFichier(CFichier &FICarg) {
-	if (FICarg.pcFICnom != nullptr) {
+	if (FICarg.pcFICnom != nullptr)
 		pcFICnom = FICarg.pcFICnom;
-	}
-	if (FICarg.pFICfichier != nullptr) {
+	if (FICarg.pFICfichier != nullptr)
 		pFICfichier = new FILE(*FICarg.pFICfichier);
-	}
-	if (FICarg.pMATDmatrice != nullptr) {
+	if (FICarg.pMATDmatrice != nullptr)
 		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
-	}
 }
 
 CFichier::CFichier(const char* pcNomFichier) {
@@ -48,18 +50,19 @@ CFichier::~CFichier() {
 /*******************************************************/
 
 CFichier& CFichier::operator=(CFichier &FICarg) {
+	//del
 	pcFICnom = nullptr;
 	pFICfichier = nullptr;
 	delete pMATDmatrice;
-	if (FICarg.pcFICnom != nullptr) {
+
+	//reinit
+	if (FICarg.pcFICnom != nullptr)
 		pcFICnom = FICarg.pcFICnom;
-	}
-	if (FICarg.pFICfichier != nullptr) {
+	if (FICarg.pFICfichier != nullptr)
 		pFICfichier = new FILE(*FICarg.pFICfichier);
-	}
-	if (FICarg.pMATDmatrice != nullptr) {
+	if (FICarg.pMATDmatrice != nullptr)
 		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
-	}
+	
 	return *this;
 }
 
@@ -73,10 +76,10 @@ int CFichier::FICparcourir() throw(CException) {
 	fopen_s(&pFICfichier, pcFICnom, "r");
 
 	//Leve une exception si l'ouverture du fichier a rencontre un probleme
-	if (pFICfichier == nullptr) {
+	if (!pFICfichier) {
 		CException EXCouverture;
-		EXCouverture.EXCSetId( (unsigned int)"ouverture_echouee" ); //erreur de type 4
-		EXCouverture.EXCSetCommentaire("nomDeLaFonction : ouverture du fichier impossible");
+		EXCouverture.EXCSetId(echec_ouverture_fichier); //erreur de type 4
+		EXCouverture.EXCSetCommentaire("FICparcourir : ouverture du fichier impossible");
 		throw(EXCouverture);
 	}
 
@@ -121,8 +124,8 @@ int CFichier::FICparcourir() throw(CException) {
 	}
 	else {
 		CException EXCformatContenu;
-		EXCformatContenu.EXCSetId((unsigned int)"format_incompatible"); //erreur de type 4
-		EXCformatContenu.EXCSetCommentaire("nomDeLaFonction : contenu du fichier incompatible");
+		EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
+		EXCformatContenu.EXCSetCommentaire("FICparcourir() : contenu du fichier incompatible");
 		throw(EXCformatContenu);
 	}
 

@@ -207,9 +207,11 @@ int CMatriceTestMult(CMatrice<double>& MATArg) {
 }
 
 int CExceptionTest() {
+	//init
 	CMatrice<double> MAT1 = CMatrice<double>(2, 2);
 	CMatrice<double> MAT2 = CMatrice<double>(3, 3);
 
+	//test
 	try {
 		
 		CException A;
