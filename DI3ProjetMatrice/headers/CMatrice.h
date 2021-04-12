@@ -19,7 +19,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : MATnew : CMatrice<T>
-		 *	Postcondition : Les attributs de l'objet CMatrice sont alloues/initialises
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> sont alloues/initialises
 		 */
 		CMatrice();
 
@@ -28,7 +28,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Remarques :
 		 *		- MATArg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MATArg : CMatrice<T2>
+		 *	Entree : MATArg : CMatrice<T>
 		 *	Precondition : neant
 		 *	Sortie : MATnew : CMatrice<T>
 		 *	Postcondition : Les attributs de l'objet CMatrice<T> MATnew sont alloues/initialises
@@ -66,7 +66,7 @@ class CMatrice : public CMatriceStructure {
 		 *	Entree : rien
 		 *	Precondition : neant
 		 *	Sortie : rien
-		 *	Postcondition : Les attributs de l'objet CMatrice sont liberes
+		 *	Postcondition : Les attributs de l'objet CMatrice<T> sont liberes
 		 */
 		~CMatrice();
 
@@ -127,19 +127,21 @@ class CMatrice : public CMatriceStructure {
 			CMatrice<T2> MAT2 = CMatrice<T2>(MATgetDimLigne(), MATgetDimColonne()); //objet temporaire
 
 			//recopie des elements de la matrice dans MAT2
-			for (unsigned int uiBoucleForX = 0; uiBoucleForX < MAT2.MATgetDimLigne(); uiBoucleForX++)
-				for (unsigned int uiBoucleForY = 0; uiBoucleForY < MAT2.MATgetDimColonne(); uiBoucleForY++)
+			for (unsigned int uiBoucleForX = 0; uiBoucleForX < MAT2.MATgetDimLigne(); uiBoucleForX++) {
+				for (unsigned int uiBoucleForY = 0; uiBoucleForY < MAT2.MATgetDimColonne(); uiBoucleForY++) {
 					//conversion de chaque element T en T2 puis recopie a l'emplacement (uiBoucleForX,uiBoucleForY) de MAT2
-					MAT2.MATsetElem(uiBoucleForX, uiBoucleForY, (T2) MATgetElem(uiBoucleForX, uiBoucleForY));
+					MAT2.MATsetElem(uiBoucleForX, uiBoucleForY, (T2)MATgetElem(uiBoucleForX, uiBoucleForY));
+				}
+			}
 
 			return MAT2; //passage par valeur : MAT2 est recopie
 		}
 
 		/*
-		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T2> MAT2arg
-		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *	Methode de type operateur a un argument recopiant la matrice CMatrice<T> MATarg
+		 *		- MATarg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MAT2arg : CMatrice<T2>
+		 *	Entree : MATarg : CMatrice<T>
 		 *	Precondition : neant
 		 *	Sortie : MATactuelle : CMatrice<T>
 		 *	Postcondition : {MATactuelle = MAT2arg}
@@ -153,7 +155,7 @@ class CMatrice : public CMatriceStructure {
 		 *
 		 *	Entree : T2arg : T2
 		 *	Precondition : neant
-		 *	Sortie : MATmult : CMatrice
+		 *	Sortie : MATmult : CMatrice<T>
 		 *	Postcondition : {MATmult = MATactuelle * T2arg}
 		 */
 		template<class T2>
@@ -166,44 +168,44 @@ class CMatrice : public CMatriceStructure {
 		 *
 		 *	Entree : T2arg : T2
 		 *	Precondition : neant
-		 *	Sortie : MATdiv : CMatrice
+		 *	Sortie : MATdiv : CMatrice<T>
 		 *	Postcondition : {MATdiv = MATactuelle / T2arg}
 		 */
 		template<class T2>
 		CMatrice<T> operator/(const T2 T2arg) const throw(CException);
 
 		/*
-		 *	Methode template de type operateur a un argument renvoyant la matrice additionnee par une CMatrice<T2> MAT2arg
-		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *	Methode template de type operateur a un argument renvoyant la matrice additionnee par une CMatrice<T> MATarg
+		 *		- MATarg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MAT2arg : CMatrice
+		 *	Entree : MATarg : CMatrice<T>
 		 *	Precondition : neant
-		 *	Sortie : MATadd : CMatrice
-		 *	Postcondition : {MATadd = MATactuelle + MAT2arg}
+		 *	Sortie : MATadd : CMatrice<T>
+		 *	Postcondition : {MATadd = MATactuelle + MATarg}
 		 */
-		CMatrice<T> operator+(const CMatrice<T>& MAT2arg) const throw(CException);
+		CMatrice<T> operator+(const CMatrice<T>& MATarg) const throw(CException);
 
 		/*
-		 *	Methode template de type operateur a un argument renvoyant la matrice soustraite par une CMatrice<T2> MAT2arg
-		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *	Methode template de type operateur a un argument renvoyant la matrice soustraite par une CMatrice<T> MATarg
+		 *		- MATarg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MAT2arg : CMatrice
+		 *	Entree : MATarg : CMatrice<T>
 		 *	Precondition : neant
-		 *	Sortie : MATsous : CMatrice
-		 *	Postcondition : {MATsous = MATactuelle - MAT2arg}
+		 *	Sortie : MATsous : CMatrice<T>
+		 *	Postcondition : {MATsous = MATactuelle - MATarg}
 		 */
-		CMatrice<T> operator-(const CMatrice<T>& MAT2arg) const throw(CException);
+		CMatrice<T> operator-(const CMatrice<T>& MATarg) const throw(CException);
 
 		/*
-		 *	Methode template de type operateur a un argument renvoyant la matrice multipliee par une CMatrice<T2> MAT2arg
-		 *		- MAT2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
+		 *	Methode template de type operateur a un argument renvoyant la matrice multipliee par une CMatrice<T> MATarg
+		 *		- MATarg est constant car il ne doit pas etre modifie lors de l'execution de la methode
 		 *
-		 *	Entree : MAT2arg : CMatrice<T2>
+		 *	Entree : MATarg : CMatrice<T>
 		 *	Precondition : neant
 		 *	Sortie : MATmult : CMatrice<T>
-		 *	Postcondition : {MATmult = MATactuelle * MAT2arg}
+		 *	Postcondition : {MATmult = MATactuelle * MATarg}
 		 */
-		CMatrice<T> operator*(const CMatrice<T>& MAT2arg) const throw(CException);
+		CMatrice<T> operator*(const CMatrice<T>& MATarg) const throw(CException);
 
 
 	//autres methodes
@@ -231,17 +233,17 @@ class CMatrice : public CMatriceStructure {
 };
 
 /*
- *	Methode de type operateur a deux argument renvoyant un nombre constant T2 T2arg multiplie par la matrice CMatrice<T2> MAT2arg
+ *	Methode de type operateur a deux argument renvoyant un nombre constant T2 T2arg multiplie par la matrice CMatrice<T> MATarg
  *	Remarques :
  *		- T2arg est constant car il ne doit pas etre modifie lors de l'execution de la methode
  *
- *	Entree : T2arg : T2, MAT2arg : CMatrice<T2>
+ *	Entree : T2arg : T2, MATarg : CMatrice<T>
  *	Precondition : neant
  *	Sortie : MATmult : CMatrice<T>
- *	Postcondition : {MATmult = T2arg * MAT2arg}
+ *	Postcondition : {MATmult = T2arg * MATarg}
  */
 template<class T, class T2>
-CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MAT2arg) throw(CException);
+CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MATarg) throw(CException);
 
 
 /* Definitions des methodes */

@@ -31,7 +31,7 @@ CMatrice<T>::CMatrice(const CMatrice<T>& MATarg) throw(CException) {
 	ppdMATelem = new T*[uiMATdimLigne];
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
-		//recopie chaque element de MAT2arg par colonne (par ligne)
+		//recopie chaque element de MATarg par colonne (par ligne)
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
 			ppdMATelem[uiBoucleForX][uiBoucleForY] = (const T) MATarg.MATgetElem(uiBoucleForX, uiBoucleForY);
 		}
@@ -292,7 +292,7 @@ CMatrice<T> CMatrice<T>::operator+(const CMatrice<T>& MATarg) const throw(CExcep
 	MATadd.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATadd.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
-		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MAT2arg, pour chaque colonne
+		//recopie le resultat pour chaque element de sa somme avec celui aux memes coordonnees dans MATarg, pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
 			MATadd.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] + MATarg.ppdMATelem[uiBoucleForX][uiBoucleForY];
 		}
@@ -325,7 +325,7 @@ CMatrice<T> CMatrice<T>::operator-(const CMatrice<T>& MATarg) const throw(CExcep
 	MATsous.ppdMATelem = new T*[uiMATdimLigne]; //allocation dynamique de chaque ligne
 	for (unsigned int uiBoucleForX = 0; uiBoucleForX < uiMATdimLigne; uiBoucleForX++) {
 		MATsous.ppdMATelem[uiBoucleForX] = new T[uiMATdimColonne]; //allocation dynamique du contenu de chaque colonne (par ligne)
-		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MAT2arg, pour chaque colonne
+		//recopie le resultat pour chaque element de sa soustraction par celui aux memes coordonnees dans MATarg, pour chaque colonne
 		for (unsigned int uiBoucleForY = 0; uiBoucleForY < uiMATdimColonne; uiBoucleForY++) {
 			MATsous.ppdMATelem[uiBoucleForX][uiBoucleForY] = ppdMATelem[uiBoucleForX][uiBoucleForY] - MATarg.ppdMATelem[uiBoucleForX][uiBoucleForY];
 		}

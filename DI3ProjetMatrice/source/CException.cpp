@@ -28,7 +28,10 @@ void CException::EXCGestionaireException() const throw(CException) {
 			bInconnue = true;
 			break;
 	}
-	if (EXCGetCommentaire() != "") cout << " dans " << EXCGetCommentaire();
+
+	if (EXCGetCommentaire() != "") {
+		cout << " dans " << EXCGetCommentaire();
+	}
 	cout << "\n";
 
 	if (bInconnue) throw(this);

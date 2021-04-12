@@ -23,7 +23,7 @@ CFichier::CFichier(CFichier &FICarg) {
 	if (FICarg.pcFICnom != nullptr)
 		pcFICnom = FICarg.pcFICnom;
 	if (FICarg.pFICfichier != nullptr)
-		pFICfichier = new FILE(*FICarg.pFICfichier);
+		pFICfichier = FICarg.pFICfichier;
 	if (FICarg.pMATDmatrice != nullptr)
 		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
 }
@@ -34,7 +34,7 @@ CFichier::CFichier(const char* pcNomFichier) {
 	pFICfichier = nullptr;
 	pMATDmatrice = nullptr;
 
-	//extrait CMatrice, donne une valeur aux deux precedents attributs
+	//extrait CMatrice<double>, donne une valeur aux deux precedents attributs
 	FICparcourir();
 }
 
@@ -59,7 +59,7 @@ CFichier& CFichier::operator=(CFichier &FICarg) {
 	if (FICarg.pcFICnom != nullptr)
 		pcFICnom = FICarg.pcFICnom;
 	if (FICarg.pFICfichier != nullptr)
-		pFICfichier = new FILE(*FICarg.pFICfichier);
+		pFICfichier = FICarg.pFICfichier;
 	if (FICarg.pMATDmatrice != nullptr)
 		pMATDmatrice = new CMatrice<double>(*FICarg.pMATDmatrice);
 	
@@ -89,9 +89,11 @@ int CFichier::FICparcourir() throw(CException) {
 
 	bool formatIncorrect = false;
 	
-	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++)
-		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double\n"[uiBoucleFor])
+	for (unsigned int uiBoucleFor = 0; uiBoucleFor < 20; uiBoucleFor++) {
+		if (pligneCourante[uiBoucleFor] != "TypeMatrice=double\n"[uiBoucleFor]) {
 			formatIncorrect = true;
+		}
+	}
 
 	if (!formatIncorrect) {
 		//on deplace le curseur afin de scanner le nombre de lignes
@@ -113,11 +115,12 @@ int CFichier::FICparcourir() throw(CException) {
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
 		double dElement = 0;
-		for (unsigned int i = 0; i < uiNbLignes; i++)
+		for (unsigned int i = 0; i < uiNbLignes; i++) {
 			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
 				pMATD->MATsetElem(i, j, dElement);
 			}
+		}
 		//on garde la variable MAT dans notre objet CFichier
 		pMATDmatrice = pMATD;
 	}
