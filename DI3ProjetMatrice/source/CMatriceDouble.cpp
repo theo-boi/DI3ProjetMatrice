@@ -2,6 +2,7 @@
 #include "../headers/CMatriceDouble.h"
 #endif
 #include <iostream>
+using namespace std;
 
 /*******************************************************/
 /************ Constructeurs et destructeurs ************/
@@ -16,7 +17,7 @@ CMatriceDouble::CMatriceDouble(const CMatriceDouble& MADArg) throw(CException) {
 	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
 	if (MADArg.ppdMADelem != nullptr) {
 		try { (double) MADArg.ppdMADelem[0][0]; }
-		catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+		catch (CException EXCLevee) { cout << EXCLevee.EXCGetCommentaire(); }
 		catch (...) {
 			CException EXCconversion;
 			EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -72,7 +73,7 @@ CMatriceDouble::~CMatriceDouble() {
 CMatriceDouble CMatriceDouble::operator*(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) lfArg; }
-	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (CException EXCLevee) { cout << EXCLevee.EXCGetCommentaire(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -114,7 +115,7 @@ CMatriceDouble operator*(const long double cldArg, const CMatriceDouble MADArg) 
 CMatriceDouble CMatriceDouble::operator/(const long double lfArg) const throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(clfArg) est trop different.
 	try { (const double) lfArg; }
-	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (CException EXCLevee) { cout << EXCLevee.EXCGetCommentaire(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
@@ -249,7 +250,7 @@ CMatriceDouble& CMatriceDouble::operator=(const CMatriceDouble& MADArg) throw(CE
 	//Test a mettre dans le constructeur de conversion du template : operator ClassDifferente()
 	if (MADArg.ppdMADelem != nullptr) {
 		try { (double) MADArg.ppdMADelem[0][0]; }
-		catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+		catch (CException EXCLevee) { cout << EXCLevee.EXCGetCommentaire(); }
 		catch (...) {
 			CException EXCconversion;
 			EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1

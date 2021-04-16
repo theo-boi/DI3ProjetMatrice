@@ -20,8 +20,7 @@ int main(int argc, char *argv[]) {
 			pMATDbdd[uiBoucleArgs-uiNbFichierDefaillants].MATprint(1); //affichage de la matrice
 		}
 		catch (CException EXCextraction) {
-			EXCextraction.EXCGestionaireException();
-			cout << endl;
+			cout << EXCextraction.EXCGetCommentaire() << endl;
 			uiNbFichierDefaillants++;
 		}
 	}
@@ -36,14 +35,14 @@ int main(int argc, char *argv[]) {
 	cout << "Pour chaque matrice M, resultat de c*M :\n\n";
 	for (unsigned int uiBoucleBdd = 0; uiBoucleBdd < uiNbFichiers; uiBoucleBdd++) {
 		try { (dConstante * pMATDbdd[uiBoucleBdd]).MATprint(1); }
-		catch (CException EXCmultConst) { EXCmultConst.EXCGestionaireException(); }
+		catch (CException EXCmultConst) { cout << EXCmultConst.EXCGetCommentaire() << endl; }
 	}
 
 	//affichage du resultat de la division de chaque matrice par la valeur dConstante : M/c
 	cout << "\nPour chaque matrice M, resultat de M/c :\n\n";
 	for (unsigned int uiBoucleBdd = 0; uiBoucleBdd < uiNbFichiers; uiBoucleBdd++) {
 		try { (pMATDbdd[uiBoucleBdd] / dConstante).MATprint(1); }
-		catch (CException EXCdivConst) { EXCdivConst.EXCGestionaireException(); }
+		catch (CException EXCdivConst) { cout << EXCdivConst.EXCGetCommentaire() << endl; }
 	}
 
 
@@ -59,7 +58,7 @@ int main(int argc, char *argv[]) {
 	}
 	catch (CException EXCsomme) {
 		cout << endl;
-		EXCsomme.EXCGestionaireException();
+		cout << EXCsomme.EXCGetCommentaire() << endl;
 	}
 
 	//affichage du resultat de l'operation : M1-M2+M3-M4+M5-M6+...
@@ -79,7 +78,7 @@ int main(int argc, char *argv[]) {
 	}
 	catch (CException EXCsommeAlt) {
 		cout << endl;
-		EXCsommeAlt.EXCGestionaireException();
+		cout << EXCsommeAlt.EXCGetCommentaire() << endl;
 	}
 
 	//affichage du resultat du produit des matrices : M1xM2xM3x...
@@ -95,7 +94,7 @@ int main(int argc, char *argv[]) {
 	}
 	catch (CException EXCsommeM) {
 		cout << endl;
-		EXCsommeM.EXCGestionaireException();
+		cout << EXCsommeM.EXCGetCommentaire() << endl;
 	}
 
 
