@@ -95,7 +95,7 @@ int CMatriceTestConst(const CMatrice<double>* pMATConst) {
 		//*MATConst.MATSetElem(0, 0, 0); //ne fonctionne pas car MATSetElem ne peut pas etre une methode constante
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 
 	return 0;
@@ -107,7 +107,7 @@ int CMatriceTestPrint(CMatrice<double>& MATArg) {
 		MATArg.MATprint(1);
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -122,7 +122,7 @@ int CMatriceTestMultConst(CMatrice<double>& MATArg) {
 		( MATArg * 10 ).MATprint(1); //MATArg*10
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	cout << endl;
 	/*
@@ -134,7 +134,7 @@ int CMatriceTestMultConst(CMatrice<double>& MATArg) {
 		( 10 * MATArg ).MATprint(1); //10*MATArg
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -149,7 +149,7 @@ int CMatriceTestDivConst(CMatrice<double>& MATArg) {
 		(MATArg / 10).MATprint(1); //MATArg/21
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 
 	/*
@@ -165,7 +165,7 @@ int CMatriceTestT(CMatrice<double>& MATArg) {
 		MATArg.MATt().MATprint(1);
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -177,7 +177,7 @@ int CMatriceTestAdd(CMatrice<double>& MATArg) {
 		(MATArg + (10 * MATDix)).MATprint();
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -189,7 +189,7 @@ int CMatriceTestSous(CMatrice<double>& MATArg) {
 		(MATArg - MATDix).MATprint();
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -201,7 +201,7 @@ int CMatriceTestMult(CMatrice<double>& MATArg) {
 		(MATArg * MATArgT).MATprint();
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	return 0;
 }
@@ -223,7 +223,7 @@ int CExceptionTest() {
 		
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur. Ici : arrete le programme
+		cout << EXClevee.EXCGetCommentaire(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur. Ici : arrete le programme
 	}
 	cout << "L'execution du programme continue !\n\n\n";
 	return 0;

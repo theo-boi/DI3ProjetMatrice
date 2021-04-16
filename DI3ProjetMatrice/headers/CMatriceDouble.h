@@ -226,7 +226,7 @@ double CMatriceDouble::MADgetElem(const unsigned int uiX, const unsigned int uiY
 void CMatriceDouble::MADsetElem(const unsigned int uiX, const unsigned int uiY, const long double ldElem) throw(CException) {
 	//Effectuer un try pour lever les erreurs de conversion si type(cldElem) est trop different
 	try { (const double) ldElem; }
-	catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+	catch (CException EXCLevee) { std::cout << EXCLevee.EXCGetCommentaire(); }
 	catch (...) {
 		CException EXCconversion;
 		EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1

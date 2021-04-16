@@ -4,6 +4,12 @@
 #endif
 #include "CMatriceStructure.inc.h"
 
+#define types_incompatibles 1
+
+#define dimensions_incompatibles 2
+
+#define division_zero 3
+
 class CMatriceStructure {
 	//attributs
 	protected:
@@ -36,27 +42,6 @@ class CMatriceStructure {
 
 
 	//accesseurs et mutateurs
-	protected:
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimLigne
-		 *
-		 *	Entree : uiDimLigne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimLigne = uiMATDimLigne)
-		 */
-		virtual void MATsetDimLigne(const unsigned int uiDimLigne) { uiMATdimLigne = uiDimLigne; };
-
-		/*
-		 *	Methode INLINE de type mutateur a trois arguments attribuant au nombre de colonne de la matrice la valeur uiDimColonne
-		 *
-		 *	Entree : uiDimColonne : entier non signe
-		 *	Precondition : neant
-		 *	Sortie : neant
-		 *	Postcondition : (uiDimColonne = uiMATdimColonne)
-		 */
-		virtual void MATsetDimColonne(const unsigned int uiDimColonne) { uiMATdimColonne = uiDimColonne; };
 
 	public:
 

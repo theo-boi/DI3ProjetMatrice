@@ -34,7 +34,7 @@ int CMatriceTest() {
 		MAT.MATprint(1);
 	}
 	catch (CException EXClevee) {
-		EXClevee.EXCGestionaireException();
+		cout << EXClevee.EXCGetCommentaire();
 		std::cout << "\n\n";
 	}
 	return 0;

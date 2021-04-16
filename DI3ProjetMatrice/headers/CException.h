@@ -83,20 +83,6 @@ class CException {
 		 *	Postcondition : {pcEXCCommentaire = pcArg}
 		 */
 		void EXCSetCommentaire(const char* pcArg) { pcEXCCommentaire = pcArg; };
-
-
-	//methodes
-	public:
-
-		/*
-		 *	Methode sans argument gerant une exception
-		 *
-		 *	Entree : rien
-		 *	Precondition : neant
-		 *	Sortie : rien
-		 *	Postcondition : L'objet CException est gere sinon il est a nouveau releve
-		 */
-		void EXCGestionaireException() const throw(CException);
 };
 
 

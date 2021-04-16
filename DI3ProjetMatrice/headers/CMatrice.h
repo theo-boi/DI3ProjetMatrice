@@ -115,7 +115,7 @@ class CMatrice : public CMatriceStructure {
 		operator CMatrice<T2>() throw(CException) {
 			//Leve l'exception de conversion si type trop different
 			try { (T2) MATgetElem(0, 0); }
-			catch (CException EXCLevee) { EXCLevee.EXCGestionaireException(); }
+			catch (CException EXCLevee) { std::cout << EXCLevee.EXCGetCommentaire(); }
 			catch (...) {
 				CException EXCconversion;
 				EXCconversion.EXCSetId(types_incompatibles); //erreur de type 1
