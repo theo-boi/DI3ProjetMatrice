@@ -53,9 +53,6 @@
     <ClInclude Include="headers\CMatriceStructure.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="headers\CMatriceStructure.inc.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

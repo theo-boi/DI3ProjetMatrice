@@ -223,7 +223,7 @@ int CExceptionTest() {
 		
 	}
 	catch (CException EXClevee) {
-		cout << EXClevee.EXCGetCommentaire(); //si EXClevee est inconnue, throw(EXClevee) au niveau superieur. Ici : arrete le programme
+		cout << EXClevee.EXCGetCommentaire();
 	}
 	cout << "L'execution du programme continue !\n\n\n";
 	return 0;
