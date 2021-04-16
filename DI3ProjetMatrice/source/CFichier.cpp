@@ -151,24 +151,26 @@ int CFichier::FICparcourir() throw(CException) {
 		/*on initialise les elements de la matrice creee en memoire a partir
 		de ceux du fichier texte */
 		double dElement = 0;
+		char c;
 
 		for (unsigned int i = 0; i < uiNbLignes; i++) {
 			for (unsigned int j = 0; j < uiNbColonnes; j++) {
 				fscanf_s(pFICfichier, "%lf", &dElement);
 				pMATD->MATsetElem(i, j, dElement);
 			}
+			c = fgetc(pFICfichier);
+			if (c != '\n') { formatIncorrect = true; }
 		}
 
-		char c;
-		fseek(pFICfichier, 2, SEEK_CUR);
 		c = fgetc(pFICfichier);
+		if (c != ']') { formatIncorrect = true; }
 
 		//si il y a eu un pb de dimension
-		if (c != ']')
+		if (formatIncorrect)
 		{
 			CException EXCformatContenu;
 			EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
-			EXCformatContenu.EXCSetCommentaire("FICparcourir() : nombre de lignes ou de colonnes mal renseigne");
+			EXCformatContenu.EXCSetCommentaire("FICparcourir() : matrice non adaptee");
 			throw(EXCformatContenu);
 		}
 
