@@ -4,6 +4,10 @@
 #include "CMatrice.h"
 #endif
 
+#define echec_ouverture_fichier 4 
+
+#define fichier_incompatible 5
+
 
 class CFichier {
 	//attributs
