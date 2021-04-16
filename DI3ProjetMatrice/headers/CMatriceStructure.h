@@ -2,7 +2,6 @@
 #ifndef CEXCEPTIONH
 #include "CException.h"
 #endif
-#include "CMatriceStructure.inc.h"
 
 #define types_incompatibles 1
 
@@ -10,6 +9,9 @@
 
 #define division_zero 3
 
+/*
+ *	CMatriceStructure est une classe abstraite, généralisant les différentes instances du template CMatrice.
+ */
 class CMatriceStructure {
 	//attributs
 	protected:
