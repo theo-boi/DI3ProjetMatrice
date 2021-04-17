@@ -16,12 +16,4 @@
 #include "CMatrice.h"
 #endif
 
-#ifndef CMATRICEDOUBLEH
-#include "CMatriceDouble.h"
-#endif
-
-#ifndef TESTH
-#include "Test.h"
-#endif
-
 #include <iostream>

@@ -154,23 +154,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\CFichier.cpp" />
-    <ClCompile Include="source\CMatriceDouble.cpp" />
     <ClCompile Include="source\DI3ProjetMatrice.cpp" />
-    <ClCompile Include="source\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\CException.h" />
     <ClInclude Include="headers\CFichier.h" />
-    <ClInclude Include="headers\CMatriceDouble.h" />
     <ClInclude Include="headers\CMatrice.h" />
     <ClInclude Include="headers\CMatrice.inc.h" />
     <ClInclude Include="headers\CMatriceStructure.h" />
     <ClInclude Include="headers\DI3ProjetMatrice.h" />
-    <ClInclude Include="headers\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fichierMatrice.txt" />
