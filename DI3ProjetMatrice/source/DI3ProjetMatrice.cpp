@@ -25,6 +25,9 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	uiNbFichiers -= uiNbFichierDefaillants;
+
+	if (!uiNbFichiers)
+		return 1; //si il n'y a aucun fichier valide, on n'execute pas la suite du programme
 	
 	//initialisation de c
 	double dConstante;
