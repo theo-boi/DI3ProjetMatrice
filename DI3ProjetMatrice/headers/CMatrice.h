@@ -249,3 +249,5 @@ CMatrice<T> operator*(const T2 T2arg, const CMatrice<T>& MATarg) throw(CExceptio
 /* Definitions des methodes */
 
 #include "CMatrice.inc.h"
+
+template class CMatrice<double>;
