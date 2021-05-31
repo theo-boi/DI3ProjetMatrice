@@ -75,7 +75,7 @@ int CFichier::FICparcourir() throw(CException) {
 	if (!pFICfichier) {
 		CException EXCouverture;
 		EXCouverture.EXCSetId(echec_ouverture_fichier); //erreur de type 4
-		EXCouverture.EXCSetCommentaire("FICparcourir : ouverture du fichier impossible");
+		EXCouverture.EXCSetCommentaire("Erreur \"echec d'ouverture du fichier\" dans FICparcourir");
 		throw(EXCouverture);
 	}
 
@@ -138,7 +138,7 @@ int CFichier::FICparcourir() throw(CException) {
 		{
 			CException EXCformatContenu;
 			EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
-			EXCformatContenu.EXCSetCommentaire("FICparcourir() : nombre de lignes ou de colonnes mal renseigne");
+			EXCformatContenu.EXCSetCommentaire("Erreur \"fichier incompatible\" dans FICparcourir() : nombre de lignes ou de colonnes mal renseigne");
 			throw(EXCformatContenu);
 		}
 
@@ -170,7 +170,7 @@ int CFichier::FICparcourir() throw(CException) {
 		{
 			CException EXCformatContenu;
 			EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
-			EXCformatContenu.EXCSetCommentaire("FICparcourir() : matrice non adaptee");
+			EXCformatContenu.EXCSetCommentaire("Erreur \"fichier incompatible\" dans FICparcourir() : matrice non adaptee");
 			throw(EXCformatContenu);
 		}
 
@@ -180,7 +180,7 @@ int CFichier::FICparcourir() throw(CException) {
 	else {
 		CException EXCformatContenu;
 		EXCformatContenu.EXCSetId(fichier_incompatible); //erreur de type 5
-		EXCformatContenu.EXCSetCommentaire("FICparcourir() : contenu du fichier incompatible");
+		EXCformatContenu.EXCSetCommentaire("Erreur \"fichier incompatible\" dans FICparcourir() : contenu du fichier incompatible");
 		throw(EXCformatContenu);
 	}
 

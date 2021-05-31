@@ -421,27 +421,26 @@ CMatrice<T> CMatrice<T>::MATt() const {
 template<class T>
 bool CMatrice<T>::MATisVandermonde() const {
 
-	//si une seule colonne ou dimension ligne nulle
-	if (uiMATdimColonne < 2)
+	switch (uiMATdimColonne)
 	{
-		if (uiMATdimColonne == 0)
-		{//0 dimension 
+		case 0:
 			return true;
-		}
-		// si une seule colonne = que des 1
-		for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++)
-		{
-			if (ppdMATelem[uiBoucleForXi][0] != 1)
+		case 1:
+			for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++)
 			{
-				return false;
+				if (ppdMATelem[uiBoucleForXi][0] != 1)
+				{
+					return false;
+				}
 			}
-		}
-		return true;
+			return true;
 	}
 
-	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++) {
+	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++)
+	{
 		int iExpected = 1;
-		for (unsigned int uiBoucleForXj = 0; uiBoucleForXj < uiMATdimColonne; uiBoucleForXj++) {
+		for (unsigned int uiBoucleForXj = 0; uiBoucleForXj < uiMATdimColonne; uiBoucleForXj++)
+		{
 			if (ppdMATelem[uiBoucleForXi][uiBoucleForXj] != iExpected)
 			{ 
 				return false;
@@ -455,31 +454,34 @@ bool CMatrice<T>::MATisVandermonde() const {
 
 template<class T>
 int CMatrice<T>::MATVandermondeDet() const {
-	if (!this->MATisVandermonde()) {
+	if (!MATisVandermonde())
+	{
 		CException EXCvandermonde;
 		EXCvandermonde.EXCSetId(types_incompatibles); //erreur de type 1
 		EXCvandermonde.EXCSetCommentaire("Erreur \"types incompatibles\" dans MATVandermondeDet() : la matrice consideree n\'est pas de Vandermonde");
 		throw(EXCvandermonde);
 	}
-
 	if (	(uiMATdimLigne != uiMATdimColonne)
-		|| ((uiMATdimLigne == uiMATdimColonne) && (uiMATdimLigne == 0)) ) {
+		|| ((uiMATdimLigne == uiMATdimColonne) && (uiMATdimLigne == 0)) )
+	{
 		CException EXCdet;
 		EXCdet.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdet.EXCSetCommentaire("Erreur \"dimensions incompatibles\" dans MATVandermindeDet() : nombre de LIGNES et de COLONNES ne permettant pas de calculer le determinant");
+		EXCdet.EXCSetCommentaire("Erreur \"dimensions incompatibles\" dans MATVandermindeDet() : nombre de LIGNES ou de COLONNES ne permettant pas de calculer le determinant");
 		throw(EXCdet);
 	}
 
-
 	if (uiMATdimLigne == 1)
+	{
 		return ppdMATelem[0][0];
+	}
 
 	int iDet = 1;
-	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne-1; uiBoucleForXi++) {
-		for (unsigned int uiBoucleForXj = uiBoucleForXi + 1; uiBoucleForXj < uiMATdimLigne; uiBoucleForXj++) {
+	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne-1; uiBoucleForXi++)
+	{
+		for (unsigned int uiBoucleForXj = uiBoucleForXi + 1; uiBoucleForXj < uiMATdimLigne; uiBoucleForXj++)
+		{
 			iDet *= (ppdMATelem[uiBoucleForXj][1] - ppdMATelem[uiBoucleForXi][1]);
 		}
 	}
-
 	return iDet;
 }

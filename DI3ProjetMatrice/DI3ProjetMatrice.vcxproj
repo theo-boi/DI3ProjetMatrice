@@ -172,6 +172,8 @@
     <Text Include="fichierMatrice2.txt" />
     <Text Include="fichierMatrice3.txt" />
     <Text Include="fichierMatriceVandermonde1.txt" />
+    <Text Include="fichierMatriceVandermonde2.txt" />
+    <Text Include="fichierMatriceVandermonde3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
