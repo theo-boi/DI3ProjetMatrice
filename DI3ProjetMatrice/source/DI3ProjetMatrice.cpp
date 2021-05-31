@@ -28,12 +28,15 @@ int main(int argc, char *argv[]) {
 
 	if (!uiNbFichiers)
 		return 1; //si il n'y a aucun fichier valide, on n'execute pas la suite du programme
-	
+
+	cout << "det = " << pMATDbdd[0].MATVandermondeDet() << "\n";
+
+	/*
 	//initialisation de c
 	double dConstante;
-	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n"; /********* INTERVENTION UTILISATEUR *********/
+	cout << "Entrez une constante c = "; cin >> dConstante; cout << "\n\n\n"; *//********* INTERVENTION UTILISATEUR *********/
 
-
+	/*
 	//affichage du resultat de la multiplication de chaque matrice par la valeur dConstante : c*M
 	cout << "Pour chaque matrice M, resultat de c*M :\n\n";
 	for (unsigned int uiBoucleBdd = 0; uiBoucleBdd < uiNbFichiers; uiBoucleBdd++) {
@@ -99,7 +102,7 @@ int main(int argc, char *argv[]) {
 		cout << endl;
 		cout << EXCsommeM.EXCGetCommentaire() << endl;
 	}
-
+	*/
 
 	delete[] pMATDbdd;
 	return 0;

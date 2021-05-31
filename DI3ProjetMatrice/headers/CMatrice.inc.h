@@ -416,3 +416,31 @@ CMatrice<T> CMatrice<T>::MATt() const {
 	}
 	return MATt;
 }
+
+template<class T>
+int CMatrice<T>::MATVandermondeDet() const {
+	if ("inserer fonction Sarah") {
+		//inserer nouvelle exception pour Vandermonde
+	}
+
+	if (	(uiMATdimLigne != uiMATdimColonne)
+		|| ((uiMATdimLigne == uiMATdimColonne) && (uiMATdimLigne == 0)) ) {
+		CException EXCdet;
+		EXCdet.EXCSetId(dimensions_incompatibles); //erreur de type 2
+		EXCdet.EXCSetCommentaire("Erreur \"dimensions incompatibles\" dans MATdet() : nombre de LIGNES et de COLONNES ne permettant pas de calculer le determinant");
+		throw(EXCdet);
+	}
+
+
+	if (uiMATdimLigne == 1)
+		return ppdMATelem[0][0];
+
+	int iDet = 1;
+	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne-1; uiBoucleForXi++) {
+		for (unsigned int uiBoucleForXj = uiBoucleForXi + 1; uiBoucleForXj < uiMATdimLigne; uiBoucleForXj++) {
+			iDet *= (ppdMATelem[uiBoucleForXj][1] - ppdMATelem[uiBoucleForXi][1]);
+		}
+	}
+
+	return iDet;
+}

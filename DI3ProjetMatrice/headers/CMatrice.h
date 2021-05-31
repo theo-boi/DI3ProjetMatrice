@@ -230,6 +230,16 @@ class CMatrice : public CMatriceStructure {
 		 *	Postcondition : MATt est la transposee de MATactuelle
 		 */
 		CMatrice<T> MATt() const;
+
+		/*
+		 *	Methode sans argument renvoyant le determinant de la matrice de Vandermonde
+		 *
+		 *	Entree : rien
+		 *	Precondition : neant
+		 *	Sortie : iDet : int
+		 *	Postcondition : iDet est le determinant de la matrice de Vandermonde
+		 */
+		int MATVandermondeDet() const;
 };
 
 /*
