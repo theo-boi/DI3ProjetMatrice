@@ -231,8 +231,16 @@ class CMatrice : public CMatriceStructure {
 		 */
 		CMatrice<T> MATt() const;
 
+		/**
+		 * Methode sans argument regardant si une matrice est de Vandermonde.
+		 * 
+		 * Sortie : bool
+		 * Postcondition : {bool = la matrice est de Vandermonde}
+		 */
+		bool MATisVandermonde() const;
+
 		/*
-		 *	Methode sans argument renvoyant le determinant de la matrice de Vandermonde
+		 *	Methode sans argument renvoyant le determinant de la matrice de Vandermonde.
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant

@@ -29,7 +29,16 @@ int main(int argc, char *argv[]) {
 	if (!uiNbFichiers)
 		return 1; //si il n'y a aucun fichier valide, on n'execute pas la suite du programme
 
-	cout << "det = " << pMATDbdd[0].MATVandermondeDet() << "\n";
+	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++) {
+		try {
+			cout << "det = " << pMATDbdd[0].MATVandermondeDet() << "\n";
+		}
+		catch (CException EXCextraction) {
+			cout << EXCextraction.EXCGetCommentaire() << endl;
+			uiNbFichierDefaillants++;
+		}
+	}
+	
 
 	/*
 	//initialisation de c

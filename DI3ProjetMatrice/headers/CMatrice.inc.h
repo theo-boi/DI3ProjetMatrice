@@ -1,6 +1,7 @@
 #ifndef CMATRICEH
 #include "CMatrice.h"
 #endif
+
 using namespace std;
 
 /*******************************************************/
@@ -418,16 +419,54 @@ CMatrice<T> CMatrice<T>::MATt() const {
 }
 
 template<class T>
+bool CMatrice<T>::MATisVandermonde() const {
+
+	//si une seule colonne ou dimension ligne nulle
+	if (uiMATdimColonne < 2)
+	{
+		if (uiMATdimColonne == 0)
+		{//0 dimension 
+			return true;
+		}
+		// si une seule colonne = que des 1
+		for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++)
+		{
+			if (ppdMATelem[uiBoucleForXi][0] != 1)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne; uiBoucleForXi++) {
+		int iExpected = 1;
+		for (unsigned int uiBoucleForXj = 0; uiBoucleForXj < uiMATdimColonne; uiBoucleForXj++) {
+			if (ppdMATelem[uiBoucleForXi][uiBoucleForXj] != iExpected)
+			{ 
+				return false;
+			}
+			iExpected *= ppdMATelem[uiBoucleForXi][1];
+		}
+	}
+	return true;
+
+}
+
+template<class T>
 int CMatrice<T>::MATVandermondeDet() const {
-	if ("inserer fonction Sarah") {
-		//inserer nouvelle exception pour Vandermonde
+	if (!this->MATisVandermonde()) {
+		CException EXCvandermonde;
+		EXCvandermonde.EXCSetId(types_incompatibles); //erreur de type 1
+		EXCvandermonde.EXCSetCommentaire("Erreur \"types incompatibles\" dans MATVandermondeDet() : la matrice consideree n\'est pas de Vandermonde");
+		throw(EXCvandermonde);
 	}
 
 	if (	(uiMATdimLigne != uiMATdimColonne)
 		|| ((uiMATdimLigne == uiMATdimColonne) && (uiMATdimLigne == 0)) ) {
 		CException EXCdet;
 		EXCdet.EXCSetId(dimensions_incompatibles); //erreur de type 2
-		EXCdet.EXCSetCommentaire("Erreur \"dimensions incompatibles\" dans MATdet() : nombre de LIGNES et de COLONNES ne permettant pas de calculer le determinant");
+		EXCdet.EXCSetCommentaire("Erreur \"dimensions incompatibles\" dans MATVandermindeDet() : nombre de LIGNES et de COLONNES ne permettant pas de calculer le determinant");
 		throw(EXCdet);
 	}
 
