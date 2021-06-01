@@ -475,7 +475,7 @@ int CMatrice<T>::MATVandermondeDet() const {
 		return ppdMATelem[0][0];
 	}
 
-	int iDet = 1;
+	double iDet = 1;
 	for (unsigned int uiBoucleForXi = 0; uiBoucleForXi < uiMATdimLigne-1; uiBoucleForXi++)
 	{
 		for (unsigned int uiBoucleForXj = uiBoucleForXi + 1; uiBoucleForXj < uiMATdimLigne; uiBoucleForXj++)
