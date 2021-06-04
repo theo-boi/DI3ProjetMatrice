@@ -234,8 +234,10 @@ class CMatrice : public CMatriceStructure {
 		/**
 		 * Methode sans argument regardant si une matrice est de Vandermonde.
 		 * 
-		 * Sortie : bool
-		 * Postcondition : {bool = la matrice est de Vandermonde}
+		 * Entree : rien
+		 * Precondition : neant
+		 * Sortie : booleen
+		 * Postcondition : Renvoie vrai si la matrice est de Vandermonde, faux sinon
 		 */
 		bool MATisVandermonde() const;
 
@@ -244,10 +246,10 @@ class CMatrice : public CMatriceStructure {
 		 *
 		 *	Entree : rien
 		 *	Precondition : neant
-		 *	Sortie : iDet : int
+		 *	Sortie : iDet : double
 		 *	Postcondition : iDet est le determinant de la matrice de Vandermonde
 		 */
-		int MATVandermondeDet() const;
+		double MATVandermondeDet() const;
 };
 
 /*

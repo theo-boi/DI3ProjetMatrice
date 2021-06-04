@@ -453,7 +453,7 @@ bool CMatrice<T>::MATisVandermonde() const {
 }
 
 template<class T>
-int CMatrice<T>::MATVandermondeDet() const {
+double CMatrice<T>::MATVandermondeDet() const {
 	if (!MATisVandermonde())
 	{
 		CException EXCvandermonde;
