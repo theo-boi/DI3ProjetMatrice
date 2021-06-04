@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	//affichage dudeterminant de chaque matrice
+	//affichage du determinant de chaque matrice
 	for (unsigned int uiBoucleArgs = 0; uiBoucleArgs < uiNbFichiers; uiBoucleArgs++)
 	{
 		try
